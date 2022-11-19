@@ -65,19 +65,23 @@ python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/
 
 To render the exploratory data analysis file, open the `src/maternal_risk_eda.ipynb` file in jupyter lab or another IDE and run all the cells. 
 
+## Dependencies 
+
+Python 3.10 and Python packages:
+- docopt==0.6.2
+- pandas==1.5.1
+- altair
+- altair_saver
+
 ## License
 
 The Maternal Health Risk Predictor materials are licensed under the Creative Commons Attribution 2.5 Canada License (CC BY 2.5 CA). If re-using/re-mixing please provide attribution and link to this webpage.
 
+Further license information can be viewed in the `LICENSE` file in the root folder of this repository.
+
 ## Attributions 
 
 The data set is attributed to Marzia Ahmed and Mohammod Kashem (Ahmed and Kashem, 2020) as well as the UCI Machine Learning Repository (Dua and Graff 2017). 
-
-The code of conduct file was adapted from the [Contributor Covenant][homepage], version 1.4, available at [http://contributor-covenant.org/version/1/4][version]
-[homepage]: http://contributor-covenant.org
-[version]: http://contributor-covenant.org/version/1/4/
-
-The contributions file was adapted from the [dplyr contributing guidelines](https://github.com/tidyverse/dplyr/blob/master/.github/CONTRIBUTING.md) and [breast cancer predictor contributing guidelines](https://github.com/ttimbers/breast_cancer_predictor/blob/master/CONTRIBUTING.md).
 
 ## References 
 
