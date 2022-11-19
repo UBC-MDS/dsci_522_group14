@@ -1,20 +1,34 @@
 # Maternal Health Risk Predictor
 
-- contributors: Shirley Zhang, Lennon Au-Yeung, Chenyang Wang
+## Authors 
+
+- Lennon Au-Yeung
+- Chenyang Wang
+- Shirley Zhang
+
+This data analysis project was created in fulfillment of the team project requirements for DSCI 522 (Data Science Workflows), a course in the Master of Data Science program at the University of British Columbia. 
 
 ## Project Proposal
 
-### Data Set
+### Introduction 
 
-Maternal Health Risk Data Set
 
-Abstract: Data has been collected from different hospitals, community clinics, maternal health cares from the rural areas of Bangladesh through the IoT based risk monitoring system.
+- maternal health risk big in poorer countries 
+- IoT can help 
+- but which factors may be of most importance 
 
-a. Main page: https://archive.ics.uci.edu/ml/datasets/Maternal+Health+Risk+Data+Set# 
+- united nations goals on maternal health 
 
-b. CSV: https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv 
 
-c. Source: Marzia Ahmed, Email: ahmed.marzia32 '@' gmail.com, Institution: Daffodil International University, Dhaka, Bangladesh.
+
+### Data
+
+Data used in this study was collected between 2018 and 2020, through six hospitals and maternity clinics in rural areas of Bangladesh (Ahmed and Kashem, 2020). Patients wore sensing devices which collected health data such as temperature and heart rate. The risk factor of each patient was determined through following a guideline based on previous research and consultation with medical professionals. 
+
+The full data set was sourced from the UCI Machine Learning Repository (Dua and Graff 2017), and can be found [https://archive.ics.uci.edu/ml/datasets/Maternal+Health+Risk+Data+Set](here). A .csv format of the data can be directly downloaded using [https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv](this link). The data can be attributed to Marzia Ahmed (Daffodil International University, Dhaka, Bangladesh) and Mohammod Kashem (Dhaka University of Science and Technology, Gazipur, Bangladesh) (Ahmed and Kashem, 2020).  
+
+The data set contains six features describing a patient's health profile, including `age`, `SystolicBP` (systolic blood pressure in mmHG), `DiastolicBP` (diastolic blood pressure in mmHG), `BS` (blood glucose levels in mmol/L), `BodyTemp` (body temperature in Fahrenheit), and `HeartRate` (heart rate in beats per minute). There are 1014 instances in total, with each row corresponding to one patient. Finally, the data contains the attribute `RiskLevel`, corresponding to a medical expert's determination of whether the patient is at low, mid, or high risk (Ahmed et al., 2020). 
+
 
 ### Predictive and Inferential Research Questions
 
@@ -26,6 +40,21 @@ b. Sub-questions:
 
   Which attributes of maternal health are the most important in determining the maternal health risk level? (inferential) 
 
+
+### Exploratory Data Analysis (EDA)
+
+Split the data set into train data set and test data set
+
+a. Table: 
+
+  Distribution of 6 attributes and target class in the train data set
+  
+b. EDA figure: 
+
+  i. Distribution of all 7 attributes separated/colored by target class (density distribution?) 
+  
+  ii. Pairwise scatter plots for all the predictors
+  
 ### Plan of Analyzing the Data
 
 a. Our project is a classification problem. 
@@ -42,26 +71,27 @@ b. Model we will try:
     
     3. Logistic regression for classification 
 
-### Exploratory Data Analysis (EDA)
-
-Split the data set into train data set and test data set
-
-a. Table: 
-
-  Distribution of 6 attributes and target class in the train data set
-  
-b. EDA figure: 
-
-  i. Distribution of all 7 attributes separated/colored by target class (density distribution?) 
-  
-  ii. Pairwise scatter plots for all the predictors
-
-### Share the Results as Tables and Figures
+### Share the Results as Tables and Figures (Results) 
 
 The results will be shared in a Jupyter Notebook with tables and figures included and the results is reproducible.
 
+
+### Usage 
+
+
+
 ## License
+
 The maternal health risk predictor materials here are licensed under the MIT License and Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0). If re-using/re-mixing please provide attribution and link to this webpage.
 
 
+### Attributions 
 
+
+## References 
+
+Ahmed, M., Kashem, M.A., Rahman, M., Khatun, S. (2020). Review and Analysis of Risk Factor of Maternal Health in Remote Area Using the Internet of Things (IoT). In: , *et al.* InECCE2019. Lecture Notes in Electrical Engineering, vol 632. Springer, Singapore. https://doi.org/10.1007/978-981-15-2317-5_30
+
+Ahmed, M. and Kashem, M. A. (2020). IoT Based Risk Level Prediction Model For Maternal Health Care In The Context Of Bangladesh. In: 2nd International Conference on Sustainable Technologies for Industry 4.0 (STI), 2020, pp. 1-6. https://doi.org/10.1109/STI50764.2020.9350320
+
+Dua, Dheeru, and Casey Graff. (2017). “UCI Machine Learning Repository.” University of California, Irvine, School of Information; Computer Sciences. http://archive.ics.uci.edu/ml.
