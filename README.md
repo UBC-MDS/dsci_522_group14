@@ -10,16 +10,13 @@ This data analysis project was created in fulfillment of the team project requir
 
 ## Project Proposal
 
-### Introduction 
+### Introduction and Questions
 
+Maternal mortality is a large risk in lower and lower middle-income countries, with about 810 women dying from preventable pregnancy-related causes each day (WHO, 2019). Often, there is a lack of information about the woman's health during pregnancy, making it difficult to monitor their status and determine whether they may be at risk of complications (Ahmed and Kashem, 2020). A potential solution to this issue is through using the 'Internet of Things (IoT)', or physical sensors which can monitor and report different health metrics of a patient to their health care provider. Medical professionals can then analyze this information to determine whether a patient may be at risk. 
 
-- maternal health risk big in poorer countries 
-- IoT can help 
-- but which factors may be of most importance 
+For this project, we aim to answer the question: "Can we use data analysis methods to predict the risk level of a patient during pregnancy (low, mid, or high) given a number of metrics describing their health profile?" This is an important question to explore given that human resources are low in lower income countries, and non-human dependent classification methods can help provide this information to more individuals. Furthermore, classifying a patient's risk level through data-driven methods may be advantageous over traditional methods which may involve levels of subjectivity. 
 
-- united nations goals on maternal health 
-
-
+IoT sensors can collect a diverse range of health metrics, however not all of them may be useful in predicting whether a patient is at risk of adverse health outcomes. Thus, we also hope to use data analysis methods to infer whether some metrics may be more important in determining maternal health risk levels than others. 
 
 ### Data
 
@@ -28,17 +25,6 @@ Data used in this study was collected between 2018 and 2020, through six hospita
 The full data set was sourced from the UCI Machine Learning Repository (Dua and Graff 2017), and can be found [https://archive.ics.uci.edu/ml/datasets/Maternal+Health+Risk+Data+Set](here). A .csv format of the data can be directly downloaded using [https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv](this link). The data can be attributed to Marzia Ahmed (Daffodil International University, Dhaka, Bangladesh) and Mohammod Kashem (Dhaka University of Science and Technology, Gazipur, Bangladesh) (Ahmed and Kashem, 2020).  
 
 The data set contains six features describing a patient's health profile, including `age`, `SystolicBP` (systolic blood pressure in mmHG), `DiastolicBP` (diastolic blood pressure in mmHG), `BS` (blood glucose levels in mmol/L), `BodyTemp` (body temperature in Fahrenheit), and `HeartRate` (heart rate in beats per minute). There are 1014 instances in total, with each row corresponding to one patient. Finally, the data contains the attribute `RiskLevel`, corresponding to a medical expert's determination of whether the patient is at low, mid, or high risk (Ahmed et al., 2020). 
-
-
-### Predictive and Inferential Research Questions
-
-a. Main predictive question: 
-
-  We want to use important maternal information including blood pressure (systolic and diastolic), blood glucose levels, heart rate, body temperature, and age to predict the risk level (low, medium, high) of the mother during pregnancy. 
-  
-b. Sub-questions: 
-
-  Which attributes of maternal health are the most important in determining the maternal health risk level? (inferential) 
 
 
 ### Exploratory Data Analysis (EDA)
@@ -95,3 +81,5 @@ Ahmed, M., Kashem, M.A., Rahman, M., Khatun, S. (2020). Review and Analysis of R
 Ahmed, M. and Kashem, M. A. (2020). IoT Based Risk Level Prediction Model For Maternal Health Care In The Context Of Bangladesh. In: 2nd International Conference on Sustainable Technologies for Industry 4.0 (STI), 2020, pp. 1-6. https://doi.org/10.1109/STI50764.2020.9350320
 
 Dua, Dheeru, and Casey Graff. (2017). “UCI Machine Learning Repository.” University of California, Irvine, School of Information; Computer Sciences. http://archive.ics.uci.edu/ml.
+
+WHO. (2019). "Maternal mortality". World Health Organization. https://www.who.int/news-room/fact-sheets/detail/maternal-mortality
