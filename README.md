@@ -20,7 +20,9 @@ For this project, we aim to answer the question:
 
 This is an important question to explore given that human resources are low in lower income countries, and non-human dependent classification methods can help provide this information to more individuals. Furthermore, classifying a patient's risk level through data-driven methods may be advantageous over traditional methods which may involve levels of subjectivity. 
 
+
 IoT sensors can collect a diverse range of health metrics, however not all of them may be useful in predicting whether a patient is at risk of adverse health outcomes. Thus, we also hope to use data analysis methods to infer (sub-question) whether some metrics may be more important in determining maternal health risk levels than others. 
+
 
 ## Data
 
@@ -32,6 +34,7 @@ The data set contains six features describing a patient's health profile, includ
 
 
 ## Exploratory Data Analysis 
+
 
 Before exploration, we will shuffle and split our data into training and test sets (80% training, 20% test). We will explore the distribution of target classes (`RiskLevel`), to determine whether there is a class imbalance that needs to be accounted for. This will be done through tables displaying the class counts for the training data set. We will create a bar plot of target class to help further visualize the distribution. Furthermore, we will examine the summary table with metrics such as mean, min, and max values for our features to determine how to best preprocess our dataset. 
 
@@ -50,6 +53,7 @@ Time permitting, we will repeat our analysis with the following classification m
 3. Logistic regression 
 
 We will compare the results of these models to our $k$-NN model to determine whether one performs better than others. Furthermore, these models may give us information to answer our inferential sub-question of which features are more important for predicting our target class. 
+
 
 To ensure reproducibility, the results will be shared in a Jupyter Notebook with tables, figures, interpretations, and corresponding code/scripts included. 
 
@@ -74,15 +78,63 @@ Python 3.10 and Python packages:
 - altair_saver
 - requests=2.22.0
 
+To ensure reproducibility, the results will be shared in a Jupyter Notebook with tables, figures, and corresponding code/scripts included. 
+
+## Report 
+
+To be added once our full analysis is complete. 
+
+## Usage 
+
+To replicate the analysis done in this project, you follow the steps below:
+
+1. Install the dependencies listed under "Dependencies"
+
+2. Clone the repository (the following shows cloning through ssh keys):
+
+```
+git clone git@github.com:UBC-MDS/maternal_health_risk_predictor.git
+```
+
+3. Move to the cloned directory
+
+```
+cd maternal_health_risk_predictor
+```
+
+4. Download the full data set and save it as 'maternal_risk.csv' under the `data/src/` directory: 
+
+```
+python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='data/raw/maternal_risk.csv'
+```
+
+(note: change the path and filename for the option '--out_file' if you wish to save the data in a different directory)
+
+5. To render the exploratory data analysis file, open the `src/maternal_risk_eda.ipynb` file in jupyter lab or another IDE and run all the cells. 
+
+(more steps to be added as the project moves towards completion) 
+
+
 ## License
 
 The Maternal Health Risk Predictor materials are licensed under the Creative Commons Attribution 2.5 Canada License (CC BY 2.5 CA). If re-using/re-mixing please provide attribution and link to this webpage.
 
+
 Further license information can be viewed in the `LICENSE` file in the root folder of this repository.
+
 
 ## Attributions 
 
 The data set is attributed to Marzia Ahmed and Mohammod Kashem (Ahmed and Kashem, 2020) as well as the UCI Machine Learning Repository (Dua and Graff 2017). 
+
+
+=======
+The code of conduct file was adapted from the [Contributor Covenant][homepage], version 1.4, available at [http://contributor-covenant.org/version/1/4][version]
+[homepage]: http://contributor-covenant.org
+[version]: http://contributor-covenant.org/version/1/4/
+
+The contributions file was adapted from the [dplyr contributing guidelines](https://github.com/tidyverse/dplyr/blob/master/.github/CONTRIBUTING.md) and [breast cancer predictor contributing guidelines](https://github.com/ttimbers/breast_cancer_predictor/blob/master/CONTRIBUTING.md).
+
 
 ## References 
 
