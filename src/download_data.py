@@ -22,10 +22,11 @@ def main(out_type, url, out_file):
     print(req)
     
   data = pd.read_csv(url, header=None)
-  path= '../data/raw/'
+  #path= '../data/raw/'
   if out_type == "csv":
     try:
-      data.to_csv(path+out_file, index = False)
+      #data.to_csv(path+out_file, index = False)
+      data.to_csv(out_file, index = False)
     except:
       os.makedirs(os.path.dirname(out_file))
       data.to_csv(out_file, index = False)
