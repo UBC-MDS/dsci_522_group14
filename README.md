@@ -72,6 +72,7 @@ Python 3.10 and Python packages:
 - pandas==1.5.1
 - altair
 - altair_saver
+- requests=2.22.0
 
 ## License
 
