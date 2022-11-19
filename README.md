@@ -20,7 +20,7 @@ For this project, we aim to answer the question:
 
 This is an important question to explore given that human resources are low in lower income countries, and non-human dependent classification methods can help provide this information to more individuals. Furthermore, classifying a patient's risk level through data-driven methods may be advantageous over traditional methods which may involve levels of subjectivity. 
 
-IoT sensors can collect a diverse range of health metrics, however not all of them may be useful in predicting whether a patient is at risk of adverse health outcomes. Thus, we also hope to use data analysis methods to infer whether some metrics may be more important in determining maternal health risk levels than others. 
+IoT sensors can collect a diverse range of health metrics, however not all of them may be useful in predicting whether a patient is at risk of adverse health outcomes. Thus, we also hope to use data analysis methods to infer (sub-question) whether some metrics may be more important in determining maternal health risk levels than others. 
 
 ## Data
 
@@ -33,7 +33,7 @@ The data set contains six features describing a patient's health profile, includ
 
 ## Exploratory Data Analysis 
 
-Before exploration, we will shuffle and split our data into training and test sets (80% training, 20% test). We will explore the distribution of target classes (`RiskLevel`), to determine whether there is a class imbalance that needs to be accounted for. This will be done through tables displaying the class counts for the overall data set, the training data set, and the test data set. We will create a bar plot of target class for the training set, to help visualize the distribution. Furthermore, we will examine the summary table with metrics such as mean, min, and max values for our features to determine how to best preprocess our dataset. 
+Before exploration, we will shuffle and split our data into training and test sets (80% training, 20% test). We will explore the distribution of target classes (`RiskLevel`), to determine whether there is a class imbalance that needs to be accounted for. This will be done through tables displaying the class counts for the training data set. We will create a bar plot of target class to help further visualize the distribution. Furthermore, we will examine the summary table with metrics such as mean, min, and max values for our features to determine how to best preprocess our dataset. 
 
 Next, given that all six features are continuous, we will create density distributions of each feature colored by the different target classes. This can give us a hint of whether the distribution of some features are different for different risk levels. If some features have similar distributions for all classes, it may suggest they are not helpful in predicting the target and hence can be dropped. We will also create a correlation matrix and pairwise scatter plots for all features, to examine whether some features may be correlated with one another. 
 
@@ -51,7 +51,7 @@ Time permitting, we will repeat our analysis with the following classification m
 
 We will compare the results of these models to our $k$-NN model to determine whether one performs better than others. Furthermore, these models may give us information to answer our inferential sub-question of which features are more important for predicting our target class. 
 
-To ensure reproducibility, the results will be shared in a Jupyter Notebook with tables, figures, and corresponding code/scripts included. 
+To ensure reproducibility, the results will be shared in a Jupyter Notebook with tables, figures, interpretations, and corresponding code/scripts included. 
 
 ## Usage 
 
