@@ -67,7 +67,7 @@ To render the exploratory data analysis file, open the `src/maternal_risk_eda.ip
 
 ## License
 
-The Maternal Health Risk Predictor materials are licensed under the MIT License and Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0). If re-using/re-mixing please provide attribution and link to this webpage.
+The Maternal Health Risk Predictor materials are licensed under the Creative Commons Attribution 2.5 Canada License (CC BY 2.5 CA). If re-using/re-mixing please provide attribution and link to this webpage.
 
 ## Attributions 
 
