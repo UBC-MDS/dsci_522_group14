@@ -53,17 +53,39 @@ We will compare the results of these models to our $k$-NN model to determine whe
 
 To ensure reproducibility, the results will be shared in a Jupyter Notebook with tables, figures, and corresponding code/scripts included. 
 
+## Report 
+
+To be added once our full analysis is complete. 
+
 ## Usage 
 
-To replicate the analysis done in this project, you must clone the repository and run the following below. 
+To replicate the analysis done in this project, you follow the steps below:
 
-To download the full data set and save it as 'maternal_risk.csv' in your current working directory: 
+1. Install the dependencies listed under "Dependencies"
+
+2. Clone the repository (the following shows cloning through ssh keys):
 
 ```
-python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='maternal_risk.csv'
+git clone git@github.com:UBC-MDS/maternal_health_risk_predictor.git
 ```
 
-To render the exploratory data analysis file, open the `src/maternal_risk_eda.ipynb` file in jupyter lab or another IDE and run all the cells. 
+3. Move to the cloned directory
+
+```
+cd maternal_health_risk_predictor
+```
+
+4. Download the full data set and save it as 'maternal_risk.csv' under the `data/src/` directory: 
+
+```
+python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='data/raw/maternal_risk.csv'
+```
+
+(note: change the path and filename for the option '--out_file' if you wish to save the data in a different directory)
+
+5. To render the exploratory data analysis file, open the `src/maternal_risk_eda.ipynb` file in jupyter lab or another IDE and run all the cells. 
+
+(more steps to be added as the project moves towards completion) 
 
 ## License
 
