@@ -7,6 +7,7 @@
 ### Data Set
 
 Maternal Health Risk Data Set
+
 Abstract: Data has been collected from different hospitals, community clinics, maternal health cares from the rural areas of Bangladesh through the IoT based risk monitoring system.
 
 a. Main page: https://archive.ics.uci.edu/ml/datasets/Maternal+Health+Risk+Data+Set# 
@@ -56,6 +57,7 @@ b. EDA figure:
   ii. Pairwise scatter plots for all the predictors
 
 ### Share the Results as Tables and Figures
+
 The results will be shared in a Jupyter Notebook with tables and figures included and the results is reproducible.
 
 ## License
