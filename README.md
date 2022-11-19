@@ -127,14 +127,6 @@ Further license information can be viewed in the `LICENSE` file in the root fold
 
 The data set is attributed to Marzia Ahmed and Mohammod Kashem (Ahmed and Kashem, 2020) as well as the UCI Machine Learning Repository (Dua and Graff 2017). 
 
-
-The code of conduct file was adapted from the [Contributor Covenant][homepage], version 1.4, available at [http://contributor-covenant.org/version/1/4][version]
-[homepage]: http://contributor-covenant.org
-[version]: http://contributor-covenant.org/version/1/4/
-
-The contributions file was adapted from the [dplyr contributing guidelines](https://github.com/tidyverse/dplyr/blob/master/.github/CONTRIBUTING.md) and [breast cancer predictor contributing guidelines](https://github.com/ttimbers/breast_cancer_predictor/blob/master/CONTRIBUTING.md).
-
-
 ## References 
 
 Ahmed, M., Kashem, M.A., Rahman, M., Khatun, S. (2020). Review and Analysis of Risk Factor of Maternal Health in Remote Area Using the Internet of Things (IoT). In: , *et al.* InECCE2019. Lecture Notes in Electrical Engineering, vol 632. Springer, Singapore. https://doi.org/10.1007/978-981-15-2317-5_30
