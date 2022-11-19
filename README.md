@@ -63,11 +63,11 @@ To download the full data set and save it as 'maternal_risk.csv' in your current
 
 `python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='maternal_risk.csv'`
 
+To render the exploratory data analysis file, open the `src/maternal_risk_eda.ipynb` file in jupyter lab or another IDE and run all the cells. 
 
 ## License
 
 The Maternal Health Risk Predictor materials are licensed under the MIT License and Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0). If re-using/re-mixing please provide attribution and link to this webpage.
-
 
 ### Attributions 
 
