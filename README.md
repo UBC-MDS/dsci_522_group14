@@ -6,6 +6,8 @@
 - Chenyang Wang
 - Shirley Zhang
 
+(Team 14) 
+
 This data analysis project was created in fulfillment of the team project requirements for DSCI 522 (Data Science Workflows), a course in the Master of Data Science program at the University of British Columbia. 
 
 ## Project Proposal
@@ -41,7 +43,7 @@ The report of our preliminary exploratory data analysis can be found here.
 
 ### Analysis 
 
-To answer our main question, we will employ a predictive classification model on our data set. We aim to use a $k$-NN ($k$-Nearest Neighbours) algorithm with hyperparameter optimization to select the optimal 'K' number of neighbours. We will perform cross-validation with approximately 30 folds, given that we have a relatively small amount of observations (n = 1014). We will use overall accuracy as the model evaluation metric and plot the accuracy with different values of 'K'. After selecting the best 'K', we will refit our model to our training data and evaluate using the test data. Finally, we will use overall accuracy and confusion matrices to examine how well our model performed on the test set.  
+To answer our main question, we will employ a predictive classification model on our data set. We aim to use a $k$-NN ($k$-Nearest Neighbours) algorithm with hyperparameter optimization to select the optimal 'K' number of neighbours. We will perform cross-validation with approximately 30 folds, given that we have a relatively small amount of observations (n = 1014). We will use overall accuracy as the model evaluation metric and plot the accuracy with different values of 'K'. After selecting the best 'K', we will refit our model to our training data and evaluate using the test data. Finally, we will use overall accuracy and confusion matrices to examine how well our model performed on the test set. 
 
 Time permitting, we will repeat our analysis with the following classification models and hyperparameter optimization: 
 
@@ -55,26 +57,21 @@ To ensure reproducibility, the results will be shared in a Jupyter Notebook with
 
 ### Usage 
 
-To replicate the analysis done in this project, you must clone the repository, install the dependencies listed under 'Dependencies', and run the following below. 
+To replicate the analysis done in this project, you must clone the repository and run the following below. 
 
-To download the full data set and save it as 'maternal_risk.csv': 
+To download the full data set and save it as 'maternal_risk.csv' in your current working directory: 
 
 `python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='maternal_risk.csv'`
 
 
-
-### Dependencies
-
-
-
 ## License
 
-The maternal health risk predictor materials here are licensed under the MIT License and Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0). If re-using/re-mixing please provide attribution and link to this webpage.
+The Maternal Health Risk Predictor materials are licensed under the MIT License and Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0). If re-using/re-mixing please provide attribution and link to this webpage.
 
 
 ### Attributions 
 
-The data set is attributed to ... 
+The data set is attributed to Marzia Ahmed and Mohammod Kashem (Ahmed and Kashem, 2020) as well as the UCI Machine Learning Repository (Dua and Graff 2017). 
 
 ## References 
 
