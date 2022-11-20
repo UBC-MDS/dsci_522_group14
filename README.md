@@ -59,33 +59,6 @@ To ensure reproducibility, the results will be shared in a Jupyter Notebook with
 
 ## Usage 
 
-To replicate the analysis done in this project, you must clone the repository and run the following below. 
-
-To download the full data set and save it as 'maternal_risk.csv' in your current working directory: 
-
-```
-python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='maternal_risk.csv'
-```
-
-To render the exploratory data analysis file, open the `src/maternal_risk_eda.ipynb` file in jupyter lab or another IDE and run all the cells. 
-
-## Dependencies 
-
-Python 3.10 and Python packages:
-- docopt==0.6.2
-- pandas==1.5.1
-- altair
-- altair_saver
-- requests=2.22.0
-
-To ensure reproducibility, the results will be shared in a Jupyter Notebook with tables, figures, and corresponding code/scripts included. 
-
-## Report 
-
-To be added once our full analysis is complete. 
-
-## Usage 
-
 To replicate the analysis done in this project, you follow the steps below:
 
 1. Install the dependencies listed under "Dependencies"
@@ -114,6 +87,20 @@ python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/
 
 (more steps to be added as the project moves towards completion) 
 
+## Dependencies 
+
+Python 3.10 and Python packages:
+- docopt==0.6.2
+- pandas==1.5.1
+- altair
+- altair_saver
+- requests=2.22.0
+
+To ensure reproducibility, the results will be shared in a Jupyter Notebook with tables, figures, and corresponding code/scripts included. 
+
+## Report 
+
+To be added once our full analysis is complete. 
 
 ## License
 
