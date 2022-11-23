@@ -10,7 +10,7 @@ import requests
 import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
-
+from sklearn.preprocessing import StandardScaler
 
 opt = docopt(__doc__)
 
@@ -19,6 +19,15 @@ def main(data_location, output_location):
     maternal_risk_df = pd.read_csv(data_location)
     
     train_df, test_df = train_test_split(maternal_risk_df, test_size=0.2, random_state=123)  
+       
+    X_train = train_df.drop(columns=['RiskLevel'])
+    y_train = train.df['RiskLevel']
+    
+    X_test = test_df.drop(columns=['RiskLevel'])
+    y_train = test.df['RiskLevel']
+    
+    scaler = StandardScaler()
+    scaler.fit(X_train)
     
     train_df.to_csv(output_location+'train_df.csv', index = False)
     
@@ -27,3 +36,4 @@ def main(data_location, output_location):
 if __name__ == "__main__":
   main(opt["--data_location"], opt["--output_location"])
 
+#python src/pre_processing.py --data_location='data/raw/maternal_risk.csv' --output_location='data/processed/'
