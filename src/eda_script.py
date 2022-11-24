@@ -39,7 +39,7 @@ def main(data_location, output_location):
     BodyTemp = display('BodyTemp')
     HeartRate = display('HeartRate')
 
-    X_density = ((Age | SystolicBP | DiastolicBP) & (BS | BodyTemp | HeartRate)).properties(title='Distribution of predictors for each Risk Level')
+    X_density = ((Age | SystolicBP | DiastolicBP) & (BS | BodyTemp | HeartRate)).properties(title='Distribution of Predictors for Each Risk Level')
     
     def boxplot(i):
         box = alt.Chart(train_df).mark_boxplot().encode(
@@ -56,7 +56,7 @@ def main(data_location, output_location):
     BodyTemp = boxplot('BodyTemp')
     HeartRate = boxplot('HeartRate')
     
-    X_box = (Age & SystolicBP & DiastolicBP & BS & BodyTemp & HeartRate).properties(title='Boxplots of different features')
+    X_box = (Age & SystolicBP & DiastolicBP & BS & BodyTemp & HeartRate).properties(title='Boxplots of Different Features)
 
     combined = class_distribution & X_density & X_box
 
