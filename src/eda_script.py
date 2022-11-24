@@ -58,7 +58,8 @@ def main(data_location, output_location):
     
     X_box = (Age & SystolicBP & DiastolicBP & BS & BodyTemp & HeartRate).properties(title='Boxplots of Different Features')
 
-    combined = (class_distribution & X_density & X_box).properties(title = 'Maternal Risk Data EDA')
+    combined = (class_distribution & X_density & X_box).configure_title(
+        fontSize=18, anchor='middle')
 
     
     def save_chart(chart, filename, scale_factor=1):
