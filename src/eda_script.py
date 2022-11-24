@@ -56,7 +56,7 @@ def main(data_location, output_location):
     BodyTemp = boxplot('BodyTemp')
     HeartRate = boxplot('HeartRate')
     
-    X_box = (Age & SystolicBP & DiastolicBP & BS & BodyTemp & HeartRate).properties(title='Boxplots of Different Features)
+    X_box = (Age & SystolicBP & DiastolicBP & BS & BodyTemp & HeartRate).properties(title='Boxplots of Different Features')
 
     combined = class_distribution & X_density & X_box
 
