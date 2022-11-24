@@ -9,7 +9,7 @@ from docopt import docopt
 import altair as alt
 import pandas as pd
 from altair_saver import save
-import imgkit
+import vl_convert as vlc
 
 opt = docopt(__doc__)
 
@@ -58,10 +58,20 @@ def main(data_location, output_location):
     
     X_box = (Age & SystolicBP & DiastolicBP & BS & BodyTemp & HeartRate).properties(title='Boxplots of Different Features')
 
-    combined = class_distribution & X_density & X_box
+    combined = (class_distribution & X_density & X_box).properties(title = 'Maternal Risk Data EDA')
 
-    save(combined, output_location+'EDA.html')
     
+    def save_chart(chart, filename, scale_factor=1):
+        if filename.split('.')[-1] == 'svg':
+            with open(filename, "w") as f:
+                f.write(vlc.vegalite_to_svg(chart.to_dict()))
+        elif filename.split('.')[-1] == 'png':
+            with open(filename, "wb") as f:
+                f.write(vlc.vegalite_to_png(chart.to_dict(), scale=scale_factor))
+        else:
+            raise ValueError("Only svg and png formats are supported")
+
+    save_chart(combined, output_location+'EDA.png',1)
     
 if __name__ == "__main__":
   main(opt["--data_location"], opt["--output_location"])
