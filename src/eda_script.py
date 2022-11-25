@@ -14,13 +14,16 @@ import altair as alt
 import pandas as pd
 from altair_saver import save
 import vl_convert as vlc
+from sklearn.model_selection import train_test_split
 
 opt = docopt(__doc__)
 
 def main(data_location, output_location):
 
-    train_df = pd.read_csv(data_location)
+    maternal_risk_df = pd.read_csv(data_location)
 
+    train_df, test_df = train_test_split(maternal_risk_df, test_size=0.2, random_state=123) 
+    
     class_distribution = alt.Chart(train_df).mark_bar().encode(
         x = 'count()',
         y = 'RiskLevel',
@@ -81,4 +84,4 @@ def main(data_location, output_location):
 if __name__ == "__main__":
   main(opt["--data_location"], opt["--output_location"])
 
-#python src/eda_script.py --data_location='data/processed/train_df.csv' --output_location='src/maternal_risk_eda_figures/'
+#python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
