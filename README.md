@@ -85,7 +85,17 @@ python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/
 
 5. To render the exploratory data analysis file, open the `src/maternal_risk_eda.ipynb` file in jupyter lab or another IDE and run all the cells. 
 
-(more steps to be added as the project moves towards completion) 
+6. Preprocess the data set and save it as 'train_df.csv' and 'test_df.csv' under the `data/processed/` directory:
+
+```
+python src/pre_processing.py --data_location='data/raw/maternal_risk.csv' --output_location='data/processed/'
+```
+
+7. Read the full dataset, produces exploratory data analysis and save it as 'EDA.png' under the `src/maternal_risk_eda_figures` directory:
+
+```
+python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
+```
 
 ## Dependencies 
 
