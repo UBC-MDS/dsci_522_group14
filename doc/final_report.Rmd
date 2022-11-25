@@ -1,0 +1,30 @@
+---
+title: "Maternal Health Risk Predictor"
+bibliography: refs.bib
+output: 
+  github_document:
+    toc: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(tidyverse)
+```
+
+# Summary
+
+# Dataset Introduction
+
+# Results
+
+# Assumptions and Limitations
+
+# Future Directions
+```{r load data}
+model_comparison <- read_csv("maternal_risk_model_figures/model_comparison_table.csv")
+kable(model_comparison)
+```
+
+# References
