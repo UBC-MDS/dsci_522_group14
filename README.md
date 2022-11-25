@@ -95,6 +95,7 @@ Python 3.10 and Python packages:
 - altair
 - altair_saver
 - requests=2.22.0
+- vl_convert
 
 To ensure reproducibility, the results will be shared in a Jupyter Notebook with tables, figures, and corresponding code/scripts included. 
 
