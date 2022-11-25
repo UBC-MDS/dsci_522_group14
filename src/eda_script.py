@@ -85,3 +85,5 @@ if __name__ == "__main__":
   main(opt["--data_location"], opt["--output_location"])
 
 #python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
+
+#save_chart function reference from Joel Ostblom
