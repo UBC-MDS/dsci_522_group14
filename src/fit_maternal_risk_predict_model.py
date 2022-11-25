@@ -21,6 +21,7 @@ from docopt import docopt
 import altair as alt
 from altair_saver import save
 alt.renderers.enable('mimetype')
+import vl_convert as vlc
 
 from sklearn.model_selection import cross_val_score, RandomizedSearchCV
 from scipy.stats import randint
@@ -54,7 +55,13 @@ def main(train_df_path, test_df_path, output_dir_path):
     compare_models(X_train, y_train, output_dir_path)
     
     # 4) Decision Tree hyperparameter optimization 
-    decisiontree_hyperparamopt(X_train, y_train)
+    random_search = decisiontree_hyperparamopt(X_train, y_train)
+    
+    # 5) Plot hyperparameters 
+    hyperparam_plot(random_search, output_dir_path)
+    
+    # 6) Create confusion matrix 
+    create_confusionmatrix(X_test, y_test, random_search, output_dir_path)
     
 def load_train_test_df(train_df_path, test_df_path):
     
@@ -159,13 +166,73 @@ def decisiontree_hyperparamopt(X_train, y_train):
     # Fit the model 
     random_search.fit(X_train, y_train)
     # Print scores 
+    print('\nHyperparameter optimization on Decision Trees')
     print('Best max_depth: ', random_search.best_params_['decisiontreeclassifier__max_depth'])
     print('Best score: ', round(random_search.best_score_, 3))
     
+    return random_search
+    
+
+def hyperparam_plot(random_search, output_dir_path):
+    
+    # Create dataframes for plotting
+    randomizedsearchcv_results = pd.DataFrame(random_search.cv_results_)[['param_decisiontreeclassifier__max_depth', 'mean_test_score', 'mean_train_score']]
+    randomizedsearchcv_results_explode = pd.melt(randomizedsearchcv_results, id_vars=['param_decisiontreeclassifier__max_depth'], value_vars=['mean_test_score', 'mean_train_score'])
+    
+    # Create plot 
+    point_plot = alt.Chart(randomizedsearchcv_results_explode).mark_circle(opacity=0.5).encode(
+    alt.X('param_decisiontreeclassifier__max_depth', title='Max Depth', scale=alt.Scale(zero=False)),
+    alt.Y('value', title='Score', scale=alt.Scale(zero=False)), 
+    color=alt.Color('variable', title=None)
+    )
+    line_plot = point_plot.mark_line(opacity=0.5)
+    combined = point_plot + line_plot
+    
+    # Save plot as png
+    plot_path = output_dir_path + 'hyperparam_plot.png'
+    save_chart(combined, plot_path, 2)
+    return
+
+def save_chart(chart, filename, scale_factor=1):
+    '''
+    Save an Altair chart using vl-convert
+    
+    Parameters
+    ----------
+    chart : altair.Chart
+        Altair chart to save
+    filename : str
+        The path to save the chart to
+    scale_factor: int or float
+        The factor to scale the image resolution by.
+        E.g. A value of `2` means two times the default resolution.
+    '''
+    if filename.split('.')[-1] == 'svg':
+        with open(filename, "w") as f:
+            f.write(vlc.vegalite_to_svg(chart.to_dict()))
+    elif filename.split('.')[-1] == 'png':
+        with open(filename, "wb") as f:
+            f.write(vlc.vegalite_to_png(chart.to_dict(), scale=scale_factor))
+    else:
+        raise ValueError("Only svg and png formats are supported")
+
+
+def create_confusionmatrix(X_test, y_test, random_search, output_dir_path):
+    
+    # Create confusion matrix
+    cm = confusion_matrix(y_test, random_search.predict(X_test))
+    cm_df = pd.DataFrame(data = cm, 
+                 index = ['High Risk', 'Low Risk', 'Mid Risk'],
+                 columns = ['High Risk', 'Low Risk', 'Mid Risk'])
+    
+    # Save as csv 
+    output_file = output_dir_path + 'testdata_confusion_matrix.csv'
+    cm_df.to_csv(output_file)
+    return 
     
 def test_score(random_search, X_test, y_test):
 
-    print('Decision Tree score on test data: ', round(random_search.score(X_test, y_test), 3)) 
+    print('\nDecision Tree score on test data: ', round(random_search.score(X_test, y_test), 3)) 
 
     
 if __name__ == "__main__":
