@@ -1,3 +1,7 @@
+# author: Lennon Au-Yeung
+# date: 2022-11-20
+
+
 """Downloads data csv data from the web to the raw data file as csv file format.
 Usage: src/down_data.py --out_type=<out_type> --url=<url> --out_file=<out_file>
 Options:
@@ -21,11 +25,11 @@ def main(out_type, url, out_file):
     print("Website at the provided url does not exist.")
     print(req)
     
-  data = pd.read_csv(url, header=None)
-  path= '../data/raw/'
+  data = pd.read_csv(url)
+  #path= '../data/raw/'
   if out_type == "csv":
     try:
-      data.to_csv(path+out_file, index = False)
+      data.to_csv(out_file, index = False)
     except:
       os.makedirs(os.path.dirname(out_file))
       data.to_csv(out_file, index = False)

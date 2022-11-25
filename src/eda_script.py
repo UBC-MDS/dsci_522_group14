@@ -1,3 +1,7 @@
+# author: Lennon Au-Yeung
+# date: 2022-11-25
+
+
 """ Export eda from training data.
 Usage: src/eda_script.py --data_location=<data_location> --output_location=<output_location>
 Options:
