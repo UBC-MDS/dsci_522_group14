@@ -53,6 +53,9 @@ def main(train_df_path, test_df_path, output_dir_path):
     # 3) Run basic comparison of multiple classification models, save table as .csv 
     compare_models(X_train, y_train, output_dir_path)
     
+    # 4) Decision Tree hyperparameter optimization 
+    decisiontree_hyperparamopt(X_train, y_train)
+    
 def load_train_test_df(train_df_path, test_df_path):
     
     # Read data into dataframes 
@@ -131,6 +134,38 @@ def compare_models(X_train, y_train, output_dir_path):
     output_file = output_dir_path + 'model_comparison_table.csv'
     model_comparison_df.to_csv(output_file)
     return 
+
+def decisiontree_hyperparamopt(X_train, y_train):
+    
+    # Pipeline
+    dt_pipe = make_pipeline(
+        StandardScaler(), DecisionTreeClassifier()
+    )
+    # Hyperparameters
+    param_dist = {
+        'decisiontreeclassifier__max_depth': randint(1, 50)
+    }
+    # Random search
+    random_search = RandomizedSearchCV(
+        dt_pipe,
+        param_dist,
+        n_iter=30,
+        verbose=1,
+        n_jobs=-1,
+        random_state=123,
+        return_train_score=True, 
+        cv=50
+    )
+    # Fit the model 
+    random_search.fit(X_train, y_train)
+    # Print scores 
+    print('Best max_depth: ', random_search.best_params_['decisiontreeclassifier__max_depth'])
+    print('Best score: ', round(random_search.best_score_, 3))
+    
+    
+def test_score(random_search, X_test, y_test):
+
+    print('Decision Tree score on test data: ', round(random_search.score(X_test, y_test), 3)) 
 
     
 if __name__ == "__main__":
