@@ -70,11 +70,15 @@ knitr::include_graphics("../src/maternal_risk_eda_figures/output_32_0.png")
 ```
 
 ## Model Building
-- try models 1. dummy classfier 2. decision tree 3. SVM 4. logistic regression 5. KNN
-For all the model, use default parameter, did not inclue hyperpamater optimization.(include table of model compare) table 1.Choose decision because it has highest crossvalidation score.
+
+
+- We have tried the following models: 1. Dummy Classifier; 2. Decision Tree; 3. Support Vector Machines (SVMs); 4. Logistic Regression; 5. K-Nearest Neighbors (KNN).
+
+For all above models, we used the default parameters and did not include hyperparameter optimization at this stage. Table 1 is the models comparison, and it shows the training scores and mean cross validation scores of the models we tried. Based on the results, we choose Decision Tree model because it has the highest mean cross validation score.
+
 ```{r load data}
 model_comparison <- read.csv("../src/maternal_risk_model_figures/model_comparison_table.csv", row.names=1, heade=TRUE)
-kable(model_comparison, caption = "Table 1")
+kable(model_comparison, caption = "Table 1. Models comparison")
 ```
 
 - hyperpamater optimization
