@@ -71,7 +71,6 @@ knitr::include_graphics("../src/maternal_risk_eda_figures/output_32_0.png")
 
 ## Model Building
 
-
 - We have tried the following models: 1. Dummy Classifier; 2. Decision Tree; 3. Support Vector Machines (SVMs); 4. Logistic Regression; 5. K-Nearest Neighbors (KNN).
 
 For all above models, we used the default parameters and did not include hyperparameter optimization at this stage. Table 1 is the models comparison, and it shows the training scores and mean cross validation scores of the models we tried. Based on the results, we choose Decision Tree model because it has the highest mean cross validation score.
@@ -81,10 +80,12 @@ model_comparison <- read.csv("../src/maternal_risk_model_figures/model_compariso
 kable(model_comparison, caption = "Table 1. Models comparison")
 ```
 
-- hyperpamater optimization
-use random search, try different max depth 1 and 50, best is 29, include plot_3 hyperpar_plot,
+- Hyperparameter optimization: For the decision tree model, we use random search method to try different max depth from 1 to 50. From the figure 3, we can see the best depth is 29, and the mean test score is 0.823 which is not bad.
 
-- score at the test data, the score is 0.823
+```{r fig.align="center", fig.cap="Figure 4. Pairwise relationship between predictors"}
+knitr::include_graphics("../src/maternal_risk_model_figures/hyperparam_plot.png")
+```
+
 
 - confusion matrix, incluse table_2(test_data_confusion_matrix),
 
