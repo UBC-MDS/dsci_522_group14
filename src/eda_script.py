@@ -78,8 +78,12 @@ def main(data_location, output_location):
                 f.write(vlc.vegalite_to_png(chart.to_dict(), scale=scale_factor))
         else:
             raise ValueError("Only svg and png formats are supported")
-
-    save_chart(combined, output_location+'EDA.png',1)
+            
+    try: 
+        save_chart(combined, output_location+'EDA.png',1)
+    except:
+        os.makedirs(os.path.dirname(output_location+'EDA.png'))
+        save_chart(combined, output_location+'EDA.png',1)
     
 if __name__ == "__main__":
   main(opt["--data_location"], opt["--output_location"])
