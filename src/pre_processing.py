@@ -22,18 +22,34 @@ def main(data_location, output_location):
     
     train_df, test_df = train_test_split(maternal_risk_df, test_size=0.2, random_state=123)  
     
-    train_df.to_csv(output_location+'train_df.csv', index = False)
+    try:
+        train_df.to_csv(output_location+'train_df.csv', index = False)
+    except:
+        os.makedirs(os.path.dirname(output_location+'train_df.csv'))
+        train_df.to_csv(output_location+'train_df.csv', index = False)
     
-    test_df.to_csv(output_location+'test_df.csv', index = False)
+    try:
+        test_df.to_csv(output_location+'test_df.csv', index = False)
+    except:
+        os.makedirs(os.path.dirname(output_location+'test_df.csv'))
+        test_df.to_csv(output_location+'test_df.csv', index = False)
     
     maternal_risk_df.loc[maternal_risk_df['RiskLevel'] == 'mid risk', 'RiskLevel'] = 'low and mid risk'
     maternal_risk_df.loc[maternal_risk_df['RiskLevel'] == 'low risk', 'RiskLevel'] = 'low and mid risk'
     
     train_df, test_df = train_test_split(maternal_risk_df, test_size=0.2, random_state=123)
     
-    train_df.to_csv(output_location+'train_df_binary.csv', index = False)
-    
-    test_df.to_csv(output_location+'test_df_binary.csv', index = False)    
+    try:
+        train_df.to_csv(output_location+'train_df_binary.csv', index = False)
+    except:
+        os.makedirs(os.path.dirname(output_location+'train_df_binary.csv'))
+        train_df.to_csv(output_location+'train_df_binary.csv', index = False)
+        
+    try:
+        test_df.to_csv(output_location+'test_df_binary.csv', index = False)
+    except:
+        os.makedirs(os.path.dirname(output_location+'test_df_binary.csv'))
+        test_df.to_csv(output_location+'test_df_binary.csv', index = False)    
     
 
 if __name__ == "__main__":
