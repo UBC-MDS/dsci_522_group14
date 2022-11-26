@@ -99,6 +99,6 @@ kable(confusion_matrix, caption = "Table 2. Confusion Matrix") |> kableExtra::ka
 # Assumptions and Limitations
 
 # Future Directions
-
+As mentioned in the introduction, we are trying to determine whether the patient is at risk, while identifying patients with a high risk level should be our priority. In the future, we could combine low and mid risk level into singular class so that we would have a binary classifier such that we can then explore different classification metrics such as recall instead of using accuracy as our only scoring metrics to evaluate our model. Recall would be an ideal scoring metric in this case as we are trying to minimize the number of false negatives such that high risk patients are not being misclassified by the model.
 
 # References
