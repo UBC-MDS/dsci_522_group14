@@ -67,6 +67,11 @@ determining maternal health risk levels than others.
 
 # Methods
 
+The R programming language R Core Team (2019) and the following R
+packages were used to perform the analysis: knitr Xie (2014). The code
+used to perform the analysis and create this report can be found here:
+<https://github.com/UBC-MDS/maternal_health_risk_predictor/blob/main/doc/final_report.md>.
+
 ## Data
 
 Data used in this study was collected between 2018 and 2020, through six
@@ -209,7 +214,7 @@ Mean Cross Validation Score
 
 <img src="../src/maternal_risk_model_figures/hyperparam_plot.png" alt="Figure 4. Pairwise relationship between predictors" width="50%" style="display: block; margin: auto;" />
 
--   Table 3 is the confusion matrix which shows the prediction rate is
+-   Table 2 is the confusion matrix which shows the prediction rate is
     consistently across all risk levels.
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -292,3 +297,24 @@ trying to minimize the number of false negatives such that high risk
 patients are not being misclassified by the model.
 
 # References
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-R" class="csl-entry">
+
+R Core Team. 2019. *R: A Language and Environment for Statistical
+Computing*. Vienna, Austria: R Foundation for Statistical Computing.
+<https://www.R-project.org/>.
+
+</div>
+
+<div id="ref-knitr" class="csl-entry">
+
+Xie, Yihui. 2014. “Knitr: A Comprehensive Tool for Reproducible Research
+in R.” In *Implementing Reproducible Computational Research*, edited by
+Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman;
+Hall/CRC. <http://www.crcpress.com/product/isbn/9781466561595>.
+
+</div>
+
+</div>

@@ -40,6 +40,8 @@ IoT sensors can collect a diverse range of health metrics, however not all of th
 
 # Methods
 
+The R programming language @R and the following R packages were used to perform the analysis: knitr @knitr. The code used to perform the analysis and create this report can be found here: https://github.com/UBC-MDS/maternal_health_risk_predictor/blob/main/doc/final_report.md.
+
 ## Data
 
 Data used in this study was collected between 2018 and 2020, through six hospitals and maternity clinics in rural areas of Bangladesh (Ahmed and Kashem, 2020). Patients wore sensing devices which collected health data such as temperature and heart rate. The risk factor of each patient was determined through following a guideline based on previous research and consultation with medical professionals.
