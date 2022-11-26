@@ -50,20 +50,31 @@ The data set contains six features describing a patient's health profile, includ
 
 ## Planned Analysis
 
-
-# Results
-
 ## Exploratory Data Analysis 
-- first image shows the distribtion across target classes, as we can see from the bar chart below, there is not a  drastic class imbalanace in the training data, however, we will still explore whether a balanced class weight will improve our model performance.
+- The figure 1 shows the distribtion across target classes, as we can see from the bar chart below, there is not a  drastic class imbalanace in the training data, however, we will still explore whether a balanced class weight will improve our model performance.
 
-- The second image is the density distribution across all features, which could provideus with insights on whether the distribution of some features are different for different target classes. 
+```{r fig.align="center", fig.cap="Figure 1. Counts of observation for each class in train data set"}
+knitr::include_graphics("../src/maternal_risk_eda_figures/output_18_1.png")
+```
+
+
+- The figure 2 is the density distribution across all features, which could provideus with insights on whether the distribution of some features are different for different target classes. 
+
+```{r fig.align="center", fig.cap="Figure 2. Distribution of training set predictors for high risk, mid risk and low risk"}
+knitr::include_graphics("../src/maternal_risk_eda_figures/output_26_0.png")
+```
+- The figure 3 shows the features SystolicBP and DiastolicBP have high correlation compared to other pairs of predictors, followed by the correlation between the two blood pressure levels and age. For other pairs of predictors, there are no significant correlations found.
+
+```{r fig.align="center", fig.cap="Figure 3. Pairwise relationship between predictors"}
+knitr::include_graphics("../src/maternal_risk_eda_figures/output_32_0.png")
+```
 
 ## Model Building
 - try models 1. dummy classfier 2. decision tree 3. SVM 4. logistic regression 5. KNN
 For all the model, use default parameter, did not inclue hyperpamater optimization.(include table of model compare) table 1.Choose decision because it has highest crossvalidation score.
 ```{r load data}
 model_comparison <- read.csv("../src/maternal_risk_model_figures/model_comparison_table.csv", row.names=1, heade=TRUE)
-kable(model_comparison)
+kable(model_comparison, caption = "Table 1")
 ```
 
 - hyperpamater optimization
@@ -72,6 +83,10 @@ use random search, try different max depth 1 and 50, best is 29, include plot_3 
 - score at the test data, the score is 0.823
 
 - confusion matrix, incluse table_2(test_data_confusion_matrix),
+
+## Planned Analysis
+
+# Results
 
 # Assumptions and Limitations
 
