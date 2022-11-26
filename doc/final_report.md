@@ -61,14 +61,15 @@ levels of subjectivity.
 
 IoT sensors can collect a diverse range of health metrics, however not
 all of them may be useful in predicting whether a patient is at risk of
-adverse health outcomes. Thus, we also hope to use data analysis methods
-to infer (sub-question) whether some metrics may be more important in
-determining maternal health risk levels than others.
+adverse health outcomes (Sutton et al. 2020). Thus, we also hope to use
+data analysis methods to infer (sub-question) whether some metrics may
+be more important in determining maternal health risk levels than
+others.
 
 # Methods
 
-The R programming language R Core Team (2019) and the following R
-packages were used to perform the analysis: knitr Xie (2014). The code
+The R programming language (R Core Team 2019) and the following R
+packages were used to perform the analysis: knitr (Xie 2014). The code
 used to perform the analysis and create this report can be found here:
 <https://github.com/UBC-MDS/maternal_health_risk_predictor/blob/main/doc/final_report.md>.
 
@@ -82,7 +83,7 @@ determined through following a guideline based on previous research and
 consultation with medical professionals.
 
 The full data set was sourced from the UCI Machine Learning Repository
-(Dua and Graff 2017), and can be found
+(Asuncion and Newman 2007), and can be found
 [here](https://archive.ics.uci.edu/ml/datasets/Maternal+Health+Risk+Data+Set).
 A .csv format of the data can be directly downloaded using [this
 link](https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv).
@@ -129,8 +130,8 @@ risk (Ahmed et al., 2020).
 ## Model Building
 
 -   We have tried the following models: 1. Dummy Classifier; 2. Decision
-    Tree; 3. Support Vector Machines (SVMs); 4. Logistic Regression; 5.
-    K-Nearest Neighbors (KNN).
+    Tree (Myles et al. 2004); 3. Support Vector Machines (SVMs); 4.
+    Logistic Regression; 5. K-Nearest Neighbors (KNN).
 
 For all above models, we used the default parameters and did not include
 hyperparameter optimization at this stage. Table 1 is the models
@@ -300,11 +301,36 @@ patients are not being misclassified by the model.
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
+<div id="ref-asuncion2007uci" class="csl-entry">
+
+Asuncion, Arthur, and David Newman. 2007. “UCI Machine Learning
+Repository.” Irvine, CA, USA.
+
+</div>
+
+<div id="ref-myles2004introduction" class="csl-entry">
+
+Myles, Anthony J, Robert N Feudale, Yang Liu, Nathaniel A Woody, and
+Steven D Brown. 2004. “An Introduction to Decision Tree Modeling.”
+*Journal of Chemometrics: A Journal of the Chemometrics Society* 18 (6):
+275–85.
+
+</div>
+
 <div id="ref-R" class="csl-entry">
 
 R Core Team. 2019. *R: A Language and Environment for Statistical
 Computing*. Vienna, Austria: R Foundation for Statistical Computing.
 <https://www.R-project.org/>.
+
+</div>
+
+<div id="ref-sutton2020early" class="csl-entry">
+
+Sutton, Elizabeth F, Sarah C Rogan, Samia Lopa, Danielle Sharbaugh,
+Matthew F Muldoon, and Janet M Catov. 2020. “Early Pregnancy Blood
+Pressure Elevations and Risk for Maternal and Neonatal Morbidity.”
+*Obstetrics and Gynecology* 136 (1): 129.
 
 </div>
 
