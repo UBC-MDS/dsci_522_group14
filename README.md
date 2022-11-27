@@ -69,7 +69,7 @@ To replicate the analysis done in this project, you follow the steps below:
 git clone git@github.com:UBC-MDS/maternal_health_risk_predictor.git
 ```
 
-3. Move to the cloned directory
+3. Move to the cloned directory:
 
 ```
 cd maternal_health_risk_predictor
@@ -81,9 +81,9 @@ cd maternal_health_risk_predictor
 python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='data/raw/maternal_risk.csv'
 ```
 
-(note: change the path and filename for the option '--out_file' if you wish to save the data in a different directory)
+5. Render the exploratory data analysis file:
 
-5. To render the exploratory data analysis file, open the `src/maternal_risk_eda.ipynb` file in jupyter lab or another IDE and run all the cells. 
+Open the `src/maternal_risk_eda.ipynb` file in jupyter lab or another IDE and run all the cells. 
 
 6. Preprocess the data set and save it as 'train_df.csv' and 'test_df.csv' under the `data/processed/` directory:
 
@@ -95,6 +95,18 @@ python src/pre_processing.py --data_location='data/raw/maternal_risk.csv' --outp
 
 ```
 python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
+```
+
+8. Run the script to fit and model a Decision Tree classifier on the training and test data, and save results under the `src/maternal_risk_model_figures/` directory:
+
+```
+python src/fit_maternal_risk_predict_model.py --train_df_path='data/processed/train_df.csv' --test_df_path='data/processed/test_df.csv' --output_dir_path='src/maternal_risk_model_figures/'
+```
+
+9. Render the final report:
+
+```
+Rscript -e "rmarkdown::render('doc/final_report.Rmd')"
 ```
 
 ## Dependencies 
@@ -111,7 +123,10 @@ To ensure reproducibility, the results will be shared in a Jupyter Notebook with
 
 ## Report 
 
-To be added once our full analysis is complete. 
+Link to final report in Markdown: [final_report.md](https://github.com/UBC-MDS/maternal_health_risk_predictor/blob/main/doc/final_report.md)
+
+
+Path to final report in Markdown: `doc/final_report.md`
 
 ## License
 
