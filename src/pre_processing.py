@@ -2,7 +2,9 @@
 # date: 2022-11-24
 
 """Splits data in train and test format, one set of train set has three classes(high, mid, low) and the other has binary classes(high, mid and low).
+
 Usage: src/pre_processing.py --data_location=<data_location> --output_location=<output_location>
+
 Options:
 --data_location=<data_location>    Location of the data to be preprocessed
 output_location=<output_location>  Location to output the train and test file

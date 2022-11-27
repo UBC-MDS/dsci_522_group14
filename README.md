@@ -75,7 +75,7 @@ git clone git@github.com:UBC-MDS/maternal_health_risk_predictor.git
 cd maternal_health_risk_predictor
 ```
 
-4. Download the full data set and save it as 'maternal_risk.csv' under the `data/src/` directory: 
+4. Download the full data set and save it as 'maternal_risk.csv' under the `data/raw/` directory: 
 
 ```
 python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='data/raw/maternal_risk.csv'
@@ -121,7 +121,7 @@ Python 3.10 and Python packages:
 
 To ensure reproducibility, the results will be shared in a Jupyter Notebook with tables, figures, and corresponding code/scripts included. 
 
-## Report 
+## Final Report 
 
 Link to final report in Markdown: [final_report.md](https://github.com/UBC-MDS/maternal_health_risk_predictor/blob/main/doc/final_report.md)
 
