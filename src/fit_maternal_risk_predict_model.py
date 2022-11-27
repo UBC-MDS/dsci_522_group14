@@ -220,6 +220,11 @@ def create_confusionmatrix(X_test, y_test, random_search, output_dir_path):
     cm_df = pd.DataFrame(data = cm, 
                  index = ['High Risk', 'Low Risk', 'Mid Risk'],
                  columns = ['High Risk', 'Low Risk', 'Mid Risk'])
+    # Set meta column and row names 
+    col_ix = pd.MultiIndex.from_product([['Predicted Label'], ['High Risk', 'Low Risk', 'Mid Risk']])                        
+    row_ix = pd.MultiIndex.from_product([['True Label'], ['High Risk', 'Low Risk', 'Mid Risk']])
+    cm_df = cm_df.set_index(row_ix)
+    cm_df.columns = col_ix
     
     # Save as csv 
     output_file = output_dir_path + 'testdata_confusion_matrix.csv'
