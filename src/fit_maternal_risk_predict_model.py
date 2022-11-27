@@ -1,10 +1,9 @@
 # author: Shirley Zhang 
 # date: 2022-11-25
 
-'''...
+'''Script which takes as input the preprocessed training and test .csv files as well as a path to the output directory, reports scores of baseline classification models, and performs hyperparameter tuning on a Decision Tree model. It will output tables and figures corresponding to the results of the model analysis.  
 
 Usage: src/fit_maternal_risk_predict_model.py --train_df_path=<train_df_path> --test_df_path=<test_df_path> --output_dir_path=<output_dir_path>
-
 
 Options:  
 --train_df_path=<train_df_path>     Path to the train_df.csv file 
@@ -43,11 +42,10 @@ opt = docopt(__doc__)
 # Main function 
 def main(train_df_path, test_df_path, output_dir_path):
     
-    # 1) Load train and test files into dataframes 
-    train_df, test_df = load_train_test_df(train_df_path, test_df_path)
+    # 1) Main function 
     
-    # 2) Split train and test into X and y
-    X_train, y_train, X_test, y_test = split_X_y(train_df, test_df)
+    # 2) Load and split train and test into X and y
+    X_train, y_train, X_test, y_test = load_split_train_test_df(train_df_path, test_df_path)
     
     # 3) Run basic comparison of multiple classification models, save table as .csv 
     compare_models(X_train, y_train, output_dir_path)
@@ -64,16 +62,13 @@ def main(train_df_path, test_df_path, output_dir_path):
     # 7) Print test score 
     test_score(random_search, X_test, y_test)
     
-def load_train_test_df(train_df_path, test_df_path):
+def load_split_train_test_df(train_df_path, test_df_path):
     
     # Read data into dataframes 
     train_df = pd.read_csv(train_df_path)
     test_df = pd.read_csv(test_df_path)
     
-    return train_df, test_df 
-
-def split_X_y(train_df, test_df): 
-    
+    # Split into train and test
     X_train = train_df.drop(columns=['RiskLevel'])
     y_train = train_df['RiskLevel']
     X_test = test_df.drop(columns=['RiskLevel'])
@@ -225,6 +220,11 @@ def create_confusionmatrix(X_test, y_test, random_search, output_dir_path):
     cm_df = pd.DataFrame(data = cm, 
                  index = ['High Risk', 'Low Risk', 'Mid Risk'],
                  columns = ['High Risk', 'Low Risk', 'Mid Risk'])
+    # Set meta column and row names 
+    col_ix = pd.MultiIndex.from_product([['Predicted Label'], ['High Risk', 'Low Risk', 'Mid Risk']])                        
+    row_ix = pd.MultiIndex.from_product([['True Label'], ['High Risk', 'Low Risk', 'Mid Risk']])
+    cm_df = cm_df.set_index(row_ix)
+    cm_df.columns = col_ix
     
     # Save as csv 
     output_file = output_dir_path + 'testdata_confusion_matrix.csv'
