@@ -108,7 +108,7 @@ kable(confusion_matrix, caption = "Table 2. Confusion Matrix") |> kableExtra::ka
 
 For our analysis, we made the following assumptions: (1) The maternal risk dataset that we used is representative of the population of patients. (2) The risk level classified in the data set is a good indicator of the patient's risk level. (3) The data collected is unbiased.
 
-The dataset we used was collected from the rural areas of Bangladesh, and it might be possible that patients in different regions have different characteristics of health information that affects their maternal risk level, hence the model might not be as accurate when predicting patients from other regions.
+The dataset we used was collected from the rural areas of Bangladesh, and it might be possible that patients in different regions have different characteristics of health information that affects their maternal risk level, hence the model might not be as accurate when predicting patients from other regions. 
 
 # Future Directions
 
