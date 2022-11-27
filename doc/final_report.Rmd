@@ -54,23 +54,28 @@ The data set contains six features describing a patient's health profile, includ
 
 ## Exploratory Data Analysis
 
--   The figure 1 shows the distribtion across target classes, as we can see from the bar chart below, there is not a drastic class imbalanace in the training data, however, we will still explore whether a balanced class weight will improve our model performance.
+-   Figure 1 shows the distribution across target classes, as we can see from the bar chart below, there is not a drastic class imbalance in the training data, however, we will still explore whether a balanced class weight will improve our model performance.
+
 
 ```{r fig.align="center", fig.cap="Figure 1. Counts of observation for each class in train data set"}
 knitr::include_graphics("../src/maternal_risk_eda_figures/class_distribution.png")
 ```
+**Figure 1. Counts of observation for each class in train data set**
 
--   The figure 2 is the density distribution across all features, which could provide us with insights on whether the distribution of some features are different for different target classes.
+-   Figure 2 shows the density distribution across all features, which could provide us with insights on whether the distribution of some features are different for different target classes.
+
 
 ```{r fig.align="center", fig.cap="Figure 2. Distribution of training set predictors for high risk, mid risk and low risk"}
 knitr::include_graphics("../src/maternal_risk_eda_figures/density_plot.png")
 ```
+**Figure 2. Distribution of training set predictors for high risk, mid risk and low risk**
 
--   The figure 3 shows the features SystolicBP and DiastolicBP have high correlation compared to other pairs of predictors, followed by the correlation between the two blood pressure levels and age. For other pairs of predictors, there are no significant correlations found.
+-   Figure 3 shows the features SystolicBP and DiastolicBP have high correlation compared to other pairs of predictors, followed by the correlation between the two blood pressure levels and age. For other pairs of predictors, there are no significant correlations found.
 
 ```{r fig.align="center", fig.cap="Figure 3. Pairwise relationship between predictors"}
 knitr::include_graphics("../src/maternal_risk_eda_figures/output_32_0.png")
 ```
+**Figure 3. Pairwise relationship between predictors**
 
 # Results
 
@@ -93,12 +98,17 @@ knitr::include_graphics("../src/maternal_risk_model_figures/hyperparam_plot.png"
 
 -   Table 2 is the confusion matrix which shows the prediction rate is consistently across all risk levels.
 
+**Table 2. Confusion Matrix**
 ```{r confusion_matrix}
 confusion_matrix <- read.csv("../src/maternal_risk_model_figures/testdata_confusion_matrix.csv",row.names=1, header=TRUE)
 kable(confusion_matrix, caption = "Table 2. Confusion Matrix") |> kableExtra::kable_styling(full_width = FALSE)
 ```
 
 # Assumptions and Limitations
+
+For our analysis, we made the following assumptions: (1) The maternal risk dataset that we used is representative of the population of patients. (2) The risk level classified in the data set is a good indicator of the patient's risk level. (3) The data collected is unbiased.
+
+The dataset we used was collected from the rural areas of Bangladesh, and it might be possible that patients in different regions have different characteristics of health information that affects their maternal risk level, hence the model might not be as accurate when predicting patients from other regions. 
 
 # Future Directions
 
