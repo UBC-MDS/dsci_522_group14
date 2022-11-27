@@ -3,7 +3,7 @@
 
 '''...
 
-Usage: fit_maternal_risk_predict_model.py --train_df_path=<train_df_path> --test_df_path=<test_df_path> --output_dir_path=<output_dir_path>
+Usage: src/fit_maternal_risk_predict_model.py --train_df_path=<train_df_path> --test_df_path=<test_df_path> --output_dir_path=<output_dir_path>
 
 
 Options:  
@@ -43,8 +43,6 @@ opt = docopt(__doc__)
 # Main function 
 def main(train_df_path, test_df_path, output_dir_path):
     
-    print('Main function')
-    
     # 1) Load train and test files into dataframes 
     train_df, test_df = load_train_test_df(train_df_path, test_df_path)
     
@@ -62,6 +60,9 @@ def main(train_df_path, test_df_path, output_dir_path):
     
     # 6) Create confusion matrix 
     create_confusionmatrix(X_test, y_test, random_search, output_dir_path)
+    
+    # 7) Print test score 
+    test_score(random_search, X_test, y_test)
     
 def load_train_test_df(train_df_path, test_df_path):
     
