@@ -18,21 +18,24 @@ import pandas as pd
 opt = docopt(__doc__)
 
 def main(out_type, url, out_file):
-  try: 
-    request = requests.get(url)
-    request.status_code == 200
-  except Exception as req:
-    print("Website at the provided url does not exist.")
-    print(req)
+    try: 
+        request = requests.get(url)
+        request.status_code == 200
+    except Exception as req:
+        print("Website at the provided url does not exist.")
+        print(req)
+
+    data = pd.read_csv(url)
+    #path= '../data/raw/'
+    if out_type == "csv":
+        try:
+          data.to_csv(out_file, index = False)
+        except:
+          os.makedirs(os.path.dirname(out_file))
+          data.to_csv(out_file, index = False)
     
-  data = pd.read_csv(url)
-  #path= '../data/raw/'
-  if out_type == "csv":
-    try:
-      data.to_csv(out_file, index = False)
-    except:
-      os.makedirs(os.path.dirname(out_file))
-      data.to_csv(out_file, index = False)
+    assert os.path.isfile(out_file), "Dataset is not in the data/raw directory." 
+
 
 if __name__ == "__main__":
   main(opt["--out_type"], opt["--url"], opt["--out_file"])

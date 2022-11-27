@@ -12,6 +12,7 @@ output_location=<output_location>  Location to output the visulisations
 from docopt import docopt
 import altair as alt
 import pandas as pd
+import os
 from altair_saver import save
 import vl_convert as vlc
 from sklearn.model_selection import train_test_split
@@ -84,6 +85,8 @@ def main(data_location, output_location):
     except:
         os.makedirs(os.path.dirname(output_location+'EDA.png'))
         save_chart(combined, output_location+'EDA.png',1)
+        
+    assert os.path.isfile(output_location+'EDA.png'), "EDA is not in the src/maternal_risk_eda_figures directory." 
     
 if __name__ == "__main__":
   main(opt["--data_location"], opt["--output_location"])

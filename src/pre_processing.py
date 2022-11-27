@@ -33,6 +33,9 @@ def main(data_location, output_location):
     except:
         os.makedirs(os.path.dirname(output_location+'test_df.csv'))
         test_df.to_csv(output_location+'test_df.csv', index = False)
+        
+    assert os.path.isfile(output_location+'train_df.csv'), "Train data is not in the data/processed directory." 
+    assert os.path.isfile(output_location+'test_df.csv'), "Test data is not in the data/processed directory." 
     
     maternal_risk_df.loc[maternal_risk_df['RiskLevel'] == 'mid risk', 'RiskLevel'] = 'low and mid risk'
     maternal_risk_df.loc[maternal_risk_df['RiskLevel'] == 'low risk', 'RiskLevel'] = 'low and mid risk'
