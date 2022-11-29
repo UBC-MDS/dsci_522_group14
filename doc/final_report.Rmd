@@ -98,7 +98,6 @@ knitr::include_graphics("../src/maternal_risk_model_figures/hyperparam_plot.png"
 
 -   Table 2 is the confusion matrix which shows the prediction rate is consistently across all risk levels.
 
-**Table 2. Confusion Matrix**
 ```{r confusion_matrix}
 confusion_matrix <- read.csv("../src/maternal_risk_model_figures/testdata_confusion_matrix.csv",row.names=1, header=TRUE)
 kable(confusion_matrix, caption = "Table 2. Confusion Matrix") |> kableExtra::kable_styling(full_width = FALSE)
