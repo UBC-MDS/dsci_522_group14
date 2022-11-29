@@ -1,5 +1,6 @@
-# Makefile
-# Shirley Zhang, November 2022
+# Maternal Health Risk Predictor Makefile Pipeline
+# Author: Shirley Zhang
+# Date: 2022-11-29
 
 # ... description ... 
 # ... example usage ... 
@@ -9,7 +10,8 @@ all : doc/final_report.Rmd
 
 
 # download data 
-data/raw/maternal_risk.csv : 
+data/raw/maternal_risk.csv : src/download_data.py
+    python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='data/raw/maternal_risk.csv'
 
 
 # preprocess data 
