@@ -5,6 +5,9 @@
 # ... example usage ... 
 
 
+all : doc/final_report.Rmd
+
+
 # download data 
 data/raw/maternal_risk.csv : 
 
@@ -43,3 +46,7 @@ src/maternal_risk_model_figures/testdata_confusion_matrix.csv :
 
 
 # create the final report 
+doc/final_report.Rmd : 
+
+
+clean : 
