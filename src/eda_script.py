@@ -69,6 +69,15 @@ def main(data_location, output_location):
     combined = (class_distribution & X_density & X_box).configure_title(
         fontSize=18, anchor='middle')
 
+    X_corr = alt.Chart(train_df).mark_point(opacity=0.3, size=10).encode(
+        alt.X(alt.repeat('row'), type='quantitative'),
+        alt.Y(alt.repeat('column'), type='quantitative')
+        ).properties(
+            width=100,
+            height=100
+        ).repeat(
+            column=['Age', 'SystolicBP', 'DiastolicBP', 'BS', 'BodyTemp', 'HeartRate'],
+            row=['Age', 'SystolicBP', 'DiastolicBP', 'BS', 'BodyTemp', 'HeartRate'])
     
     def save_chart(chart, filename, scale_factor=1):
         if filename.split('.')[-1] == 'svg':
@@ -85,6 +94,11 @@ def main(data_location, output_location):
     except:
         os.makedirs(os.path.dirname(output_location+'EDA.png'))
         save_chart(combined, output_location+'EDA.png',1)
+    
+    save_chart(X_density, output_location+'density_plot.png',1)
+    save_chart(X_box, output_location+'box_plot.png',1)
+    save_chart(class_distribution, output_location+'class_distribution.png',1)
+    save_chart(X_corr, output_location+'output_32_0.png',1)
         
     assert os.path.isfile(output_location+'EDA.png'), "EDA is not in the src/maternal_risk_eda_figures directory." 
     
