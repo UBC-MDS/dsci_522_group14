@@ -21,6 +21,7 @@ import altair as alt
 from altair_saver import save
 alt.renderers.enable('mimetype')
 import vl_convert as vlc
+import pickle
 
 from sklearn.model_selection import cross_val_score, RandomizedSearchCV
 from scipy.stats import randint
@@ -55,6 +56,9 @@ def main(train_df_path, test_df_path, output_dir_path):
     
     # 5) Plot hyperparameters 
     hyperparam_plot(random_search, output_dir_path)
+    
+    # 6) Save the best model as a pickle 
+    save_bestmodel_pickle(random_search, output_dir_path)
     
     # 6) Create confusion matrix 
     #create_confusionmatrix(X_test, y_test, random_search, output_dir_path)
@@ -213,6 +217,13 @@ def save_chart(chart, filename, scale_factor=1):
         raise ValueError("Only svg and png formats are supported")
 
 
+def save_bestmodel_pickle(random_search, output_dir_path):
+    
+    path_filename = output_dir_path + 'bestmodel.pkl'
+    pickle.dump(random_search, open(path_filename, 'wb'))
+    
+    return 
+        
 #def create_confusionmatrix(X_test, y_test, random_search, output_dir_path):
     
     # Create confusion matrix
@@ -225,7 +236,7 @@ def save_chart(chart, filename, scale_factor=1):
 #    output_file = output_dir_path + 'testdata_confusion_matrix.csv'
 #    cm_df.to_csv(output_file)
 #    return 
- 
+
     
 #def test_score(random_search, X_test, y_test):
 #    print('\nDecision Tree score on test data: ', round(random_search.score(X_test, y_test), 3)) 
