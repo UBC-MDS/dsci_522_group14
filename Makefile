@@ -1,5 +1,5 @@
 # Maternal Health Risk Predictor Makefile Pipeline
-# Author: Shirley Zhang
+# Author: Shirley Zhang, Lennon Au-Yeung
 # Date: 2022-11-29
 
 # ... description ... 
@@ -15,25 +15,13 @@ data/raw/maternal_risk.csv : src/download_data.py
 
 
 # preprocess data 
-data/processed/test_df.csv : 
-
-data/processed/test_df_binary.csv : 
-
-data/processed/train_df.csv : 
-
-data/processed/train_df_binary.csv : 
+data/processed/test_df.csv data/processed/test_df_binary.csv data/processed/train_df.csv data/processed/train_df_binary.csv : src/pre_processing.py data/raw/maternal_risk.csv
+    python src/pre_processing.py --data_location='data/raw/maternal_risk.csv' --output_location='data/processed/'
 
 
 # create the figures from EDA 
-src/maternal_risk_eda_figures/EDA.png : 
-
-src/maternal_risk_eda_figures/box_plot.png : 
-
-src/maternal_risk_eda_figures/class_distribution : 
-
-src/maternal_risk_eda_figures/density_plot.png : 
-
-src/maternal_risk_eda_figures/output_32_0.png : 
+src/maternal_risk_eda_figures/EDA.png src/maternal_risk_eda_figures/box_plot.png src/maternal_risk_eda_figures/class_distribution src/maternal_risk_eda_figures/density_plot.png src/maternal_risk_eda_figures/output_32_0.png : data/raw/maternal_risk.csv
+    python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
 
 
 # create the figures from model building 
