@@ -186,7 +186,11 @@ def hyperparam_plot(random_search, output_dir_path):
     
     # Save plot as png
     plot_path = output_dir_path + 'hyperparam_plot.png'
-    save_chart(combined, plot_path, 2)
+    try:
+        save_chart(combined, plot_path, 2)
+    except:
+        os.makedirs(os.path.dirname(plot_path))
+        save_chart(combined, plot_path, 2)
     return
 
 def save_chart(chart, filename, scale_factor=1):
