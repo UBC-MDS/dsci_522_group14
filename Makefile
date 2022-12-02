@@ -37,4 +37,9 @@ src/maternal_risk_model_figures/hyperparam_plot.png src/maternal_risk_model_figu
 doc/final_report.Rmd : 
 
 
-clean : 
+clean :
+	rm -f data/raw/*.csv
+	rm -f data/processed/*.csv
+	rm -f src/maternal_risk_eda_figures/*.png
+	rm -f src/maternal_risk_model_figures/*.png
+	rm -f src/maternal_risk_model_figures/*.csv
