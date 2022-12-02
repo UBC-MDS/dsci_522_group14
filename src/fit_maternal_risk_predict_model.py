@@ -16,6 +16,7 @@ import pandas as pd
 import numpy as np
 import re
 import graphviz
+import os
 from docopt import docopt
 import altair as alt
 from altair_saver import save
@@ -135,7 +136,12 @@ def compare_models(X_train, y_train, output_dir_path):
     # Save as csv 
     model_comparison_df = pd.DataFrame(model_comparison_dict)
     output_file = output_dir_path + 'model_comparison_table.csv'
-    model_comparison_df.to_csv(output_file)
+    
+    try:
+        model_comparison_df.to_csv(output_file)
+    except:
+        os.makedirs(os.path.dirname(output_file))
+        model_comparison_df.to_csv(output_file)
     return 
 
 def decisiontree_hyperparamopt(X_train, y_train):
