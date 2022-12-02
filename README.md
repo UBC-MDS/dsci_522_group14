@@ -36,39 +36,39 @@ git clone git@github.com:UBC-MDS/maternal_health_risk_predictor.git
 cd maternal_health_risk_predictor
 ```
 
-4. Download the full data set from [UCI](https://archive.ics.uci.edu/ml/machine-learning-databases/00639/) and save locally it as 'maternal_risk.csv' under the `data/raw/` directory: 
-
+4. Run the following commands at the command line/terminal from the root of the directory of this project.
 ```
+#Download the full data set from [UCI](https://archive.ics.uci.edu/ml/machine-learning-databases/00639/) and save locally it as 'maternal_risk.csv' under the `data/raw/` directory: 
+
+
 python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='data/raw/maternal_risk.csv'
-```
-
-5. Render the exploratory data analysis file:
-
-- Open the `src/maternal_risk_eda.ipynb` file in jupyter lab or another IDE and run all the cells. 
-- See the file as a markdown version here: [maternal_risk_eda.md](https://github.com/UBC-MDS/maternal_health_risk_predictor/blob/main/src/maternal_risk_eda.md)
 
 
-6. Preprocess the downloaded raw data set (from step 4) and save it as 'train_df.csv' and 'test_df.csv' under the `data/processed/` directory:
+#Render the exploratory data analysis file:
 
-```
+jupyter nbconvert --execute --to notebook --inplace src/maternal_risk_eda.ipynb
+
+
+#Preprocess the downloaded raw data set (from step 4) and save it as 'train_df.csv' and 'test_df.csv' under the `data/processed/` directory:
+
+
 python src/pre_processing.py --data_location='data/raw/maternal_risk.csv' --output_location='data/processed/'
-```
 
-7. Read the full dataset, perform exploratory data analysis, and save it as 'EDA.png' under the `src/maternal_risk_eda_figures` directory:
 
-```
+#Read the full dataset, perform exploratory data analysis, and save it as 'EDA.png' under the `src/maternal_risk_eda_figures` directory:
+
 python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
-```
 
-8. Run the script to fit and model a Decision Tree classifier on the training and test data (from step 6), and save results under the `src/maternal_risk_model_figures/` directory:
 
-```
+#Run the script to fit and model a Decision Tree classifier on the training and test data (from step 6), and save results under the `src/maternal_risk_model_figures/` directory:
+
+
 python src/fit_maternal_risk_predict_model.py --train_df_path='data/processed/train_df.csv' --test_df_path='data/processed/test_df.csv' --output_dir_path='src/maternal_risk_model_figures/'
-```
 
-9. Render the final report under the `/doc` directory:
 
-```
+#Render the final report under the `/doc` directory:
+
+
 Rscript -e "rmarkdown::render('doc/final_report.Rmd')"
 ```
 
@@ -84,6 +84,7 @@ Python 3.10 and Python packages:
 - requests==2.22.0
 - vl_convert
 - graphviz==0.20.1
+- nbconvert
 
 Model building packages: 
 - sklearn==1.1.3
