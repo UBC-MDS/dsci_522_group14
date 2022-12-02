@@ -22,6 +22,7 @@ import altair as alt
 from altair_saver import save
 alt.renderers.enable('mimetype')
 import vl_convert as vlc
+import pickle
 
 from sklearn.model_selection import cross_val_score, RandomizedSearchCV
 from scipy.stats import randint
@@ -57,11 +58,14 @@ def main(train_df_path, test_df_path, output_dir_path):
     # 5) Plot hyperparameters 
     hyperparam_plot(random_search, output_dir_path)
     
+    # 6) Save the best model as a pickle 
+    save_bestmodel_pickle(random_search, output_dir_path)
+    
     # 6) Create confusion matrix 
-    create_confusionmatrix(X_test, y_test, random_search, output_dir_path)
+    #create_confusionmatrix(X_test, y_test, random_search, output_dir_path)
     
     # 7) Print test score 
-    test_score(random_search, X_test, y_test)
+    #test_score(random_search, X_test, y_test)
     
 def load_split_train_test_df(train_df_path, test_df_path):
     
@@ -69,7 +73,7 @@ def load_split_train_test_df(train_df_path, test_df_path):
     train_df = pd.read_csv(train_df_path)
     test_df = pd.read_csv(test_df_path)
     
-    # Split into train and test
+    # Split into X and y
     X_train = train_df.drop(columns=['RiskLevel'])
     y_train = train_df['RiskLevel']
     X_test = test_df.drop(columns=['RiskLevel'])
@@ -223,27 +227,29 @@ def save_chart(chart, filename, scale_factor=1):
         raise ValueError("Only svg and png formats are supported")
 
 
-def create_confusionmatrix(X_test, y_test, random_search, output_dir_path):
+def save_bestmodel_pickle(random_search, output_dir_path):
+    
+    path_filename = output_dir_path + 'bestmodel.pkl'
+    pickle.dump(random_search, open(path_filename, 'wb'))
+    
+    return 
+        
+#def create_confusionmatrix(X_test, y_test, random_search, output_dir_path):
     
     # Create confusion matrix
-    cm = confusion_matrix(y_test, random_search.predict(X_test))
-    cm_df = pd.DataFrame(data = cm, 
-                 index = ['High Risk', 'Low Risk', 'Mid Risk'],
-                 columns = ['High Risk', 'Low Risk', 'Mid Risk'])
-    # Set meta column and row names 
-    col_ix = pd.MultiIndex.from_product([['Predicted Label'], ['High Risk', 'Low Risk', 'Mid Risk']])                        
-    row_ix = pd.MultiIndex.from_product([['True Label'], ['High Risk', 'Low Risk', 'Mid Risk']])
-    cm_df = cm_df.set_index(row_ix)
-    cm_df.columns = col_ix
+#    cm = confusion_matrix(y_test, random_search.predict(X_test))
+#    cm_df = pd.DataFrame(data = cm, 
+#                 index = ['True High Risk', 'True Low Risk', 'True Mid Risk'],
+#                 columns = ['Predicted High Risk', 'Predicted Low Risk', 'Predicted Mid Risk'])
     
     # Save as csv 
-    output_file = output_dir_path + 'testdata_confusion_matrix.csv'
-    cm_df.to_csv(output_file)
-    return 
-    
-def test_score(random_search, X_test, y_test):
+#    output_file = output_dir_path + 'testdata_confusion_matrix.csv'
+#    cm_df.to_csv(output_file)
+#    return 
 
-    print('\nDecision Tree score on test data: ', round(random_search.score(X_test, y_test), 3)) 
+    
+#def test_score(random_search, X_test, y_test):
+#    print('\nDecision Tree score on test data: ', round(random_search.score(X_test, y_test), 3)) 
 
     
 if __name__ == "__main__":
