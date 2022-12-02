@@ -16,6 +16,7 @@ import pandas as pd
 import numpy as np
 import re
 import graphviz
+import os
 from docopt import docopt
 import altair as alt
 from altair_saver import save
@@ -139,7 +140,12 @@ def compare_models(X_train, y_train, output_dir_path):
     # Save as csv 
     model_comparison_df = pd.DataFrame(model_comparison_dict)
     output_file = output_dir_path + 'model_comparison_table.csv'
-    model_comparison_df.to_csv(output_file)
+    
+    try:
+        model_comparison_df.to_csv(output_file)
+    except:
+        os.makedirs(os.path.dirname(output_file))
+        model_comparison_df.to_csv(output_file)
     return 
 
 def decisiontree_hyperparamopt(X_train, y_train):
@@ -190,7 +196,11 @@ def hyperparam_plot(random_search, output_dir_path):
     
     # Save plot as png
     plot_path = output_dir_path + 'hyperparam_plot.png'
-    save_chart(combined, plot_path, 2)
+    try:
+        save_chart(combined, plot_path, 2)
+    except:
+        os.makedirs(os.path.dirname(plot_path))
+        save_chart(combined, plot_path, 2)
     return
 
 def save_chart(chart, filename, scale_factor=1):
