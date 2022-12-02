@@ -72,7 +72,7 @@ def load_split_train_test_df(train_df_path, test_df_path):
     train_df = pd.read_csv(train_df_path)
     test_df = pd.read_csv(test_df_path)
     
-    # Split into train and test
+    # Split into X and y
     X_train = train_df.drop(columns=['RiskLevel'])
     y_train = train_df['RiskLevel']
     X_test = test_df.drop(columns=['RiskLevel'])
