@@ -1,5 +1,0 @@
-,,Predicted Label,Predicted Label,Predicted Label
-,,High Risk,Low Risk,Mid Risk
-True Label,High Risk,53,1,6
-True Label,Low Risk,1,66,14
-True Label,Mid Risk,4,10,48
