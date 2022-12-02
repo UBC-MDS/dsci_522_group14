@@ -34,7 +34,7 @@ src/maternal_risk_model_figures/hyperparam_plot.png src/maternal_risk_model_figu
 
 
 # create the final report 
-doc/final_report.md : doc/final_report.Rmd src/maternal_risk_model_figures/hyperparam_plot.png src/maternal_risk_eda_figures/box_plot.png data/processed/test_df.csv
+doc/final_report.md : doc/final_report.Rmd data/processed/test_df.csv src/maternal_risk_eda_figures/box_plot.png data/processed/test_df.csv src/maternal_risk_model_figures/hyperparam_plot.png
 	Rscript -e "rmarkdown::render('doc/final_report.Rmd')"
 
 
