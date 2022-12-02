@@ -20,7 +20,7 @@ data/processed/test_df.csv data/processed/test_df_binary.csv data/processed/trai
 
 
 # create the figures from EDA 
-src/maternal_risk_eda_figures/EDA.png src/maternal_risk_eda_figures/box_plot.png src/maternal_risk_eda_figures/class_distribution src/maternal_risk_eda_figures/density_plot.png src/maternal_risk_eda_figures/output_32_0.png : data/raw/maternal_risk.csv
+src/maternal_risk_eda_figures/EDA.png src/maternal_risk_eda_figures/box_plot.png src/maternal_risk_eda_figures/class_distribution src/maternal_risk_eda_figures/density_plot.png src/maternal_risk_eda_figures/output_32_0.png :src/eda_script.py data/raw/maternal_risk.csv
     python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
 
 
