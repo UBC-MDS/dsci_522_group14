@@ -25,11 +25,9 @@ src/maternal_risk_eda_figures/EDA.png src/maternal_risk_eda_figures/box_plot.png
 
 
 # create the figures from model building 
-src/maternal_risk_model_figures/hyperparam_plot.png : 
+src/maternal_risk_model_figures/hyperparam_plot.png src/maternal_risk_model_figures/model_comparison_table.csv : src/fit_maternal_risk_predict_model.py data/processed/train_df.csv data/processed/test_df.csv 
+    python src/fit_maternal_risk_predict_model.py --train_df_path='data/processed/train_df.csv' --test_df_path='data/processed/test_df.csv' --output_dir_path='src/maternal_risk_model_figures/'
 
-src/maternal_risk_model_figures/model_comparison_table.csv : 
-
-src/maternal_risk_model_figures/testdata_confusion_matrix.csv : 
 
 
 # test model 
