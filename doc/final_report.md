@@ -105,39 +105,46 @@ risk (Ahmed et al., 2020).
 
 ## Exploratory Data Analysis
 
--   The figure 1 shows the distribtion across target classes, as we can
-    see from the bar chart below, there is not a drastic class
-    imbalanace in the training data, however, we will still explore
-    whether a balanced class weight will improve our model performance.
+-   Figure 1 shows the distribution across target classes, as we can see
+    from the bar chart below, there is not a drastic class imbalance in
+    the training data, however, we will still explore whether a balanced
+    class weight will improve our model performance.
 
 <img src="../src/maternal_risk_eda_figures/class_distribution.png" alt="Figure 1. Counts of observation for each class in train data set" style="display: block; margin: auto;" />
+**Figure 1. Counts of observation for each class in train data set**
 
--   The figure 2 is the density distribution across all features, which
+-   Figure 2 shows the density distribution across all features, which
     could provide us with insights on whether the distribution of some
     features are different for different target classes.
 
 <img src="../src/maternal_risk_eda_figures/density_plot.png" alt="Figure 2. Distribution of training set predictors for high risk, mid risk and low risk" style="display: block; margin: auto;" />
+**Figure 2. Distribution of training set predictors for high risk, mid
+risk and low risk**
 
--   The figure 3 shows the features SystolicBP and DiastolicBP have high
+-   Figure 3 shows the features SystolicBP and DiastolicBP have high
     correlation compared to other pairs of predictors, followed by the
     correlation between the two blood pressure levels and age. For other
     pairs of predictors, there are no significant correlations found.
 
 <img src="../src/maternal_risk_eda_figures/output_32_0.png" alt="Figure 3. Pairwise relationship between predictors" style="display: block; margin: auto;" />
+**Figure 3. Pairwise relationship between predictors**
 
 # Results
 
 ## Model Building
 
 -   We have tried the following models: 1. Dummy Classifier; 2. Decision
-    Tree (Myles et al. 2004); 3. Support Vector Machines (SVMs); 4.
-    Logistic Regression; 5. K-Nearest Neighbors (KNN).
+    Tree (Myles et al. 2004); 3. Support Vector Machines (SVMs)(Hearst
+    et al. 1998); 4. Logistic Regression; 5. K-Nearest Neighbors (KNN).
 
 For all above models, we used the default parameters and did not include
 hyperparameter optimization at this stage. Table 1 is the models
 comparison, and it shows the training scores and mean cross validation
 scores of the models we tried. Based on the results, we choose Decision
 Tree model because it has the highest mean cross validation score.
+
+    ## New names:
+    ## • `` -> `...1`
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -146,21 +153,22 @@ Table 1. Models comparison
 <thead>
 <tr>
 <th style="text-align:left;">
+Score type
 </th>
 <th style="text-align:right;">
 Dummy
 </th>
 <th style="text-align:right;">
-Decision.Tree
+Decision Tree
 </th>
 <th style="text-align:right;">
 SVM
 </th>
 <th style="text-align:right;">
-Logistic.Regression
+Logistic Regression
 </th>
 <th style="text-align:right;">
-K.Nearest.Neighbors
+K-Nearest Neighbors
 </th>
 </tr>
 </thead>
@@ -218,72 +226,19 @@ Mean Cross Validation Score
 -   Table 2 is the confusion matrix which shows the prediction rate is
     consistently across all risk levels.
 
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>
-Table 2. Confusion Matrix
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-High.Risk
-</th>
-<th style="text-align:right;">
-Low.Risk
-</th>
-<th style="text-align:right;">
-Mid.Risk
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-High Risk
-</td>
-<td style="text-align:right;">
-53
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Low Risk
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-68
-</td>
-<td style="text-align:right;">
-12
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mid Risk
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-48
-</td>
-</tr>
-</tbody>
-</table>
-
 # Assumptions and Limitations
+
+For our analysis, we made the following assumptions: (1) The maternal
+risk dataset that we used is representative of the population of
+patients. (2) The risk level classified in the data set is a good
+indicator of the patient’s risk level. (3) The data collected is
+unbiased.
+
+The dataset we used was collected from the rural areas of Bangladesh,
+and it might be possible that patients in different regions have
+different characteristics of health information that affects their
+maternal risk level, hence the model might not be as accurate when
+predicting patients from other regions.
 
 # Future Directions
 
@@ -305,6 +260,14 @@ patients are not being misclassified by the model.
 
 Asuncion, Arthur, and David Newman. 2007. “UCI Machine Learning
 Repository.” Irvine, CA, USA.
+
+</div>
+
+<div id="ref-hearst1998support" class="csl-entry">
+
+Hearst, Marti A., Susan T Dumais, Edgar Osuna, John Platt, and Bernhard
+Scholkopf. 1998. “Support Vector Machines.” *IEEE Intelligent Systems
+and Their Applications* 13 (4): 18–28.
 
 </div>
 

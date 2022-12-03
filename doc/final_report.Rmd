@@ -85,8 +85,9 @@ knitr::include_graphics("../src/maternal_risk_eda_figures/output_32_0.png")
 
 For all above models, we used the default parameters and did not include hyperparameter optimization at this stage. Table 1 is the models comparison, and it shows the training scores and mean cross validation scores of the models we tried. Based on the results, we choose Decision Tree model because it has the highest mean cross validation score.
 
-```{r load data}
-model_comparison <- read.csv("../src/maternal_risk_model_figures/model_comparison_table.csv", row.names=1, header = TRUE)
+```{r load_data}
+model_comparison<-read_csv("../src/maternal_risk_model_figures/model_comparison_table.csv",show_col_types = FALSE)
+names(model_comparison)[1] <- 'Score type'
 kable(model_comparison, caption = "Table 1. Models comparison") |> kableExtra::kable_styling(full_width = FALSE)
 ```
 
@@ -99,8 +100,8 @@ knitr::include_graphics("../src/maternal_risk_model_figures/hyperparam_plot.png"
 -   Table 2 is the confusion matrix which shows the prediction rate is consistently across all risk levels.
 
 ```{r confusion_matrix}
-confusion_matrix <- read.csv("../src/maternal_risk_model_figures/testdata_confusion_matrix.csv",row.names=1, header=TRUE)
-kable(confusion_matrix, caption = "Table 2. Confusion Matrix") |> kableExtra::kable_styling(full_width = FALSE)
+#confusion_matrix <- read_csv("../src/maternal_risk_model_figures/testdata_confusion_matrix.csv")
+#kable(confusion_matrix, caption = "Table 2. Confusion Matrix") |> kableExtra::kable_styling(full_width = FALSE)
 ```
 
 # Assumptions and Limitations
