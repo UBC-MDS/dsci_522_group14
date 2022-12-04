@@ -16,27 +16,27 @@
 all : doc/final_report.md
 
 
-# download data 
+# download data from url 
 data/raw/maternal_risk.csv : src/download_data.py
 	python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='data/raw/maternal_risk.csv'
 
 
-# preprocess data 
+# preprocess data by splitting into train and test set 
 data/processed/test_df.csv data/processed/test_df_binary.csv data/processed/train_df.csv data/processed/train_df_binary.csv : data/raw/maternal_risk.csv src/pre_processing.py 
 	python src/pre_processing.py --data_location='data/raw/maternal_risk.csv' --output_location='data/processed/'
 
 
-# create the figures from EDA 
+# create figures from exploratory data analysis 
 src/maternal_risk_eda_figures/EDA.png src/maternal_risk_eda_figures/box_plot.png src/maternal_risk_eda_figures/class_distribution.png src/maternal_risk_eda_figures/density_plot.png src/maternal_risk_eda_figures/output_32_0.png : data/raw/maternal_risk.csv src/eda_script.py 
 	python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
 
 
-# create the figures from model building 
+# create graphs and figures from model building and hyperparameter optimization
 results/hyperparam_plot.png results/model_comparison_table.csv : data/processed/train_df.csv data/processed/test_df.csv src/fit_maternal_risk_predict_model.py 
 	python src/fit_maternal_risk_predict_model.py --train_df_path='data/processed/train_df.csv' --test_df_path='data/processed/test_df.csv' --output_dir_path='results/'
 
 
-# test model 
+# score model on test data and create confusion matrix
 results/test_score.csv results/testdata_confusion_matrix.csv : results/bestmodel.pkl data/processed/test_df.csv src/predict_model_on_test.py
 	python src/predict_model_on_test.py --bestmodel_path='results/bestmodel.pkl' --test_df_path='data/processed/test_df.csv' --output_dir_path='results/'
 
