@@ -34,9 +34,9 @@ For this project, we aim to answer the question:
 
 This is an important question to explore given that human resources are low in lower income countries, and non-human dependent classification methods can help provide this information to more individuals. Furthermore, classifying a patient's risk level through data-driven methods may be advantageous over traditional methods which may involve levels of subjectivity.
 
-IoT sensors can collect a diverse range of health metrics, however not all of them may be useful in predicting whether a patient is at risk of adverse health outcomes [@sutton2020early]. Thus, we also hope to use data analysis methods to infer (sub-question) whether some metrics may be more important in determining maternal health risk levels than others.
+IoT sensors can collect a diverse range of health metrics, however not all of them may be useful in predicting whether a patient is at risk of adverse health outcomes [@sutton2020early]. Thus, time permitting, we also hope to use data analysis methods to infer (sub-question) whether some metrics may be more important in determining maternal health risk levels than others.
 
-# Methods
+# Data and EDA
 
 The R programming language [@R] and the following R packages were used to perform the analysis: knitr [@knitr]. The code used to perform the analysis and create this report can be found here: https://github.com/UBC-MDS/maternal_health_risk_predictor/blob/main/doc/final_report.md.
 
@@ -48,50 +48,54 @@ The full data set was sourced from the UCI Machine Learning Repository [@asuncio
 
 The data set contains six features describing a patient's health profile, including `age`, `SystolicBP` (systolic blood pressure in mmHG), `DiastolicBP` (diastolic blood pressure in mmHG), `BS` (blood glucose levels in mmol/L), `BodyTemp` (body temperature in Fahrenheit), and `HeartRate` (heart rate in beats per minute). There are 1014 instances in total, with each row corresponding to one patient. Finally, the data contains the attribute `RiskLevel`, corresponding to a medical expert's determination of whether the patient is at low, mid, or high risk (Ahmed et al., 2020).
 
-## Planned Analysis
+## Exploratory Data Analysis (EDA)
 
-- Classification models
-
-## Exploratory Data Analysis
-
-Figure 1. shows the distribution across target classes. As we can see from the bar chart below, there is not a drastic class imbalance in the training data, however, we will still explore whether a balanced class weight will improve our model performance.
-
+We first wanted to examine the distribution of counts of our three target classes in the training set, in order to see whether we would need to deal with class imbalance. Figure 1. shows this distribution as a bar graph. Upon visualization, there does not appear to be a drastic class imbalance. 
 
 ```{r figure-1, echo=FALSE, out.width="100%"}
 knitr::include_graphics("../src/maternal_risk_eda_figures/class_distribution.png")
-#fig.cap="Counts of Observations for Target Classes in the Training Set"
+#fig.cap="Counts of Observations for the Target Class RiskLevel in the Training Set"
 ```
-Figure 1. Counts of Observations for Target Classes in the Training Set
- 
 
+**Figure 1. Counts of Observations for the Target Class RiskLevel in the Training Set** 
 
-Figure 2. shows the density distribution across all features, which could provide us with insights on whether the distribution of some features are different for different target classes.
+As all of our features were continuous, we plotted the density distribution of each feature colored by different target classes (high risk = blue, low risk = orange, mid risk = red). This is shown in Figure 2. below. These graphs provided us with insights on whether the distribution of some features are different for different target classes. For example, the distribution of `age` for the high risk class is more symmetrical than the low risk and mid risk classes (which are both right-skewed). This could indicate that `age` could be a useful predictor in determining whether someone is at high risk. On the other hand, it appears that the feature `BodyTemp` has similar distributions for all classes, suggesting that it may not be not helpful in predicting the target.
 
 
 ```{r figure-2, echo=FALSE, out.width="100%"}
 knitr::include_graphics("../src/maternal_risk_eda_figures/density_plot.png")
 #fig.align="center"
-#fig.cap="Distribution of Features for Different Target Classes in the Training Set"
+#fig.cap="Distribution of Features for the Target Class RiskLevel in the Training Set"
 ```
-Figure 2. Distribution of Features for Different Target Classes in the Training Set
 
+**Figure 2. Distribution of Features for the Target Class RiskLevel in the Training Set** 
 
-Figure 3. shows the features SystolicBP and DiastolicBP have high correlation compared to other pairs of predictors, followed by the correlation between the two blood pressure levels and age. For other pairs of predictors, there are no significant correlations found.
+Finally, we created pairwise scatter plots for all features to examine whether some features may be correlated with one another. Figure 3. shows that the features `SystolicBP` and `DiastolicBP` have high correlation compared to other pairs of predictors, followed by the correlation between the two blood pressure levels and age. For other pairs of predictors, there are no significant correlations found.
+
 
 ```{r figure-3, echo=FALSE, out.width="100%"}
 knitr::include_graphics("../src/maternal_risk_eda_figures/output_32_0.png")
 #fig.align="center", fig.cap="Pairwise Relationships Between Features"
 ```
-Figure 3. Pairwise Relationships Between Features
+
+**Figure 3. Pairwise Relationships Between Features** 
 
 
-# Results
+# Model Building
 
-## Model Building
+## Exploratory Model Building
 
-We have tried the following models: 1. Dummy Classifier; 2. Decision Tree [@myles2004introduction]; 3. Support Vector Machines (SVMs)[@hearst1998support]; 4. Logistic Regression; 5. K-Nearest Neighbors (KNN).
+Before applying our machine learning models, we separated our training set into 'X_train' and 'y_train'. As all of our features were numeric and continuous with different ranges, we performed standard scaling on 'X_train' with the Scikit-learn Standard Scaler package [@pedregosa2011scikit]. 
 
-For all above models, we used the default parameters and did not include hyperparameter optimization at this stage. Table 1 is the models comparison, and it shows the training scores and mean cross validation scores of the models we tried. Based on the results, we choose Decision Tree model because it has the highest mean cross validation score.
+We decided to test a few different classification models to decide which we should choose in our final analysis: 
+
+1. Dummy Classifier
+2. Decision Tree [@myles2004introduction]
+3. Support Vector Machines (SVMs) [@hearst1998support]
+4. Logistic Regression
+5. K-Nearest Neighbors (KNN)
+
+For all above models, we used the default parameters and did not include hyperparameter optimization. Table 1. shows the comparison of the models with their respective training scores and mean cross validation scores (default 5-fold cross validation). As the Decision Tree model had the highest mean cross validation score, we decided to choose this one for our final analysis.
 
 ```{r table-1, echo=FALSE, message=FALSE, warning=FALSE}
 model_comparison <- read_csv("../src/maternal_risk_model_figures/model_comparison_table.csv", show_col_types = FALSE)
@@ -100,16 +104,24 @@ kable(model_comparison, caption = "Table 1. Comparison of Classification Models"
     kableExtra::kable_styling(position = "left", full_width = FALSE)
 ```
 
-Hyperparameter optimization: For the decision tree model, we use random search method to try different max depth from 1 to 50. From the figure 3, we can see the best depth is 29, and the mean test score is 0.823 which is not bad.
+## Hyperparameter Optimization
+
+For hyperparameter optimization, we used a random search method for max depths ranging between 1 to 50. We used 50-fold cross-validation, and computed the average accuracy between folds to compare between different max depths. We plotted these averaged scores against the max depths as shown in Figure 4. The best depth found by the randomized search was 29. 
 
 ```{r figure-4, out.width="100%"}
 knitr::include_graphics("../src/maternal_risk_model_figures/hyperparam_plot.png")
 #fig.align="center", fig.cap="Hyperparameter Optimization for Max Depth", out.width="50%"
 ```
-Figure 4. Hyperparameter Optimization for Max Depth
 
+**Figure 4. Hyperparameter Optimization for Max Depth with Mean Train and Test Scores**
 
-Table 2 is the confusion matrix which shows the prediction rate is consistently across all risk levels.
+## Evaluating on Test Data
+
+With a max depth 29, we scored our best Decision Tree model on our test data set and obtained an accuracy score of **0.823**.
+
+Although this score appears high, we also wanted to further examine the predictions made by our model for each of the target classes. Table 2. shows the confusion matrix. We are mainly interested in seeing whether our model can correctly predict whether an individual is at high maternal health risk, as it would be more detrimental to incorrectly label a high risk individual as mid or low risk. 
+
+Our model predicted 53 high risk observations correctly out of a total of 60 true high risk observations (recall = 0.88). Our model also predicted 58 high risk observations in total (5 of these predictions were incorrect, giving a precision of 0.91). The f1-score for the high risk class would be 0.90. 
 
 ```{r table-2, echo=FALSE, message=FALSE, warning=FALSE}
 confusion_matrix <- read_csv("../src/maternal_risk_model_figures/testdata_confusion_matrix.csv", show_col_types = FALSE)
@@ -120,15 +132,30 @@ kable(confusion_matrix, caption = "Table 2. Confusion Matrix with Test Data") |>
 
 # Assumptions and Limitations
 
-For our analysis, we made the following assumptions: 
-- (1) The maternal risk dataset that we used is representative of the population of patients. 
-- (2) The risk level classified in the data set is a good indicator of the patient's risk level. 
-- (3) The data collected is unbiased.
+Before our analysis, we made the following assumptions: 
 
-The dataset we used was collected from the rural areas of Bangladesh, and it might be possible that patients in different regions have different characteristics of health information that affects their maternal risk level, hence the model might not be as accurate when predicting patients from other regions. 
+1. The maternal risk dataset that we used is representative of the population of patients. 
+2. The risk level classified in the data set is a good indicator of the patient's risk level. 
+3. The data collected is unbiased.
+
+The dataset we used was collected from the rural areas of Bangladesh, and it might be possible that patients in different regions have different characteristics of health information that affects their maternal risk level. Thus, a limitation to our model is that it may not be as accurate when predicting patients from other regions. 
+
+During our analysis, we also assumed that: 
+
+1. Our data set did not contain any class imbalance 
+2. A Decision Tree model may be the best choice based on initial modeling looking at cross-validation scores of accuracy
+
+However, it is possible that there is class imbalance that we did not account for. Furthermore, it may be that Decision Trees had the best cross-validation scores without hyperparameter tuning, but another model with optimal hyperparameters could outperform our best model. Furthermore, we only looked at accuracy during cross-validation when choosing the model, and it may be more beneficial to look at recall or f1-scores. 
+
 
 # Future Directions
 
-As mentioned in the introduction, we are trying to determine whether the patient is at risk, while identifying patients with a high risk level should be our priority. In the future, we could combine low and mid risk level into singular class so that we would have a binary classifier such that we can then explore different classification metrics such as recall instead of using accuracy as our only scoring metrics to evaluate our model. Recall would be an ideal scoring metric in this case as we are trying to minimize the number of false negatives such that high risk patients are not being misclassified by the model.
+As mentioned in the introduction, we are trying to determine whether a patient is at risk, and identifying patients with a high risk level should be our priority. We propose the following next steps to improve our model: 
+
+1. We could combine low and mid risk level into singular class so that we would have a binary classifier. In this way, we could focus on improving the prediction of the high risk class. We would explore classification metrics such as recall instead of using accuracy, as we are trying to minimize the number of false negatives such that high risk patients are not being misclassified by the model. 
+2. As mentioned in the limitations, we could add `class_weight` in our hyperparameter optimization to see whether handling class imbalance would improve our model. 
+3. We could also try hyperparameter tuning with other classification models (instead of just Decision Trees) to see whether they may have better performance. 
+4. We could drop some features which do not seem meaningful, like `BodyTemp` to see if a simpler model is better. 
+5. Finally, we can examine Precision-Recall (PR) curves and adjust the threshold of our model to improve the recall for the high risk class. 
 
 # References
