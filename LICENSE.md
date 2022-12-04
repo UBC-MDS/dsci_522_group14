@@ -1,3 +1,7 @@
+# License
+
+## Codes
+
 MIT License
 
 Copyright (c) [2022] [Shirley Zhang, Lennon Au-Yeung, Chenyang Wang]
@@ -20,6 +24,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+## Reports
 
 Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 

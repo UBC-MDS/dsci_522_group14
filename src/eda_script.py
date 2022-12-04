@@ -6,7 +6,7 @@
 Usage: src/eda_script.py --data_location=<data_location> --output_location=<output_location>
 Options:
 --data_location=<data_location>    Location of the data to be used for eda
-output_location=<output_location>  Location to output the visulisations
+--output_location=<output_location>  Location to output the visulisations
 """
 
 from docopt import docopt
