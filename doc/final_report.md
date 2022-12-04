@@ -236,7 +236,7 @@ computed the average accuracy between folds to compare between different
 max depths. We plotted these averaged scores against the max depths as
 shown in Figure 4. The best depth found by the randomized search was 29.
 
-<img src="../src/maternal_risk_model_figures/hyperparam_plot.png" width="100%" />
+<img src="../results/hyperparam_plot.png" width="100%" />
 
 **Figure 4. Hyperparameter Optimization for Max Depth with Mean Train
 and Test Scores**
