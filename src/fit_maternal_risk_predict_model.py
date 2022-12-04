@@ -171,9 +171,9 @@ def decisiontree_hyperparamopt(X_train, y_train):
     # Fit the model 
     random_search.fit(X_train, y_train)
     # Print scores 
-    print('\nHyperparameter optimization on Decision Trees')
-    print('Best max_depth: ', random_search.best_params_['decisiontreeclassifier__max_depth'])
-    print('Best score: ', round(random_search.best_score_, 3))
+    #print('\nHyperparameter optimization on Decision Trees')
+    #print('Best max_depth: ', random_search.best_params_['decisiontreeclassifier__max_depth'])
+    #print('Best score: ', round(random_search.best_score_, 3))
     
     return random_search
     

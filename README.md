@@ -2,11 +2,11 @@
 
 ## Authors 
 
+(Team 14) 
+
 - Lennon Au-Yeung
 - Chenyang Wang
 - Shirley Zhang
-
-(Team 14) 
 
 This data analysis project was created in fulfillment of the team project requirements for DSCI 522 (Data Science Workflows), a course in the Master of Data Science program at the University of British Columbia. 
 
@@ -20,7 +20,7 @@ The full data set was sourced from the UCI Machine Learning Repository (Dua and 
 
 To replicate the analysis done in this project, you follow the steps below:
 
-1. Install the dependencies listed under "Dependencies"
+1. Install the dependencies listed under "Dependencies":
 
 - [Dependencies](https://github.com/UBC-MDS/maternal_health_risk_predictor#dependencies)
 
@@ -36,42 +36,36 @@ git clone git@github.com:UBC-MDS/maternal_health_risk_predictor.git
 cd maternal_health_risk_predictor
 ```
 
-4. Use one of the following options to run the rest of the analysis
+4. Use one of the following options to run the rest of the analysis:
 
-#### A. Run each command individually 
+#### Option A. Run each command individually 
 
 Run the following at the command line/terminal inside of the root directory of this repo:
 
 ```
-# Download the full data set from [UCI](https://archive.ics.uci.edu/ml/machine-learning-databases/00639/) and save locally it as 'maternal_risk.csv' under the `data/raw/` directory: 
+# download the full data set 
 python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='data/raw/maternal_risk.csv'
 
-
-# Render the exploratory data analysis file:
+# render the exploratory data analysis file
 jupyter nbconvert --execute --to notebook --inplace src/maternal_risk_eda.ipynb
 
-
-# Preprocess the downloaded raw data set (from step 4) and save it as 'train_df.csv' and 'test_df.csv' under the `data/processed/` directory:
+# preprocess the downloaded raw data set 
 python src/pre_processing.py --data_location='data/raw/maternal_risk.csv' --output_location='data/processed/'
 
-
-# Read the full dataset, perform exploratory data analysis, and save it as 'EDA.png' under the `src/maternal_risk_eda_figures` directory:
+# read the full dataset, perform exploratory data analysis, and save it as 'EDA.png' 
 python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
 
-
-# Run the script to fit and model a Decision Tree classifier on the training data, and save results under the `results/` directory:
+# run the script to fit and model a Decision Tree classifier on the training data
 python src/fit_maternal_risk_predict_model.py --train_df_path='data/processed/train_df.csv' --test_df_path='data/processed/test_df.csv' --output_dir_path='results/'
 
-
-# Score the best model on the test data, and create a confusion matrix:
+# score the best model on the test data, and create a confusion matrix
 python src/predict_model_on_test.py --bestmodel_path='results/bestmodel.pkl' --test_df_path='data/processed/test_df.csv' --output_dir_path='results/'
 
-
-# Render the final report under the `/doc` directory:
+# render the final report 
 Rscript -e "rmarkdown::render('doc/final_report.Rmd')"
 ```
 
-#### B. Use the Makefile 
+#### Option B. Use the Makefile 
 
 Run the following at the command line/terminal inside of the root directory of this repo:
 
@@ -97,7 +91,7 @@ Python 3.10 and Python packages:
 - requests==2.22.0
 - vl_convert
 - graphviz==0.20.1
-- nbconvert
+- nbconvert==7.2.5
 
 Model building packages: 
 - sklearn==1.1.3
@@ -110,8 +104,6 @@ R version 4.2.1 and R packages:
 
 
 ## EDA and Final Report 
-
-Link to initial exploratory data analysis in Markdown: [maternal_risk_eda.md](https://github.com/UBC-MDS/maternal_health_risk_predictor/blob/main/src/maternal_risk_eda.md)
 
 Link to final report in Markdown: [final_report.md](https://github.com/UBC-MDS/maternal_health_risk_predictor/blob/main/doc/final_report.md)
 
