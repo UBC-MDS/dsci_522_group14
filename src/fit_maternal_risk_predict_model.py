@@ -1,7 +1,8 @@
 # author: Shirley Zhang 
 # date: 2022-11-25
 
-'''Script which takes as input the preprocessed training and test .csv files as well as a path to the output directory, reports scores of baseline classification models, and performs hyperparameter tuning on a Decision Tree model. It will output tables and figures corresponding to the results of the model analysis.  
+'''Script which takes as input the preprocessed training and test .csv files as well as a path to the output directory, reports scores of baseline classification models, and performs hyperparameter tuning on a Decision Tree model. It will output a table called 'model_comparison_table.csv' with scores of different models, and a figure called 'hyperparam_plot.png' with details about hyperparameter optimization. 
+
 
 Usage: src/fit_maternal_risk_predict_model.py --train_df_path=<train_df_path> --test_df_path=<test_df_path> --output_dir_path=<output_dir_path>
 
@@ -27,9 +28,7 @@ import pickle
 from sklearn.model_selection import cross_val_score, RandomizedSearchCV
 from scipy.stats import randint
 from sklearn.pipeline import Pipeline, make_pipeline
-from sklearn.metrics import ConfusionMatrixDisplay, classification_report
 from sklearn.model_selection import cross_val_predict
-from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import StandardScaler
 
 from sklearn.dummy import DummyClassifier
