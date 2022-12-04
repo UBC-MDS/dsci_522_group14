@@ -98,7 +98,7 @@ We decided to test a few different classification models to decide which we shou
 For all above models, we used the default parameters and did not include hyperparameter optimization. Table 1. shows the comparison of the models with their respective training scores and mean cross validation scores (default 5-fold cross validation). As the Decision Tree model had the highest mean cross validation score, we decided to choose this one for our final analysis.
 
 ```{r table-1, echo=FALSE, message=FALSE, warning=FALSE}
-model_comparison <- read_csv("../src/maternal_risk_model_figures/model_comparison_table.csv", show_col_types = FALSE)
+model_comparison <- read_csv("../results/model_comparison_table.csv", show_col_types = FALSE)
 names(model_comparison)[1] <- " "
 kable(model_comparison, caption = "Table 1. Comparison of Classification Models") |> 
     kableExtra::kable_styling(position = "left", full_width = FALSE)
@@ -109,7 +109,7 @@ kable(model_comparison, caption = "Table 1. Comparison of Classification Models"
 For hyperparameter optimization, we used a random search method for max depths ranging between 1 to 50. We used 50-fold cross-validation, and computed the average accuracy between folds to compare between different max depths. We plotted these averaged scores against the max depths as shown in Figure 4. The best depth found by the randomized search was 29. 
 
 ```{r figure-4, out.width="100%"}
-knitr::include_graphics("../src/maternal_risk_model_figures/hyperparam_plot.png")
+knitr::include_graphics("../results/hyperparam_plot.png")
 #fig.align="center", fig.cap="Hyperparameter Optimization for Max Depth", out.width="50%"
 ```
 
@@ -124,7 +124,7 @@ Although this score appears high, we also wanted to further examine the predicti
 Our model predicted 53 high risk observations correctly out of a total of 60 true high risk observations (recall = 0.88). Our model also predicted 58 high risk observations in total (5 of these predictions were incorrect, giving a precision of 0.91). The f1-score for the high risk class would be 0.90. 
 
 ```{r table-2, echo=FALSE, message=FALSE, warning=FALSE}
-confusion_matrix <- read_csv("../src/maternal_risk_model_figures/testdata_confusion_matrix.csv", show_col_types = FALSE)
+confusion_matrix <- read_csv("../results/testdata_confusion_matrix.csv", show_col_types = FALSE)
 names(confusion_matrix)[1] <- " "
 kable(confusion_matrix, caption = "Table 2. Confusion Matrix with Test Data") |> 
     kableExtra::kable_styling(position = "left", full_width = FALSE)
