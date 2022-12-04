@@ -2,8 +2,10 @@
 # date: 2022-11-25
 
 
-""" Export eda from training data.
+""" Creates exploratory data analysis figures from the preprocessed training data of the maternal health risk dataset
+
 Usage: src/eda_script.py --data_location=<data_location> --output_location=<output_location>
+
 Options:
 --data_location=<data_location>    Location of the data to be used for eda
 --output_location=<output_location>  Location to output the visulisations
@@ -31,38 +33,21 @@ def main(data_location, output_location):
         color = 'RiskLevel'
     ).properties(title = 'Distribution of Risk Level')
 
-
-    def display(i):
-        graph = alt.Chart(train_df).transform_density(
-        i,groupby=['RiskLevel'],
-        as_=[ i, 'density']).mark_area(fill = None, strokeWidth=2).encode(
-        x = (i),
-        y='density:Q',stroke='RiskLevel').properties(width=200,height=200)
-        return graph + graph.mark_area(opacity = 0.3).encode(color = alt.Color('RiskLevel',legend=None))
-
-    Age = display('Age')
-    SystolicBP = display('SystolicBP')
-    DiastolicBP = display('DiastolicBP')
-    BS = display('BS')
-    BodyTemp = display('BodyTemp')
-    HeartRate = display('HeartRate')
+    Age = display('Age',train_df)
+    SystolicBP = display('SystolicBP',train_df)
+    DiastolicBP = display('DiastolicBP',train_df)
+    BS = display('BS',train_df)
+    BodyTemp = display('BodyTemp',train_df)
+    HeartRate = display('HeartRate',train_df)
 
     X_density = ((Age | SystolicBP | DiastolicBP) & (BS | BodyTemp | HeartRate)).properties(title='Distribution of Predictors for Each Risk Level')
     
-    def boxplot(i):
-        box = alt.Chart(train_df).mark_boxplot().encode(
-        x = i,
-        y = 'RiskLevel',
-        color = 'RiskLevel'
-    )
-        return box
-    
-    Age = boxplot('Age')
-    SystolicBP = boxplot('SystolicBP')
-    DiastolicBP = boxplot('DiastolicBP')
-    BS = boxplot('BS')
-    BodyTemp = boxplot('BodyTemp')
-    HeartRate = boxplot('HeartRate')
+    Age = boxplot('Age',train_df)
+    SystolicBP = boxplot('SystolicBP',train_df)
+    DiastolicBP = boxplot('DiastolicBP',train_df)
+    BS = boxplot('BS',train_df)
+    BodyTemp = boxplot('BodyTemp',train_df)
+    HeartRate = boxplot('HeartRate',train_df)
     
     X_box = (Age & SystolicBP & DiastolicBP & BS & BodyTemp & HeartRate).properties(title='Boxplots of Different Features')
 
@@ -78,16 +63,6 @@ def main(data_location, output_location):
         ).repeat(
             column=['Age', 'SystolicBP', 'DiastolicBP', 'BS', 'BodyTemp', 'HeartRate'],
             row=['Age', 'SystolicBP', 'DiastolicBP', 'BS', 'BodyTemp', 'HeartRate'])
-    
-    def save_chart(chart, filename, scale_factor=1):
-        if filename.split('.')[-1] == 'svg':
-            with open(filename, "w") as f:
-                f.write(vlc.vegalite_to_svg(chart.to_dict()))
-        elif filename.split('.')[-1] == 'png':
-            with open(filename, "wb") as f:
-                f.write(vlc.vegalite_to_png(chart.to_dict(), scale=scale_factor))
-        else:
-            raise ValueError("Only svg and png formats are supported")
             
     try: 
         save_chart(combined, output_location+'EDA.png',1)
@@ -101,6 +76,31 @@ def main(data_location, output_location):
     save_chart(X_corr, output_location+'output_32_0.png',1)
         
     assert os.path.isfile(output_location+'EDA.png'), "EDA is not in the src/maternal_risk_eda_figures directory." 
+
+def display(i,train_df):
+    graph = alt.Chart(train_df).transform_density(
+    i,groupby=['RiskLevel'],
+    as_=[ i, 'density']).mark_area(fill = None, strokeWidth=2).encode(
+    x = (i),
+    y='density:Q',stroke='RiskLevel').properties(width=200,height=200)
+    return graph + graph.mark_area(opacity = 0.3).encode(color = alt.Color('RiskLevel',legend=None))
+
+def boxplot(i,train_df):
+    box = alt.Chart(train_df).mark_boxplot().encode(
+    x = i,
+    y = 'RiskLevel',
+    color = 'RiskLevel')
+    return box
+
+def save_chart(chart, filename, scale_factor=1):
+    if filename.split('.')[-1] == 'svg':
+        with open(filename, "w") as f:
+            f.write(vlc.vegalite_to_svg(chart.to_dict()))
+    elif filename.split('.')[-1] == 'png':
+        with open(filename, "wb") as f:
+            f.write(vlc.vegalite_to_png(chart.to_dict(), scale=scale_factor))
+    else:
+        raise ValueError("Only svg and png formats are supported")
     
 if __name__ == "__main__":
   main(opt["--data_location"], opt["--output_location"])
