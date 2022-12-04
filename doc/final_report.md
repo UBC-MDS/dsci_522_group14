@@ -1,22 +1,18 @@
 Maternal Health Risk Predictor
 ================
 
--   <a href="#authors" id="toc-authors">Authors</a>
--   <a href="#summary" id="toc-summary">Summary</a>
--   <a href="#introduction" id="toc-introduction">Introduction</a>
--   <a href="#methods" id="toc-methods">Methods</a>
-    -   <a href="#data" id="toc-data">Data</a>
-    -   <a href="#planned-analysis" id="toc-planned-analysis">Planned
-        Analysis</a>
-    -   <a href="#exploratory-data-analysis"
-        id="toc-exploratory-data-analysis">Exploratory Data Analysis</a>
--   <a href="#results" id="toc-results">Results</a>
-    -   <a href="#model-building" id="toc-model-building">Model Building</a>
--   <a href="#assumptions-and-limitations"
-    id="toc-assumptions-and-limitations">Assumptions and Limitations</a>
--   <a href="#future-directions" id="toc-future-directions">Future
-    Directions</a>
--   <a href="#references" id="toc-references">References</a>
+-   [Authors](#authors)
+-   [Summary](#summary)
+-   [Introduction](#introduction)
+-   [Methods](#methods)
+    -   [Data](#data)
+    -   [Planned Analysis](#planned-analysis)
+    -   [Exploratory Data Analysis](#exploratory-data-analysis)
+-   [Results](#results)
+    -   [Model Building](#model-building)
+-   [Assumptions and Limitations](#assumptions-and-limitations)
+-   [Future Directions](#future-directions)
+-   [References](#references)
 
 ## Authors
 
@@ -41,7 +37,7 @@ causes each day (WHO, 2019). Often, there is a lack of information about
 the woman’s health during pregnancy, making it difficult to monitor
 their status and determine whether they may be at risk of complications
 (Ahmed and Kashem, 2020). A potential solution to this issue is through
-using the ‘Internet of Things (IoT)’, or physical sensors which can
+using the ‘Internet of Things (IoT),’ or physical sensors which can
 monitor and report different health metrics of a patient to their health
 care provider. Medical professionals can then analyze this information
 to determine whether a patient may be at risk.
