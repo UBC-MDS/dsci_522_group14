@@ -32,17 +32,17 @@ src/maternal_risk_eda_figures/EDA.png src/maternal_risk_eda_figures/box_plot.png
 
 
 # create the figures from model building 
-src/maternal_risk_model_figures/hyperparam_plot.png src/maternal_risk_model_figures/model_comparison_table.csv : data/processed/train_df.csv data/processed/test_df.csv src/fit_maternal_risk_predict_model.py 
-	python src/fit_maternal_risk_predict_model.py --train_df_path='data/processed/train_df.csv' --test_df_path='data/processed/test_df.csv' --output_dir_path='src/maternal_risk_model_figures/'
+results/hyperparam_plot.png results/model_comparison_table.csv : data/processed/train_df.csv data/processed/test_df.csv src/fit_maternal_risk_predict_model.py 
+	python src/fit_maternal_risk_predict_model.py --train_df_path='data/processed/train_df.csv' --test_df_path='data/processed/test_df.csv' --output_dir_path='results/'
 
 
 # test model 
-src/maternal_risk_model_figures/test_score.csv src/maternal_risk_model_figures/testdata_confusion_matrix.csv : src/maternal_risk_model_figures/bestmodel.pkl data/processed/test_df.csv src/predict_model_on_test.py
-	python src/predict_model_on_test.py --bestmodel_path='src/maternal_risk_model_figures/bestmodel.pkl' --test_df_path='data/processed/test_df.csv' --output_dir_path='src/maternal_risk_model_figures/' 
+results/test_score.csv results/testdata_confusion_matrix.csv : results/bestmodel.pkl data/processed/test_df.csv src/predict_model_on_test.py
+	python src/predict_model_on_test.py --bestmodel_path='results/bestmodel.pkl' --test_df_path='data/processed/test_df.csv' --output_dir_path='results/'
 
 
 # create the final report 
-doc/final_report.md : data/processed/test_df.csv src/maternal_risk_eda_figures/box_plot.png data/processed/test_df.csv src/maternal_risk_model_figures/hyperparam_plot.png src/maternal_risk_model_figures/testdata_confusion_matrix.csv doc/final_report.Rmd
+doc/final_report.md : data/processed/test_df.csv src/maternal_risk_eda_figures/box_plot.png data/processed/test_df.csv results/hyperparam_plot.png results/testdata_confusion_matrix.csv doc/final_report.Rmd
 	Rscript -e "rmarkdown::render('doc/final_report.Rmd')"
 
 
@@ -50,5 +50,6 @@ clean :
 	rm -f data/raw/*.csv
 	rm -f data/processed/*.csv
 	rm -f src/maternal_risk_eda_figures/*.png
-	rm -f src/maternal_risk_model_figures/*.png
-	rm -f src/maternal_risk_model_figures/*.csv
+	rm -f results/*.png
+	rm -f results/*.csv
+	rm -f results/*.pkl
