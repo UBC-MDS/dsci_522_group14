@@ -1,7 +1,7 @@
 ---
 title: "Maternal Health Risk Predictor"
 date: "2022-12-04"
-author: "Lennon Au-Yeung, Chenyang Wang, Shirley Zhang (Team 14)"
+author: "Lennon Au-Yeung, Chenyang Wang, Shirley Zhang (University of British Columbia)"
 bibliography: refs.bib
 output: 
     github_document: 
