@@ -1,9 +1,15 @@
 ---
 title: "Maternal Health Risk Predictor"
+date: "2022-12-04"
+author: "Lennon Au-Yeung, Chenyang Wang, Shirley Zhang (Team 14)"
 bibliography: refs.bib
 output: 
-  github_document:
-    toc: true
+    github_document: 
+        toc: true
+    html_document: 
+        toc: true
+    pdf_document: 
+        toc: true
 always_allow_html: true
 ---
 
@@ -14,17 +20,9 @@ library(tidyverse)
 library(kableExtra)
 ```
 
-## Authors
-
--   Lennon Au-Yeung
--   Chenyang Wang
--   Shirley Zhang
-
-(Team 14)
-
 # Summary
 
-This data analysis project was created in fulfillment of the team project requirements for DSCI 522 (Data Science Workflows), a course in the Master of Data Science program at the University of British Columbia.
+This data analysis project was created in fulfillment of the team project requirements for DSCI 522 (Data Science Workflows), for the Master of Data Science program at the University of British Columbia.
 
 # Introduction
 
@@ -52,61 +50,80 @@ The data set contains six features describing a patient's health profile, includ
 
 ## Planned Analysis
 
+- Classification models
+
 ## Exploratory Data Analysis
 
--   Figure 1 shows the distribution across target classes, as we can see from the bar chart below, there is not a drastic class imbalance in the training data, however, we will still explore whether a balanced class weight will improve our model performance.
+Figure 1. shows the distribution across target classes. As we can see from the bar chart below, there is not a drastic class imbalance in the training data, however, we will still explore whether a balanced class weight will improve our model performance.
 
 
-```{r fig.align="center", fig.cap="Figure 1. Counts of observation for each class in train data set"}
+```{r figure-1, echo=FALSE, out.width="100%"}
 knitr::include_graphics("../src/maternal_risk_eda_figures/class_distribution.png")
+#fig.cap="Counts of Observations for Target Classes in the Training Set"
 ```
-**Figure 1. Counts of observation for each class in train data set**
+Figure 1. Counts of Observations for Target Classes in the Training Set
+ 
 
--   Figure 2 shows the density distribution across all features, which could provide us with insights on whether the distribution of some features are different for different target classes.
+
+Figure 2. shows the density distribution across all features, which could provide us with insights on whether the distribution of some features are different for different target classes.
 
 
-```{r fig.align="center", fig.cap="Figure 2. Distribution of training set predictors for high risk, mid risk and low risk"}
+```{r figure-2, echo=FALSE, out.width="100%"}
 knitr::include_graphics("../src/maternal_risk_eda_figures/density_plot.png")
+#fig.align="center"
+#fig.cap="Distribution of Features for Different Target Classes in the Training Set"
 ```
-**Figure 2. Distribution of training set predictors for high risk, mid risk and low risk**
+Figure 2. Distribution of Features for Different Target Classes in the Training Set
 
--   Figure 3 shows the features SystolicBP and DiastolicBP have high correlation compared to other pairs of predictors, followed by the correlation between the two blood pressure levels and age. For other pairs of predictors, there are no significant correlations found.
 
-```{r fig.align="center", fig.cap="Figure 3. Pairwise relationship between predictors"}
+Figure 3. shows the features SystolicBP and DiastolicBP have high correlation compared to other pairs of predictors, followed by the correlation between the two blood pressure levels and age. For other pairs of predictors, there are no significant correlations found.
+
+```{r figure-3, echo=FALSE, out.width="100%"}
 knitr::include_graphics("../src/maternal_risk_eda_figures/output_32_0.png")
+#fig.align="center", fig.cap="Pairwise Relationships Between Features"
 ```
-**Figure 3. Pairwise relationship between predictors**
+Figure 3. Pairwise Relationships Between Features
+
 
 # Results
 
 ## Model Building
 
--   We have tried the following models: 1. Dummy Classifier; 2. Decision Tree [@myles2004introduction]; 3. Support Vector Machines (SVMs)[@hearst1998support]; 4. Logistic Regression; 5. K-Nearest Neighbors (KNN).
+We have tried the following models: 1. Dummy Classifier; 2. Decision Tree [@myles2004introduction]; 3. Support Vector Machines (SVMs)[@hearst1998support]; 4. Logistic Regression; 5. K-Nearest Neighbors (KNN).
 
 For all above models, we used the default parameters and did not include hyperparameter optimization at this stage. Table 1 is the models comparison, and it shows the training scores and mean cross validation scores of the models we tried. Based on the results, we choose Decision Tree model because it has the highest mean cross validation score.
 
-```{r load_data}
-model_comparison<-read_csv("../src/maternal_risk_model_figures/model_comparison_table.csv",show_col_types = FALSE)
-names(model_comparison)[1] <- 'Score type'
-kable(model_comparison, caption = "Table 1. Models comparison") |> kableExtra::kable_styling(full_width = FALSE)
+```{r table-1, echo=FALSE, message=FALSE, warning=FALSE}
+model_comparison <- read_csv("../src/maternal_risk_model_figures/model_comparison_table.csv", show_col_types = FALSE)
+names(model_comparison)[1] <- " "
+kable(model_comparison, caption = "Table 1. Comparison of Classification Models") |> 
+    kableExtra::kable_styling(position = "left", full_width = FALSE)
 ```
 
--   Hyperparameter optimization: For the decision tree model, we use random search method to try different max depth from 1 to 50. From the figure 3, we can see the best depth is 29, and the mean test score is 0.823 which is not bad.
+Hyperparameter optimization: For the decision tree model, we use random search method to try different max depth from 1 to 50. From the figure 3, we can see the best depth is 29, and the mean test score is 0.823 which is not bad.
 
-```{r fig.align="center", fig.cap="Figure 4. Pairwise relationship between predictors",out.width="50%"}
+```{r figure-4, out.width="100%"}
 knitr::include_graphics("../src/maternal_risk_model_figures/hyperparam_plot.png")
+#fig.align="center", fig.cap="Hyperparameter Optimization for Max Depth", out.width="50%"
 ```
+Figure 4. Hyperparameter Optimization for Max Depth
 
--   Table 2 is the confusion matrix which shows the prediction rate is consistently across all risk levels.
 
-```{r confusion_matrix}
-#confusion_matrix <- read_csv("../src/maternal_risk_model_figures/testdata_confusion_matrix.csv")
-#kable(confusion_matrix, caption = "Table 2. Confusion Matrix") |> kableExtra::kable_styling(full_width = FALSE)
+Table 2 is the confusion matrix which shows the prediction rate is consistently across all risk levels.
+
+```{r table-2, echo=FALSE, message=FALSE, warning=FALSE}
+confusion_matrix <- read_csv("../src/maternal_risk_model_figures/testdata_confusion_matrix.csv", show_col_types = FALSE)
+names(confusion_matrix)[1] <- " "
+kable(confusion_matrix, caption = "Table 2. Confusion Matrix with Test Data") |> 
+    kableExtra::kable_styling(position = "left", full_width = FALSE)
 ```
 
 # Assumptions and Limitations
 
-For our analysis, we made the following assumptions: (1) The maternal risk dataset that we used is representative of the population of patients. (2) The risk level classified in the data set is a good indicator of the patient's risk level. (3) The data collected is unbiased.
+For our analysis, we made the following assumptions: 
+- (1) The maternal risk dataset that we used is representative of the population of patients. 
+- (2) The risk level classified in the data set is a good indicator of the patient's risk level. 
+- (3) The data collected is unbiased.
 
 The dataset we used was collected from the rural areas of Bangladesh, and it might be possible that patients in different regions have different characteristics of health information that affects their maternal risk level, hence the model might not be as accurate when predicting patients from other regions. 
 

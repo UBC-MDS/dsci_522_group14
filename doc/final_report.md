@@ -1,7 +1,8 @@
 Maternal Health Risk Predictor
 ================
+Lennon Au-Yeung, Chenyang Wang, Shirley Zhang (Team 14)
+2022-12-04
 
--   [Authors](#authors)
 -   [Summary](#summary)
 -   [Introduction](#introduction)
 -   [Methods](#methods)
@@ -14,20 +15,11 @@ Maternal Health Risk Predictor
 -   [Future Directions](#future-directions)
 -   [References](#references)
 
-## Authors
-
--   Lennon Au-Yeung
--   Chenyang Wang
--   Shirley Zhang
-
-(Team 14)
-
 # Summary
 
 This data analysis project was created in fulfillment of the team
-project requirements for DSCI 522 (Data Science Workflows), a course in
-the Master of Data Science program at the University of British
-Columbia.
+project requirements for DSCI 522 (Data Science Workflows), for the
+Master of Data Science program at the University of British Columbia.
 
 # Introduction
 
@@ -99,39 +91,41 @@ risk (Ahmed et al., 2020).
 
 ## Planned Analysis
 
+-   Classification models
+
 ## Exploratory Data Analysis
 
--   Figure 1 shows the distribution across target classes, as we can see
-    from the bar chart below, there is not a drastic class imbalance in
-    the training data, however, we will still explore whether a balanced
-    class weight will improve our model performance.
+Figure 1. shows the distribution across target classes. As we can see
+from the bar chart below, there is not a drastic class imbalance in the
+training data, however, we will still explore whether a balanced class
+weight will improve our model performance.
 
-<img src="../src/maternal_risk_eda_figures/class_distribution.png" alt="Figure 1. Counts of observation for each class in train data set" style="display: block; margin: auto;" />
-**Figure 1. Counts of observation for each class in train data set**
+<img src="../src/maternal_risk_eda_figures/class_distribution.png" width="100%" />
+Figure 1. Counts of Observations for Target Classes in the Training Set
 
--   Figure 2 shows the density distribution across all features, which
-    could provide us with insights on whether the distribution of some
-    features are different for different target classes.
+Figure 2. shows the density distribution across all features, which
+could provide us with insights on whether the distribution of some
+features are different for different target classes.
 
-<img src="../src/maternal_risk_eda_figures/density_plot.png" alt="Figure 2. Distribution of training set predictors for high risk, mid risk and low risk" style="display: block; margin: auto;" />
-**Figure 2. Distribution of training set predictors for high risk, mid
-risk and low risk**
+<img src="../src/maternal_risk_eda_figures/density_plot.png" width="100%" />
+Figure 2. Distribution of Features for Different Target Classes in the
+Training Set
 
--   Figure 3 shows the features SystolicBP and DiastolicBP have high
-    correlation compared to other pairs of predictors, followed by the
-    correlation between the two blood pressure levels and age. For other
-    pairs of predictors, there are no significant correlations found.
+Figure 3. shows the features SystolicBP and DiastolicBP have high
+correlation compared to other pairs of predictors, followed by the
+correlation between the two blood pressure levels and age. For other
+pairs of predictors, there are no significant correlations found.
 
-<img src="../src/maternal_risk_eda_figures/output_32_0.png" alt="Figure 3. Pairwise relationship between predictors" style="display: block; margin: auto;" />
-**Figure 3. Pairwise relationship between predictors**
+<img src="../src/maternal_risk_eda_figures/output_32_0.png" width="100%" />
+Figure 3. Pairwise Relationships Between Features
 
 # Results
 
 ## Model Building
 
--   We have tried the following models: 1. Dummy Classifier; 2. Decision
-    Tree (Myles et al. 2004); 3. Support Vector Machines (SVMs)(Hearst
-    et al. 1998); 4. Logistic Regression; 5. K-Nearest Neighbors (KNN).
+We have tried the following models: 1. Dummy Classifier; 2. Decision
+Tree (Myles et al. 2004); 3. Support Vector Machines (SVMs)(Hearst et
+al. 1998); 4. Logistic Regression; 5. K-Nearest Neighbors (KNN).
 
 For all above models, we used the default parameters and did not include
 hyperparameter optimization at this stage. Table 1 is the models
@@ -139,17 +133,13 @@ comparison, and it shows the training scores and mean cross validation
 scores of the models we tried. Based on the results, we choose Decision
 Tree model because it has the highest mean cross validation score.
 
-    ## New names:
-    ## • `` -> `...1`
-
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="table" style="width: auto !important; ">
 <caption>
-Table 1. Models comparison
+Table 1. Comparison of Classification Models
 </caption>
 <thead>
 <tr>
 <th style="text-align:left;">
-Score type
 </th>
 <th style="text-align:right;">
 Dummy
@@ -212,22 +202,88 @@ Mean Cross Validation Score
 </tbody>
 </table>
 
--   Hyperparameter optimization: For the decision tree model, we use
-    random search method to try different max depth from 1 to 50. From
-    the figure 3, we can see the best depth is 29, and the mean test
-    score is 0.823 which is not bad.
+Hyperparameter optimization: For the decision tree model, we use random
+search method to try different max depth from 1 to 50. From the figure
+3, we can see the best depth is 29, and the mean test score is 0.823
+which is not bad.
 
-<img src="../src/maternal_risk_model_figures/hyperparam_plot.png" alt="Figure 4. Pairwise relationship between predictors" width="50%" style="display: block; margin: auto;" />
+<img src="../src/maternal_risk_model_figures/hyperparam_plot.png" width="100%" />
+Figure 4. Hyperparameter Optimization for Max Depth
 
--   Table 2 is the confusion matrix which shows the prediction rate is
-    consistently across all risk levels.
+Table 2 is the confusion matrix which shows the prediction rate is
+consistently across all risk levels.
+
+<table class="table" style="width: auto !important; ">
+<caption>
+Table 2. Confusion Matrix with Test Data
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Predicted High Risk
+</th>
+<th style="text-align:right;">
+Predicted Low Risk
+</th>
+<th style="text-align:right;">
+Predicted Mid Risk
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+True High Risk
+</td>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+True Low Risk
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+True Mid Risk
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+48
+</td>
+</tr>
+</tbody>
+</table>
 
 # Assumptions and Limitations
 
-For our analysis, we made the following assumptions: (1) The maternal
+For our analysis, we made the following assumptions: - (1) The maternal
 risk dataset that we used is representative of the population of
-patients. (2) The risk level classified in the data set is a good
-indicator of the patient’s risk level. (3) The data collected is
+patients. - (2) The risk level classified in the data set is a good
+indicator of the patient’s risk level. - (3) The data collected is
 unbiased.
 
 The dataset we used was collected from the rural areas of Bangladesh,
