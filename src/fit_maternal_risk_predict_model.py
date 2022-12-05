@@ -39,32 +39,6 @@ from sklearn.linear_model import LogisticRegression
 
 
 opt = docopt(__doc__)
-
-# Main function 
-def main(train_df_path, test_df_path, output_dir_path):
-    
-    # 1) Main function 
-    
-    # 2) Load and split train and test into X and y
-    X_train, y_train, X_test, y_test = load_split_train_test_df(train_df_path, test_df_path)
-    
-    # 3) Run basic comparison of multiple classification models, save table as .csv 
-    compare_models(X_train, y_train, output_dir_path)
-    
-    # 4) Decision Tree hyperparameter optimization 
-    random_search = decisiontree_hyperparamopt(X_train, y_train)
-    
-    # 5) Plot hyperparameters 
-    hyperparam_plot(random_search, output_dir_path)
-    
-    # 6) Save the best model as a pickle 
-    save_bestmodel_pickle(random_search, output_dir_path)
-    
-    # 6) Create confusion matrix 
-    #create_confusionmatrix(X_test, y_test, random_search, output_dir_path)
-    
-    # 7) Print test score 
-    #test_score(random_search, X_test, y_test)
     
 def load_split_train_test_df(train_df_path, test_df_path):
     
@@ -233,23 +207,26 @@ def save_bestmodel_pickle(random_search, output_dir_path):
     
     return 
         
-#def create_confusionmatrix(X_test, y_test, random_search, output_dir_path):
+# Main function 
+def main(train_df_path, test_df_path, output_dir_path):
     
-    # Create confusion matrix
-#    cm = confusion_matrix(y_test, random_search.predict(X_test))
-#    cm_df = pd.DataFrame(data = cm, 
-#                 index = ['True High Risk', 'True Low Risk', 'True Mid Risk'],
-#                 columns = ['Predicted High Risk', 'Predicted Low Risk', 'Predicted Mid Risk'])
+    # 1) Main function 
     
-    # Save as csv 
-#    output_file = output_dir_path + 'testdata_confusion_matrix.csv'
-#    cm_df.to_csv(output_file)
-#    return 
-
+    # 2) Load and split train and test into X and y
+    X_train, y_train, X_test, y_test = load_split_train_test_df(train_df_path, test_df_path)
     
-#def test_score(random_search, X_test, y_test):
-#    print('\nDecision Tree score on test data: ', round(random_search.score(X_test, y_test), 3)) 
-
+    # 3) Run basic comparison of multiple classification models, save table as .csv 
+    compare_models(X_train, y_train, output_dir_path)
+    
+    # 4) Decision Tree hyperparameter optimization 
+    random_search = decisiontree_hyperparamopt(X_train, y_train)
+    
+    # 5) Plot hyperparameters 
+    hyperparam_plot(random_search, output_dir_path)
+    
+    # 6) Save the best model as a pickle 
+    save_bestmodel_pickle(random_search, output_dir_path)
+    
     
 if __name__ == "__main__":
     main(opt['--train_df_path'], opt['--test_df_path'], opt['--output_dir_path'])

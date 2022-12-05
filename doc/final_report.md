@@ -1,6 +1,7 @@
 Maternal Health Risk Predictor
 ================
-Lennon Au-Yeung, Chenyang Wang, Shirley Zhang (Team 14)
+Lennon Au-Yeung, Chenyang Wang, Shirley Zhang (University of British
+Columbia)
 2022-12-04
 
 -   [Summary](#summary)
@@ -301,10 +302,10 @@ True Low Risk
 1
 </td>
 <td style="text-align:right;">
-67
+65
 </td>
 <td style="text-align:right;">
-13
+15
 </td>
 </tr>
 <tr>
