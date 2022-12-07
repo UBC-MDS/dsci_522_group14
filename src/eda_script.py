@@ -16,16 +16,45 @@ import altair as alt
 import pandas as pd
 import os
 from altair_saver import save
+import dataframe_image as dfi
 import vl_convert as vlc
 from sklearn.model_selection import train_test_split
 
-opt = docopt(__doc__)
+opt = docopt(__doc__) 
+
+def display(i,train_df):
+    graph = alt.Chart(train_df).transform_density(
+    i,groupby=['RiskLevel'],
+    as_=[ i, 'density']).mark_area(fill = None, strokeWidth=2).encode(
+    x = (i),
+    y='density:Q',stroke='RiskLevel').properties(width=200,height=200)
+    return graph + graph.mark_area(opacity = 0.3).encode(color = alt.Color('RiskLevel',legend=None))
+
+def boxplot(i,train_df):
+    box = alt.Chart(train_df).mark_boxplot().encode(
+    x = i,
+    y = 'RiskLevel',
+    color = 'RiskLevel')
+    return box
+
+def save_chart(chart, filename, scale_factor=1):
+    if filename.split('.')[-1] == 'svg':
+        with open(filename, "w") as f:
+            f.write(vlc.vegalite_to_svg(chart.to_dict()))
+    elif filename.split('.')[-1] == 'png':
+        with open(filename, "wb") as f:
+            f.write(vlc.vegalite_to_png(chart.to_dict(), scale=scale_factor))
+    else:
+        raise ValueError("Only svg and png formats are supported")
 
 def main(data_location, output_location):
 
+    #read data
     maternal_risk_df = pd.read_csv(data_location)
 
     train_df, test_df = train_test_split(maternal_risk_df, test_size=0.2, random_state=123) 
+    
+    corr_df = train_df.corr('spearman').style.background_gradient()
     
     class_distribution = alt.Chart(train_df).mark_bar().encode(
         x = 'count()',
@@ -61,8 +90,8 @@ def main(data_location, output_location):
             width=100,
             height=100
         ).repeat(
-            column=['Age', 'SystolicBP', 'DiastolicBP', 'BS', 'BodyTemp', 'HeartRate'],
-            row=['Age', 'SystolicBP', 'DiastolicBP', 'BS', 'BodyTemp', 'HeartRate'])
+            column=['Age', 'SystolicBP', 'DiastolicBP'],
+            row=['Age', 'SystolicBP', 'DiastolicBP'])
             
     try: 
         save_chart(combined, output_location+'EDA.png',1)
@@ -70,37 +99,13 @@ def main(data_location, output_location):
         os.makedirs(os.path.dirname(output_location+'EDA.png'))
         save_chart(combined, output_location+'EDA.png',1)
     
+    dfi.export(corr_df, output_location + 'corr_plot.png')
     save_chart(X_density, output_location+'density_plot.png',1)
     save_chart(X_box, output_location+'box_plot.png',1)
     save_chart(class_distribution, output_location+'class_distribution.png',1)
-    save_chart(X_corr, output_location+'output_32_0.png',1)
+    save_chart(X_corr, output_location+'corr_bp_plot.png',1)
         
-    assert os.path.isfile(output_location+'EDA.png'), "EDA is not in the src/maternal_risk_eda_figures directory." 
-
-def display(i,train_df):
-    graph = alt.Chart(train_df).transform_density(
-    i,groupby=['RiskLevel'],
-    as_=[ i, 'density']).mark_area(fill = None, strokeWidth=2).encode(
-    x = (i),
-    y='density:Q',stroke='RiskLevel').properties(width=200,height=200)
-    return graph + graph.mark_area(opacity = 0.3).encode(color = alt.Color('RiskLevel',legend=None))
-
-def boxplot(i,train_df):
-    box = alt.Chart(train_df).mark_boxplot().encode(
-    x = i,
-    y = 'RiskLevel',
-    color = 'RiskLevel')
-    return box
-
-def save_chart(chart, filename, scale_factor=1):
-    if filename.split('.')[-1] == 'svg':
-        with open(filename, "w") as f:
-            f.write(vlc.vegalite_to_svg(chart.to_dict()))
-    elif filename.split('.')[-1] == 'png':
-        with open(filename, "wb") as f:
-            f.write(vlc.vegalite_to_png(chart.to_dict(), scale=scale_factor))
-    else:
-        raise ValueError("Only svg and png formats are supported")
+    assert os.path.isfile(output_location+'EDA.png'), "EDA is not in the src/maternal_risk_eda_figures directory."
     
 if __name__ == "__main__":
   main(opt["--data_location"], opt["--output_location"])

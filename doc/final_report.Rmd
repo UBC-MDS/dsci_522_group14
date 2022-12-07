@@ -70,15 +70,22 @@ knitr::include_graphics("../src/maternal_risk_eda_figures/density_plot.png")
 
 **Figure 2. Distribution of Features for the Target Class RiskLevel in the Training Set** 
 
-Finally, we created pairwise scatter plots for all features to examine whether some features may be correlated with one another. Figure 3. shows that the features `SystolicBP` and `DiastolicBP` have high correlation compared to other pairs of predictors, followed by the correlation between the two blood pressure levels and age. For other pairs of predictors, there are no significant correlations found.
+Finally, we created a correlation table for all features to examine whether some features may be correlated with one another. Figure 3. shows that the features `SystolicBP` and `DiastolicBP` have high correlation compared to other pairs of predictors, followed by the correlation between the two blood pressure levels and age. For other pairs of predictors, there are no significant correlations found. Figure 4 shows features which has shown higher correlation than others.
 
+```{r figure3}
+knitr::include_graphics("../src/maternal_risk_eda_figures/corr_plot.png")
+fig.align="center"
+fig.cap = "Pairwise Relationships Between Features"
+```
+**Figure 3. Pairwise Relationships Between Features** 
 
-```{r figure-3, echo=FALSE, out.width="100%"}
-knitr::include_graphics("../src/maternal_risk_eda_figures/output_32_0.png")
-#fig.align="center", fig.cap="Pairwise Relationships Between Features"
+```{r figure-4, echo=FALSE, out.width="100%"}
+knitr::include_graphics("../src/maternal_risk_eda_figures/corr_bp_plot.png")
+#fig.align="center"
+#fig.cap="Pairwise Relationships Between Features"
 ```
 
-**Figure 3. Pairwise Relationships Between Features** 
+**Figure 4. Pairwise Relationships Between Significant Features** 
 
 
 # Model Building
@@ -106,14 +113,14 @@ kable(model_comparison, caption = "Table 1. Comparison of Classification Models"
 
 ## Hyperparameter Optimization
 
-For hyperparameter optimization, we used a random search method for max depths ranging between 1 to 50. We used 50-fold cross-validation, and computed the average accuracy between folds to compare between different max depths. We plotted these averaged scores against the max depths as shown in Figure 4. The best depth found by the randomized search was 29. 
+For hyperparameter optimization, we used a random search method for max depths ranging between 1 to 50. We used 50-fold cross-validation, and computed the average accuracy between folds to compare between different max depths. We plotted these averaged scores against the max depths as shown in Figure 5. The best depth found by the randomized search was 29. 
 
-```{r figure-4, out.width="100%"}
+```{r figure-5, out.width="100%"}
 knitr::include_graphics("../results/hyperparam_plot.png")
 #fig.align="center", fig.cap="Hyperparameter Optimization for Max Depth", out.width="50%"
 ```
 
-**Figure 4. Hyperparameter Optimization for Max Depth with Mean Train and Test Scores**
+**Figure 5. Hyperparameter Optimization for Max Depth with Mean Train and Test Scores**
 
 ## Evaluating on Test Data
 

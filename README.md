@@ -92,6 +92,7 @@ Python 3.10 and Python packages:
 - vl_convert
 - graphviz==0.20.1
 - nbconvert==7.2.5
+- dataframe_image
 
 Model building packages: 
 - sklearn==1.1.3
