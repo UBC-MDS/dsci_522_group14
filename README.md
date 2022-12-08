@@ -24,10 +24,10 @@ To replicate the analysis done in this project, you follow the steps below:
 
 - [Dependencies](https://github.com/UBC-MDS/maternal_health_risk_predictor#dependencies)
 
-2. Clone the repository (the following shows cloning through ssh keys):
+2. Clone the repository:
 
 ```
-git clone git@github.com:UBC-MDS/maternal_health_risk_predictor.git
+git clone https://github.com/UBC-MDS/maternal_health_risk_predictor.git
 ```
 
 3. Move to the cloned directory:
@@ -103,6 +103,9 @@ R version 4.2.1 and R packages:
 - tidyverse==1.2.1
 - kableExtra==1.3.4
 
+## Makefile Dependency Diagram
+
+![dependency_diagram](Makefile.png)
 
 ## EDA and Final Report 
 

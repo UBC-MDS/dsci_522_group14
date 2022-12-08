@@ -12,7 +12,7 @@ Options:
 --output_dir_path=<output_dir_path> Path to directory where outputs will be stored
 '''
 
-# Import statements
+##### Import statements
 import pandas as pd
 import os
 from docopt import docopt
@@ -21,12 +21,10 @@ from altair_saver import save
 alt.renderers.enable('mimetype')
 import vl_convert as vlc
 import pickle
-
 from sklearn.model_selection import cross_val_score, RandomizedSearchCV
 from scipy.stats import randint
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-
 from sklearn.dummy import DummyClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -36,9 +34,12 @@ from sklearn.linear_model import LogisticRegression
 
 opt = docopt(__doc__)
     
+    
+##### Helper functions
 def load_split_train_test_df(train_df_path, test_df_path):
     '''
-    Reading and splitting the training and testing data set
+    Takes in the path to the training and test data files, reads them as dataframes, 
+    and splits them into X and y. Returns the dataframes X_train, y_train, X_test, and y_test. 
     
     Parameters
     ----------
@@ -75,8 +76,13 @@ def load_split_train_test_df(train_df_path, test_df_path):
     return X_train, y_train, X_test, y_test
 
 def compare_models(X_train, y_train, output_dir_path):
+
     '''
-    Compare the performance of different models and output as csv
+    Takes in the training data and the path to the directory to save the results. 
+    Runs 5 different classification models and saves the training and cross-val 
+    scores in a table to be exported as a .csv file. 
+    
+    (models: Dummy Classifier, Decision Tree, SVM, Logistic Regression, KNN)
     
     Parameters
     ----------
@@ -156,7 +162,8 @@ def compare_models(X_train, y_train, output_dir_path):
 
 def decisiontree_hyperparamopt(X_train, y_train):
     '''
-    Hyperparamter optimization for decision tree model
+    Takes in the training data. Performs hyperparameter optimization for the parameter 
+    'max_depth' using randomized search and returns the randomized search object.     
     
     Parameters
     ----------
@@ -192,17 +199,16 @@ def decisiontree_hyperparamopt(X_train, y_train):
     )
     # Fit the model 
     random_search.fit(X_train, y_train)
-    # Print scores 
-    #print('\nHyperparameter optimization on Decision Trees')
-    #print('Best max_depth: ', random_search.best_params_['decisiontreeclassifier__max_depth'])
-    #print('Best score: ', round(random_search.best_score_, 3))
     
     return random_search
     
-
 def hyperparam_plot(random_search, output_dir_path):
+
     '''
-    Saves the hyperparameter optimization plot
+    
+    Takes in the randomized search object created in decisiontree_hyperparamopt() and the 
+    path to the directory where outputs will be saved. Creates a plot of cross-validation 
+    scores for different hyperparameter values, and saves it as a .png file. 
     
     Parameters
     ----------
@@ -236,6 +242,8 @@ def hyperparam_plot(random_search, output_dir_path):
 
 def save_chart(chart, filename, scale_factor=1):
     '''
+    (Function attributed to Joel Ostblom, UBC)
+    
     Save an Altair chart using vl-convert
     
     Parameters
@@ -257,11 +265,12 @@ def save_chart(chart, filename, scale_factor=1):
     else:
         raise ValueError("Only svg and png formats are supported")
 
-
 def save_bestmodel_pickle(random_search, output_dir_path):
+
     '''
-    Saves the best model in a pickle format
-    
+    Takes in the randomized search object created in decisiontree_hyperparamopt() and the 
+    path to the directory where outputs will be saved. Saves the object as a pickle file. 
+
     Parameters
     ----------
     random_search: randomsearch
@@ -278,7 +287,8 @@ def save_bestmodel_pickle(random_search, output_dir_path):
 # Main function 
 def main(train_df_path, test_df_path, output_dir_path):
     '''
-    Compare the performance between differnt machine learning model and optimize the hyperparamters of the best model
+    Takes in the randomized search object created in decisiontree_hyperparamopt() and the 
+    path to the directory where outputs will be saved.    
     
     Parameters
     ----------
@@ -291,22 +301,25 @@ def main(train_df_path, test_df_path, output_dir_path):
     output_dir_path: str
         Storing the path of the output directory    
     '''
-    # 1) Main function 
     
-    # 2) Load and split train and test into X and y
+    # 1) Load and split train and test into X and y
     X_train, y_train, X_test, y_test = load_split_train_test_df(train_df_path, test_df_path)
     
-    # 3) Run basic comparison of multiple classification models, save table as .csv 
+    # 2) Run basic comparison of multiple classification models, save table as .csv 
     compare_models(X_train, y_train, output_dir_path)
     
-    # 4) Decision Tree hyperparameter optimization 
+    # 3) Decision Tree hyperparameter optimization 
     random_search = decisiontree_hyperparamopt(X_train, y_train)
     
-    # 5) Plot hyperparameters 
+    # 4) Plot hyperparameters 
     hyperparam_plot(random_search, output_dir_path)
     
-    # 6) Save the best model as a pickle 
+    # 5) Save the best model as a pickle 
     save_bestmodel_pickle(random_search, output_dir_path)
+    
+
+##### Tests
+
     
     
 if __name__ == "__main__":
