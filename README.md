@@ -102,6 +102,9 @@ R version 4.2.1 and R packages:
 - tidyverse==1.2.1
 - kableExtra==1.3.4
 
+## Makefile Dependency Diagram
+
+![dependency_diagram](Makefile.png)
 
 ## EDA and Final Report 
 
