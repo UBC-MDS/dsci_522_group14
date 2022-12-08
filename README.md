@@ -87,7 +87,7 @@ Python 3.10 and Python packages:
 - numpy==1.23.5
 - re==2022.10.31
 - altair==4.2.0
-- altair-saver==0.5.0
+- altair_saver==0.5.0
 - requests==2.22.0
 - vl_convert
 - graphviz==0.20.1
@@ -98,6 +98,7 @@ Model building packages:
 - scipy==1.3.2
 
 R version 4.2.1 and R packages: 
+- rmarkdown==2.18
 - knitr==1.26
 - tidyverse==1.2.1
 - kableExtra==1.3.4
