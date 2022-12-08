@@ -317,8 +317,10 @@ def main(train_df_path, test_df_path, output_dir_path):
     # 5) Save the best model as a pickle 
     save_bestmodel_pickle(random_search, output_dir_path)
     
-
-##### Tests
+    #test that the expected output are in the correct directory
+    assert os.path.isfile(output_dir_path + 'model_comparison_table.csv'), 'Model Comparison table is not in the directory'
+    assert os.path.isfile(output_dir_path + 'hyperparam_plot.png'), 'Hyperparameter plot file is not in the directory'
+    assert os.path.isfile(output_dir_path + 'bestmodel.pkl'), 'Pickle file is not in the directory'
 
     
     
