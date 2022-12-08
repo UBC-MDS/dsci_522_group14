@@ -15,7 +15,7 @@ Options:
 import pandas as pd
 import pickle
 from docopt import docopt
-from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
+from sklearn.metrics import confusion_matrix
 
 opt = docopt(__doc__)
     

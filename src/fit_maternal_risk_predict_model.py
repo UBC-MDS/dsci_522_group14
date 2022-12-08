@@ -14,9 +14,6 @@ Options:
 
 # Import statements
 import pandas as pd
-import numpy as np
-import re
-import graphviz
 import os
 from docopt import docopt
 import altair as alt
@@ -27,13 +24,12 @@ import pickle
 
 from sklearn.model_selection import cross_val_score, RandomizedSearchCV
 from scipy.stats import randint
-from sklearn.pipeline import Pipeline, make_pipeline
-from sklearn.model_selection import cross_val_predict
+from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 from sklearn.dummy import DummyClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 
