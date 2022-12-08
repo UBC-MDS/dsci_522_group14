@@ -41,7 +41,31 @@ from sklearn.linear_model import LogisticRegression
 opt = docopt(__doc__)
     
 def load_split_train_test_df(train_df_path, test_df_path):
+    '''
+    Reading and splitting the training and testing data set
     
+    Parameters
+    ----------
+    train_df_path: str
+        path that stores the training set
+        
+    test_df_path: str
+        path that stores the testing set
+    
+    Returns
+    ----------
+    X_train: dataframe
+        values of all features in the training set 
+    
+    y_train: dataframe
+        values of target in the training set
+        
+    X_test: dataframe
+        values of all features in the testing set 
+    
+    y_test: dataframe
+        values of target in the testing set
+    '''
     # Read data into dataframes 
     train_df = pd.read_csv(train_df_path)
     test_df = pd.read_csv(test_df_path)
@@ -55,7 +79,20 @@ def load_split_train_test_df(train_df_path, test_df_path):
     return X_train, y_train, X_test, y_test
 
 def compare_models(X_train, y_train, output_dir_path):
+    '''
+    Compare the performance of different models and output as csv
     
+    Parameters
+    ----------
+    X_train: dataframe
+        values of all features in the training set 
+    
+    y_train: dataframe
+        values of target in the training set
+    
+    output_dir_path: str
+        Storing the path of the output directory
+    '''
     model_comparison_dict = {}
     
     # a) Dummy Classifier 
@@ -122,7 +159,22 @@ def compare_models(X_train, y_train, output_dir_path):
     return 
 
 def decisiontree_hyperparamopt(X_train, y_train):
+    '''
+    Hyperparamter optimization for decision tree model
     
+    Parameters
+    ----------
+    X_train: dataframe
+        values of all features in the training set 
+    
+    y_train: dataframe
+        values of target in the training set
+    
+    Returns
+    ----------
+    random_search: randomsearch
+        Randomsearch object from randomizedsearchcv
+    '''
     # Pipeline
     dt_pipe = make_pipeline(
         StandardScaler(), DecisionTreeClassifier()
@@ -153,7 +205,17 @@ def decisiontree_hyperparamopt(X_train, y_train):
     
 
 def hyperparam_plot(random_search, output_dir_path):
+    '''
+    Saves the hyperparameter optimization plot
     
+    Parameters
+    ----------
+    random_search: randomsearch
+        Randomsearch object from randomizedsearchcv    
+        
+    output_dir_path: str
+        Storing the path of the output directory    
+    '''
     # Create dataframes for plotting
     randomizedsearchcv_results = pd.DataFrame(random_search.cv_results_)[['param_decisiontreeclassifier__max_depth', 'mean_test_score', 'mean_train_score']]
     randomizedsearchcv_results_explode = pd.melt(randomizedsearchcv_results, id_vars=['param_decisiontreeclassifier__max_depth'], value_vars=['mean_test_score', 'mean_train_score'])
@@ -201,7 +263,17 @@ def save_chart(chart, filename, scale_factor=1):
 
 
 def save_bestmodel_pickle(random_search, output_dir_path):
+    '''
+    Saves the best model in a pickle format
     
+    Parameters
+    ----------
+    random_search: randomsearch
+        Randomsearch object from randomizedsearchcv    
+        
+    output_dir_path: str
+        Storing the path of the output directory    
+    '''
     path_filename = output_dir_path + 'bestmodel.pkl'
     pickle.dump(random_search, open(path_filename, 'wb'))
     
@@ -209,7 +281,20 @@ def save_bestmodel_pickle(random_search, output_dir_path):
         
 # Main function 
 def main(train_df_path, test_df_path, output_dir_path):
+    '''
+    Compare the performance between differnt machine learning model and optimize the hyperparamters of the best model
     
+    Parameters
+    ----------
+    train_df_path: str
+        path that stores the training set    
+    
+    test_df_path: str
+        path that stores the training set
+    
+    output_dir_path: str
+        Storing the path of the output directory    
+    '''
     # 1) Main function 
     
     # 2) Load and split train and test into X and y

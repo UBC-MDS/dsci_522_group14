@@ -23,6 +23,26 @@ from sklearn.model_selection import train_test_split
 opt = docopt(__doc__) 
 
 def display(i,train_df):
+    '''
+    Return altair density plot graph with outline
+    
+    Parameters
+    ----------
+    i: str
+        column name to generate density plot
+    
+    train_df: df
+        training dataframe
+        
+    Returns
+    ----------
+    graph: altair object
+        density plot with outline
+    
+    Example
+    ----------
+    >>> display('Age', train_df)
+    '''
     graph = alt.Chart(train_df).transform_density(
     i,groupby=['RiskLevel'],
     as_=[ i, 'density']).mark_area(fill = None, strokeWidth=2).encode(
@@ -31,6 +51,26 @@ def display(i,train_df):
     return graph + graph.mark_area(opacity = 0.3).encode(color = alt.Color('RiskLevel',legend=None))
 
 def boxplot(i,train_df):
+    '''
+    Return altair boxplot graph
+    
+    Parameters
+    ----------
+    i: str
+        column name to generate density plot
+    
+    train_df: df
+        training dataframe
+        
+    Returns
+    ----------
+    graph: altair object
+        boxplot
+    
+    Example
+    ----------
+    >>> boxplot('Age', train_df)
+    '''
     box = alt.Chart(train_df).mark_boxplot().encode(
     x = i,
     y = 'RiskLevel',
@@ -38,6 +78,19 @@ def boxplot(i,train_df):
     return box
 
 def save_chart(chart, filename, scale_factor=1):
+    '''
+    Save an Altair chart using vl-convert
+    
+    Parameters
+    ----------
+    chart : altair.Chart
+        Altair chart to save
+    filename : str
+        The path to save the chart to
+    scale_factor: int or float
+        The factor to scale the image resolution by.
+        E.g. A value of `2` means two times the default resolution.
+    '''
     if filename.split('.')[-1] == 'svg':
         with open(filename, "w") as f:
             f.write(vlc.vegalite_to_svg(chart.to_dict()))
@@ -48,7 +101,19 @@ def save_chart(chart, filename, scale_factor=1):
         raise ValueError("Only svg and png formats are supported")
 
 def main(data_location, output_location):
-
+    '''
+    Output EDA figures
+    
+    Parameters
+    ----------
+    data_location: string
+        location that the data are stored
+    
+    output_location: string
+        location for the EDA figures to be outputted
+        
+    '''
+    
     #read data
     maternal_risk_df = pd.read_csv(data_location)
 

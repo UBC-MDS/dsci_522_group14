@@ -18,6 +18,20 @@ import pandas as pd
 opt = docopt(__doc__)
 
 def main(out_type, url, out_file):
+    '''
+    Dowload the data from the url and save it in the desired location
+    
+    Parameters
+    ----------
+    out_type: str
+        file type for the data to be saved as
+    
+    url: str
+        url where the data can be extracted
+    
+    out_file: str
+        location and file name for the data extracted
+    '''
     try: 
         request = requests.get(url)
         request.status_code == 200
@@ -26,7 +40,9 @@ def main(out_type, url, out_file):
         print(req)
 
     data = pd.read_csv(url)
-    #path= '../data/raw/'
+    
+    assert out_type == 'csv', "This file type is not supported, please consider using csv."
+    
     if out_type == "csv":
         try:
           data.to_csv(out_file, index = False)

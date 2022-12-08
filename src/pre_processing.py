@@ -19,7 +19,19 @@ from sklearn.model_selection import train_test_split
 opt = docopt(__doc__)
 
 def main(data_location, output_location):
-
+    '''
+    Split the data to train and test, and a second version where the target classes are binary
+    
+    Parameters
+    ----------
+    data_location: str
+        location where the data is located
+    
+    output_location: str
+        location where the data is exported to
+    '''
+    
+    
     maternal_risk_df = pd.read_csv(data_location)
     
     train_df, test_df = train_test_split(maternal_risk_df, test_size=0.2, random_state=123)  
