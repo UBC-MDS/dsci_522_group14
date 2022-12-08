@@ -103,6 +103,7 @@ R version 4.2.1 and R packages:
 - knitr==1.26
 - tidyverse==1.2.1
 - kableExtra==1.3.4
+- devtools
 
 ## Makefile Dependency Diagram
 
