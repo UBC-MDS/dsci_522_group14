@@ -84,6 +84,7 @@ make clean
 Python 3.10 and Python packages:
 - docopt==0.6.2
 - pandas==1.5.1
+- pandoc==2
 - numpy==1.23.5
 - re==2022.10.31
 - altair==4.2.0
