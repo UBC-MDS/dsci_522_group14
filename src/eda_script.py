@@ -43,6 +43,7 @@ def display(i,train_df):
     ----------
     >>> display('Age', train_df)
     '''
+    #create area plot and outline
     graph = alt.Chart(train_df).transform_density(
     i,groupby=['RiskLevel'],
     as_=[ i, 'density']).mark_area(fill = None, strokeWidth=2).encode(
@@ -71,6 +72,7 @@ def boxplot(i,train_df):
     ----------
     >>> boxplot('Age', train_df)
     '''
+    #create box plot
     box = alt.Chart(train_df).mark_boxplot().encode(
     x = i,
     y = 'RiskLevel',
@@ -78,6 +80,7 @@ def boxplot(i,train_df):
     return box
 
 def save_chart(chart, filename, scale_factor=1):
+    #save_chart function reference from Joel Ostblom
     '''
     Save an Altair chart using vl-convert
     
@@ -91,6 +94,7 @@ def save_chart(chart, filename, scale_factor=1):
         The factor to scale the image resolution by.
         E.g. A value of `2` means two times the default resolution.
     '''
+    #saves altair object as png
     if filename.split('.')[-1] == 'svg':
         with open(filename, "w") as f:
             f.write(vlc.vegalite_to_svg(chart.to_dict()))
@@ -117,16 +121,20 @@ def main(data_location, output_location):
     #read data
     maternal_risk_df = pd.read_csv(data_location)
 
+    #train test split
     train_df, test_df = train_test_split(maternal_risk_df, test_size=0.2, random_state=123) 
     
+    #correlation dataframe
     corr_df = train_df.corr('spearman').style.background_gradient()
     
+    #class distribution plot
     class_distribution = alt.Chart(train_df).mark_bar().encode(
         x = 'count()',
         y = 'RiskLevel',
         color = 'RiskLevel'
     ).properties(title = 'Distribution of Risk Level')
 
+    #create multiple density plots
     Age = display('Age',train_df)
     SystolicBP = display('SystolicBP',train_df)
     DiastolicBP = display('DiastolicBP',train_df)
@@ -134,8 +142,10 @@ def main(data_location, output_location):
     BodyTemp = display('BodyTemp',train_df)
     HeartRate = display('HeartRate',train_df)
 
+    #combine density plots
     X_density = ((Age | SystolicBP | DiastolicBP) & (BS | BodyTemp | HeartRate)).properties(title='Distribution of Predictors for Each Risk Level')
     
+    #create multiple box plots
     Age = boxplot('Age',train_df)
     SystolicBP = boxplot('SystolicBP',train_df)
     DiastolicBP = boxplot('DiastolicBP',train_df)
@@ -143,11 +153,13 @@ def main(data_location, output_location):
     BodyTemp = boxplot('BodyTemp',train_df)
     HeartRate = boxplot('HeartRate',train_df)
     
+    #combine box plots
     X_box = (Age & SystolicBP & DiastolicBP & BS & BodyTemp & HeartRate).properties(title='Boxplots of Different Features')
 
     combined = (class_distribution & X_density & X_box).configure_title(
         fontSize=18, anchor='middle')
-
+    
+    #correlation plot for some features
     X_corr = alt.Chart(train_df).mark_point(opacity=0.3, size=10).encode(
         alt.X(alt.repeat('row'), type='quantitative'),
         alt.Y(alt.repeat('column'), type='quantitative')
@@ -157,24 +169,26 @@ def main(data_location, output_location):
         ).repeat(
             column=['Age', 'SystolicBP', 'DiastolicBP'],
             row=['Age', 'SystolicBP', 'DiastolicBP'])
-            
+    
+    #create folder directory if not exist
     try: 
         save_chart(combined, output_location+'EDA.png',1)
     except:
         os.makedirs(os.path.dirname(output_location+'EDA.png'))
         save_chart(combined, output_location+'EDA.png',1)
     
+    #save plots
     dfi.export(corr_df, output_location + 'corr_plot.png')
     save_chart(X_density, output_location+'density_plot.png',1)
     save_chart(X_box, output_location+'box_plot.png',1)
     save_chart(class_distribution, output_location+'class_distribution.png',1)
     save_chart(X_corr, output_location+'corr_bp_plot.png',1)
         
+    #test to make sure EDA is in the correct directory
     assert os.path.isfile(output_location+'EDA.png'), "EDA is not in the src/maternal_risk_eda_figures directory."
     
 if __name__ == "__main__":
-  main(opt["--data_location"], opt["--output_location"])
+    main(opt["--data_location"], opt["--output_location"])
 
 #python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
 
-#save_chart function reference from Joel Ostblom

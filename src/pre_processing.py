@@ -31,11 +31,13 @@ def main(data_location, output_location):
         location where the data is exported to
     '''
     
-    
+    #read data
     maternal_risk_df = pd.read_csv(data_location)
     
+    #train test split
     train_df, test_df = train_test_split(maternal_risk_df, test_size=0.2, random_state=123)  
     
+    #save training and testing set, create directory if does not exists
     try:
         train_df.to_csv(output_location+'train_df.csv', index = False)
     except:
@@ -48,14 +50,18 @@ def main(data_location, output_location):
         os.makedirs(os.path.dirname(output_location+'test_df.csv'))
         test_df.to_csv(output_location+'test_df.csv', index = False)
         
+    #test to make sure training and testing set are in the correct directory
     assert os.path.isfile(output_location+'train_df.csv'), "Train data is not in the data/processed directory." 
     assert os.path.isfile(output_location+'test_df.csv'), "Test data is not in the data/processed directory." 
     
+    #transform target column to binary
     maternal_risk_df.loc[maternal_risk_df['RiskLevel'] == 'mid risk', 'RiskLevel'] = 'low and mid risk'
     maternal_risk_df.loc[maternal_risk_df['RiskLevel'] == 'low risk', 'RiskLevel'] = 'low and mid risk'
     
+    #train test split
     train_df, test_df = train_test_split(maternal_risk_df, test_size=0.2, random_state=123)
     
+    #save training and testing set, create directory if does not exists
     try:
         train_df.to_csv(output_location+'train_df_binary.csv', index = False)
     except:
@@ -70,6 +76,6 @@ def main(data_location, output_location):
     
 
 if __name__ == "__main__":
-  main(opt["--data_location"], opt["--output_location"])
+    main(opt["--data_location"], opt["--output_location"])
 
 #python src/pre_processing.py --data_location='data/raw/maternal_risk.csv' --output_location='data/processed/'
