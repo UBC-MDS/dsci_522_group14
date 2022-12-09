@@ -4,19 +4,25 @@ Lennon Au-Yeung, Chenyang Wang, Shirley Zhang (University of British
 Columbia)
 2022-12-04
 
--   [Summary](#summary)
--   [Introduction](#introduction)
--   [Data and EDA](#data-and-eda)
-    -   [Data](#data)
-    -   [Exploratory Data Analysis
-        (EDA)](#exploratory-data-analysis-eda)
--   [Model Building](#model-building)
-    -   [Exploratory Model Building](#exploratory-model-building)
-    -   [Hyperparameter Optimization](#hyperparameter-optimization)
-    -   [Evaluating on Test Data](#evaluating-on-test-data)
--   [Assumptions and Limitations](#assumptions-and-limitations)
--   [Future Directions](#future-directions)
--   [References](#references)
+-   <a href="#summary" id="toc-summary">Summary</a>
+-   <a href="#introduction" id="toc-introduction">Introduction</a>
+-   <a href="#data-and-eda" id="toc-data-and-eda">Data and EDA</a>
+    -   <a href="#data" id="toc-data">Data</a>
+    -   <a href="#exploratory-data-analysis-eda"
+        id="toc-exploratory-data-analysis-eda">Exploratory Data Analysis
+        (EDA)</a>
+-   <a href="#model-building" id="toc-model-building">Model Building</a>
+    -   <a href="#exploratory-model-building"
+        id="toc-exploratory-model-building">Exploratory Model Building</a>
+    -   <a href="#hyperparameter-optimization"
+        id="toc-hyperparameter-optimization">Hyperparameter Optimization</a>
+    -   <a href="#evaluating-on-test-data"
+        id="toc-evaluating-on-test-data">Evaluating on Test Data</a>
+-   <a href="#assumptions-and-limitations"
+    id="toc-assumptions-and-limitations">Assumptions and Limitations</a>
+-   <a href="#future-directions" id="toc-future-directions">Future
+    Directions</a>
+-   <a href="#references" id="toc-references">References</a>
 
 # Summary
 
@@ -32,7 +38,7 @@ causes each day (WHO, 2019). Often, there is a lack of information about
 the woman’s health during pregnancy, making it difficult to monitor
 their status and determine whether they may be at risk of complications
 (Ahmed and Kashem, 2020). A potential solution to this issue is through
-using the ‘Internet of Things (IoT),’ or physical sensors which can
+using the ‘Internet of Things (IoT)’, or physical sensors which can
 monitor and report different health metrics of a patient to their health
 care provider. Medical professionals can then analyze this information
 to determine whether a patient may be at risk.
@@ -123,25 +129,29 @@ the target.
 **Figure 2. Distribution of Features for the Target Class RiskLevel in
 the Training Set**
 
-Finally, we created pairwise scatter plots for all features to examine
+Finally, we created a correlation table for all features to examine
 whether some features may be correlated with one another. Figure 3.
 shows that the features `SystolicBP` and `DiastolicBP` have high
 correlation compared to other pairs of predictors, followed by the
 correlation between the two blood pressure levels and age. For other
-pairs of predictors, there are no significant correlations found.
+pairs of predictors, there are no significant correlations found. Figure
+4 shows features which has shown higher correlation than others.
 
-<img src="../src/maternal_risk_eda_figures/output_32_0.png" width="100%" />
+![](../src/maternal_risk_eda_figures/corr_plot.png)<!-- --> **Figure 3.
+Pairwise Relationships Between Features**
 
-**Figure 3. Pairwise Relationships Between Features**
+<img src="../src/maternal_risk_eda_figures/corr_bp_plot.png" width="100%" />
+
+**Figure 4. Pairwise Relationships Between Significant Features**
 
 # Model Building
 
 ## Exploratory Model Building
 
 Before applying our machine learning models, we separated our training
-set into ‘X\_train’ and ‘y\_train.’ As all of our features were numeric
+set into ‘X_train’ and ‘y_train’. As all of our features were numeric
 and continuous with different ranges, we performed standard scaling on
-‘X\_train’ with the Scikit-learn Standard Scaler package (Pedregosa et
+‘X_train’ with the Scikit-learn Standard Scaler package (Pedregosa et
 al. 2011).
 
 We decided to test a few different classification models to decide which
@@ -235,17 +245,18 @@ For hyperparameter optimization, we used a random search method for max
 depths ranging between 1 to 50. We used 50-fold cross-validation, and
 computed the average accuracy between folds to compare between different
 max depths. We plotted these averaged scores against the max depths as
-shown in Figure 4. The best depth found by the randomized search was 29.
+shown in Figure 5. The best depth found by the randomized search was 29.
 
 <img src="../results/hyperparam_plot.png" width="100%" />
 
-**Figure 4. Hyperparameter Optimization for Max Depth with Mean Train
+**Figure 5. Hyperparameter Optimization for Max Depth with Mean Train
 and Test Scores**
 
 ## Evaluating on Test Data
 
 With a max depth 29, we scored our best Decision Tree model on our test
-data set and obtained an accuracy score of **0.823**.
+data set and obtained an accuracy score of **0.823**, compared to the
+score that we obtained for the baseline model which is 0.401.
 
 Although this score appears high, we also wanted to further examine the
 predictions made by our model for each of the target classes. Table 2.

@@ -27,7 +27,7 @@ data/processed/test_df.csv data/processed/test_df_binary.csv data/processed/trai
 
 
 # create figures from exploratory data analysis 
-src/maternal_risk_eda_figures/EDA.png src/maternal_risk_eda_figures/box_plot.png src/maternal_risk_eda_figures/class_distribution.png src/maternal_risk_eda_figures/density_plot.png src/maternal_risk_eda_figures/output_32_0.png : data/raw/maternal_risk.csv src/eda_script.py 
+src/maternal_risk_eda_figures/EDA.png src/maternal_risk_eda_figures/box_plot.png src/maternal_risk_eda_figures/class_distribution.png src/maternal_risk_eda_figures/density_plot.png src/maternal_risk_eda_figures/corr_bp_plot.png : data/raw/maternal_risk.csv src/eda_script.py 
 	python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
 
 

@@ -15,27 +15,28 @@ Options:
 import pandas as pd
 import pickle
 from docopt import docopt
-from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
+from sklearn.metrics import confusion_matrix
 
 opt = docopt(__doc__)
-
-# Main function 
-def main(bestmodel_path, test_df_path, output_dir_path):
-    
-    # Split test dataframe into X and y
-    X_test, y_test = split_test_df(test_df_path)
-    
-    # Score the model on the test data
-    test_score_df, random_bestmodel = get_test_score(X_test, y_test, bestmodel_path)
-    
-    # Save to a .csv file 
-    save_testscore_csv(test_score_df, output_dir_path)
-    
-    # Create a confusion matrix
-    create_confusionmatrix(X_test, y_test, random_bestmodel, output_dir_path)
     
 def split_test_df(test_df_path):
+    '''
+    Split features and target of the testing set
     
+    Parameters
+    ----------
+    test_df_path: str
+        path that stores the testing set
+    
+    Returns
+    ----------
+    X_test: dataframe
+        values of all features
+    
+    y-test: dataframe
+        values of target
+    
+    '''
     # Read data into dataframes 
     test_df = pd.read_csv(test_df_path)
     
@@ -46,6 +47,28 @@ def split_test_df(test_df_path):
     return X_test, y_test
     
 def get_test_score(X_test, y_test, bestmodel_path):
+    '''
+    Gets test score using the best model
+    
+    Parameters
+    ----------
+    X_test: dataframe
+        values of all features
+    
+    y_test: dataframe
+        values of target
+        
+    bestmodel_path: str
+        path that stores the best model
+    
+    Return
+    ----------
+    test_score_df: dataframe
+        Dataframe storing the test score of the best model
+    
+    random_bestmodel: pickle
+        Storing the best model
+    '''
     
     # Load pickle file 
     random_bestmodel = pickle.load(open(bestmodel_path, 'rb'))
@@ -61,14 +84,41 @@ def get_test_score(X_test, y_test, bestmodel_path):
     return test_score_df, random_bestmodel
      
 def save_testscore_csv(test_score_df, output_dir_path):
-
+    '''
+    Output test score as csv
+    
+    Parameters
+    ----------
+    test_score_df: dataframe
+        Dataframe storing the test scores
+    
+    output_dir_path: str
+        Storing the path of the output directory
+   
+    '''
     output_file = output_dir_path + 'test_score.csv'
     test_score_df.to_csv(output_file)
     
     return 
 
 def create_confusionmatrix(X_test, y_test, random_bestmodel, output_dir_path):
+    '''
+    Creates confusiion matrix using the test results
     
+    Parameters
+    ----------
+    X_test: dataframe
+        values of all features
+    
+    y-test: dataframe
+        values of target
+    
+    random_bestmodel: pickle
+        Storing the best model
+        
+    output_dir_path: str
+        Storing the path of the output directory    
+    '''
     # Create confusion matrix
     cm = confusion_matrix(y_test, random_bestmodel.predict(X_test))
     cm_df = pd.DataFrame(data = cm, 
@@ -80,7 +130,34 @@ def create_confusionmatrix(X_test, y_test, random_bestmodel, output_dir_path):
     cm_df.to_csv(output_file)
     
     return 
+
+# Main function 
+def main(bestmodel_path, test_df_path, output_dir_path):
+    '''
+    Outputs test score and confusion matrix from the best model
     
+    Parameters
+    ----------
+    bestmodel_path: str
+        path that stores the best model
+    
+    test_df_path: str
+        path that stores the testing set
+    
+    output_dir_path: str
+        path for the files to be exported
+    '''
+    # Split test dataframe into X and y
+    X_test, y_test = split_test_df(test_df_path)
+    
+    # Score the model on the test data
+    test_score_df, random_bestmodel = get_test_score(X_test, y_test, bestmodel_path)
+    
+    # Save to a .csv file 
+    save_testscore_csv(test_score_df, output_dir_path)
+    
+    # Create a confusion matrix
+    create_confusionmatrix(X_test, y_test, random_bestmodel, output_dir_path)
 
 if __name__ == "__main__":
     main(opt['--bestmodel_path'], opt['--test_df_path'], opt['--output_dir_path']) 
