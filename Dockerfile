@@ -39,6 +39,7 @@ RUN conda install -y python=3.10
 RUN conda install -y docopt=0.6.2
 RUN conda install -y pandas=1.5.1
 RUN conda install -y pandoc=2
+RUN conda install -y -c jmcmurray os
 
 # install other python packages with pip 
 RUN pip install numpy==1.23.5
