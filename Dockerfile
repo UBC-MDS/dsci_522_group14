@@ -63,5 +63,18 @@ RUN apt-get install r-base r-base-dev -y
 # install other R packages 
 RUN Rscript -e "install.packages('rmarkdown')"
 RUN Rscript -e "install.packages('knitr')"
-RUN Rscript -e "install.packages('tidyverse')"
+
+
+RUN Rscript -e "install.packages('libcurl4-openssl-dev')"
+RUN Rscript -e "install.packages('libssl-dev')"
+RUN Rscript -e "install.packages('libxml2-dev')"
+RUN Rscript -e "install.packages('xml2')"
+RUN Rscript -e "install.packages('rvest')"
+
+#RUN Rscript -e "install.packages('tidyverse')"
+RUN Rscript -e "install.packages('tidyr')"
+
+#RUN Rscript -e "install.packages('devtools')"
+#RUN Rscript -e "devtools::install_github('tidyverse/tidyverse')"
 RUN Rscript -e "install.packages('kableExtra')" 
+RUN Rscript -e "install.packages('readr')" 
