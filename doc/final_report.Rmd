@@ -16,8 +16,8 @@ always_allow_html: true
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(knitr)
-library(tidyverse)
-library(kableExtra)
+#library(tidyverse)
+#library(kableExtra)
 ```
 
 # Summary
@@ -104,11 +104,13 @@ We decided to test a few different classification models to decide which we shou
 
 For all above models, we used the default parameters and did not include hyperparameter optimization. Table 1. shows the comparison of the models with their respective training scores and mean cross validation scores (default 5-fold cross validation). As the Decision Tree model had the highest mean cross validation score, we decided to choose this one for our final analysis.
 
+**Table 1. Comparison of Classification Models** 
 ```{r table-1, echo=FALSE, message=FALSE, warning=FALSE}
-model_comparison <- read_csv("../results/model_comparison_table.csv", show_col_types = FALSE)
-names(model_comparison)[1] <- " "
-kable(model_comparison, caption = "Table 1. Comparison of Classification Models") |> 
-    kableExtra::kable_styling(position = "left", full_width = FALSE)
+#model_comparison <- read_csv("../results/model_comparison_table.csv", show_col_types = FALSE)
+#names(model_comparison)[1] <- " "
+#kable(model_comparison, caption = "Table 1. Comparison of Classification Models") |> 
+#    kableExtra::kable_styling(position = "left", full_width = FALSE)
+knitr::include_graphics("../results/model_comparison_table.png")
 ```
 
 ## Hyperparameter Optimization
@@ -130,11 +132,13 @@ Although this score appears high, we also wanted to further examine the predicti
 
 Our model predicted 53 high risk observations correctly out of a total of 60 true high risk observations (recall = 0.88). Our model also predicted 58 high risk observations in total (5 of these predictions were incorrect, giving a precision of 0.91). The f1-score for the high risk class would be 0.90. 
 
+**Table 2. Confusion Matrix with Test Data** 
 ```{r table-2, echo=FALSE, message=FALSE, warning=FALSE}
-confusion_matrix <- read_csv("../results/testdata_confusion_matrix.csv", show_col_types = FALSE)
-names(confusion_matrix)[1] <- " "
-kable(confusion_matrix, caption = "Table 2. Confusion Matrix with Test Data") |> 
-    kableExtra::kable_styling(position = "left", full_width = FALSE)
+#confusion_matrix <- read_csv("../results/testdata_confusion_matrix.csv", show_col_types = FALSE)
+#names(confusion_matrix)[1] <- " "
+#kable(confusion_matrix, caption = "Table 2. Confusion Matrix with Test Data") |> 
+#    kableExtra::kable_styling(position = "left", full_width = FALSE)
+knitr::include_graphics("../results/testdata_confusion_matrix.png")
 ```
 
 # Assumptions and Limitations
