@@ -21,6 +21,7 @@ from altair_saver import save
 alt.renderers.enable('mimetype')
 import vl_convert as vlc
 import pickle
+import dataframe_image as dfi
 from sklearn.model_selection import cross_val_score, RandomizedSearchCV
 from scipy.stats import randint
 from sklearn.pipeline import make_pipeline
@@ -158,6 +159,10 @@ def compare_models(X_train, y_train, output_dir_path):
     except:
         os.makedirs(os.path.dirname(output_file))
         model_comparison_df.to_csv(output_file)
+        
+    #output model comparison as image
+    dfi.export(model_comparison_df, output_dir_path + 'model_comparison_table.png')
+    
     return 
 
 def decisiontree_hyperparamopt(X_train, y_train):

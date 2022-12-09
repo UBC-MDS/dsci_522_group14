@@ -14,6 +14,7 @@ Options:
 # Import statements
 import pandas as pd
 import pickle
+import dataframe_image as dfi
 from docopt import docopt
 from sklearn.metrics import confusion_matrix
 
@@ -97,7 +98,13 @@ def save_testscore_csv(test_score_df, output_dir_path):
    
     '''
     output_file = output_dir_path + 'test_score.csv'
-    test_score_df.to_csv(output_file)
+    try:
+        test_score_df.to_csv(output_file)
+    except:
+        os.makedirs(os.path.dirname(output_file))
+        test_score_df.to_csv(output_file)
+    
+    dfi.export(test_score_df, output_dir_path + 'test_score.png')
     
     return 
 
@@ -127,7 +134,13 @@ def create_confusionmatrix(X_test, y_test, random_bestmodel, output_dir_path):
     
     # Save as csv 
     output_file = output_dir_path + 'testdata_confusion_matrix.csv'
-    cm_df.to_csv(output_file)
+    try:
+        cm_df.to_csv(output_file)
+    except:
+        os.makedirs(os.path.dirname(output_file))
+        cm_df.to_csv(output_file)
+    
+    dfi.export(cm_df, output_dir_path + 'testdata_confusion_matrix.png')
     
     return 
 
