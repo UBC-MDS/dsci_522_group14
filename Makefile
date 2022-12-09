@@ -13,8 +13,8 @@
 # make clean 
 
 
-all : doc/final_report.md
 
+all : doc/final_report.md
 
 # download data from url 
 data/raw/maternal_risk.csv : src/download_data.py
