@@ -16,7 +16,6 @@ import altair as alt
 import pandas as pd
 import os
 from altair_saver import save
-import dataframe_image as dfi
 import vl_convert as vlc
 from sklearn.model_selection import train_test_split
 
@@ -125,7 +124,7 @@ def main(data_location, output_location):
     train_df, test_df = train_test_split(maternal_risk_df, test_size=0.2, random_state=123) 
     
     #correlation dataframe
-    corr_df = train_df.corr('spearman').style.background_gradient()
+    corr_df = train_df.corr('spearman')
     
     #class distribution plot
     class_distribution = alt.Chart(train_df).mark_bar().encode(
@@ -178,7 +177,7 @@ def main(data_location, output_location):
         save_chart(combined, output_location+'EDA.png',1)
     
     #save plots
-    dfi.export(corr_df, output_location + 'corr_plot.png')
+    corr_df.to_csv(output_location + 'corr_plot.csv')
     save_chart(X_density, output_location+'density_plot.png',1)
     save_chart(X_box, output_location+'box_plot.png',1)
     save_chart(class_distribution, output_location+'class_distribution.png',1)

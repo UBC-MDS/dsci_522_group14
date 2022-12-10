@@ -16,7 +16,7 @@ always_allow_html: true
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(knitr)
-#library(tidyverse)
+library(tidyverse)
 #library(kableExtra)
 ```
 
@@ -71,6 +71,11 @@ knitr::include_graphics("../src/maternal_risk_eda_figures/density_plot.png")
 **Figure 2. Distribution of Features for the Target Class RiskLevel in the Training Set** 
 
 Finally, we created a correlation table for all features to examine whether some features may be correlated with one another. Figure 3. shows that the features `SystolicBP` and `DiastolicBP` have high correlation compared to other pairs of predictors, followed by the correlation between the two blood pressure levels and age. For other pairs of predictors, there are no significant correlations found. Figure 4 shows features which has shown higher correlation than others.
+
+```{r}
+corr_table<- read_csv("../src/maternal_risk_eda_figures/corr_plot.csv", show_col_types = FALSE)
+corr_table
+```
 
 ```{r figure3, echo=FALSE, out.width="100%"}
 knitr::include_graphics("../src/maternal_risk_eda_figures/corr_plot.png")
