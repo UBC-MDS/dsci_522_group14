@@ -24,10 +24,10 @@ To replicate the analysis done in this project, you follow the steps below:
 
 - [Dependencies](https://github.com/UBC-MDS/maternal_health_risk_predictor#dependencies)
 
-2. Clone the repository:
+2. Clone the repository (the following shows cloning through ssh keys):
 
 ```
-git clone https://github.com/UBC-MDS/maternal_health_risk_predictor.git
+git clone git@github.com:UBC-MDS/maternal_health_risk_predictor.git
 ```
 
 3. Move to the cloned directory:
@@ -38,36 +38,24 @@ cd maternal_health_risk_predictor
 
 4. Use one of the following options to run the rest of the analysis:
 
-#### Option A. Run each command individually 
+#### Option A. Using Docker
 
-Run the following at the command line/terminal inside of the root directory of this repo:
+Install [docker](https://www.docker.com/get-started/). Then, run the following at the command line/terminal inside of the root directory of this repo: 
 
 ```
-# download the full data set 
-python src/download_data.py --out_type='csv' --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00639/Maternal%20Health%20Risk%20Data%20Set.csv' --out_file='data/raw/maternal_risk.csv'
-
-# render the exploratory data analysis file
-jupyter nbconvert --execute --to notebook --inplace src/maternal_risk_eda.ipynb
-
-# preprocess the downloaded raw data set 
-python src/pre_processing.py --data_location='data/raw/maternal_risk.csv' --output_location='data/processed/'
-
-# read the full dataset, perform exploratory data analysis, and save it as 'EDA.png' 
-python src/eda_script.py --data_location='data/raw/maternal_risk.csv' --output_location='src/maternal_risk_eda_figures/'
-
-# run the script to fit and model a Decision Tree classifier on the training data
-python src/fit_maternal_risk_predict_model.py --train_df_path='data/processed/train_df.csv' --test_df_path='data/processed/test_df.csv' --output_dir_path='results/'
-
-# score the best model on the test data, and create a confusion matrix
-python src/predict_model_on_test.py --bestmodel_path='results/bestmodel.pkl' --test_df_path='data/processed/test_df.csv' --output_dir_path='results/'
-
-# render the final report 
-Rscript -e "rmarkdown::render('doc/final_report.Rmd')"
+docker run --rm -v /$(pwd):/home/maternal_health_risk_predictor wenlansz/maternal_health_risk_predictor:v1.0 make -C /home/maternal_health_risk_predictor all 
 ```
 
-#### Option B. Use the Makefile 
+To reset the repository to a clean slate with no intermediates or results (so that you can rerun the analysis), run the following at the command line/terminal inside of the root directory of this repo: 
 
-Run the following at the command line/terminal inside of the root directory of this repo:
+```
+docker run --rm -v /$(pwd):/home/maternal_health_risk_predictor wenlansz/maternal_health_risk_predictor:v1.0 make -C /home/maternal_health_risk_predictor clean  
+```
+
+
+#### Option B. Without using Docker 
+
+Install all of the [dependencies](https://github.com/UBC-MDS/maternal_health_risk_predictor/blob/main/README.md#dependencies) listed below. Then, run the following at the command line/terminal inside of the root directory of this repo:
 
 ```
 make all 
