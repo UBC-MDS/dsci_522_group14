@@ -16,7 +16,7 @@ import altair as alt
 import pandas as pd
 import os
 from altair_saver import save
-import dataframe_image as dfi
+#import dataframe_image as dfi
 import vl_convert as vlc
 from sklearn.model_selection import train_test_split
 
@@ -178,7 +178,7 @@ def main(data_location, output_location):
         save_chart(combined, output_location+'EDA.png',1)
     
     #save plots
-    dfi.export(corr_df, output_location + 'corr_plot.png')
+    #dfi.export(corr_df, output_location + 'corr_plot.png')
     save_chart(X_density, output_location+'density_plot.png',1)
     save_chart(X_box, output_location+'box_plot.png',1)
     save_chart(class_distribution, output_location+'class_distribution.png',1)

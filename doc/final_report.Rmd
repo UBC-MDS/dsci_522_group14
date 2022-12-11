@@ -4,13 +4,13 @@ date: "2022-12-04"
 author: "Lennon Au-Yeung, Chenyang Wang, Shirley Zhang (University of British Columbia)"
 bibliography: refs.bib
 output: 
-    pdf_document: 
-        toc: true
     github_document: 
         toc: true
     html_document: 
         toc: true
-always_allow_html: true
+    pdf_document: 
+        toc: true
+#always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -73,9 +73,9 @@ knitr::include_graphics("../src/maternal_risk_eda_figures/density_plot.png")
 Finally, we created a correlation table for all features to examine whether some features may be correlated with one another. Figure 3. shows that the features `SystolicBP` and `DiastolicBP` have high correlation compared to other pairs of predictors, followed by the correlation between the two blood pressure levels and age. For other pairs of predictors, there are no significant correlations found. Figure 4 shows features which has shown higher correlation than others.
 
 ```{r figure3, echo=FALSE, out.width="100%"}
-knitr::include_graphics("../src/maternal_risk_eda_figures/corr_plot.png")
-fig.align="center"
-fig.cap = "Pairwise Relationships Between Features"
+knitr::include_graphics("../src/maternal_risk_eda_figures/perm/corr_plot_perm.png")
+#fig.align="center"
+#fig.cap = "Pairwise Relationships Between Features"
 ```
 **Figure 3. Pairwise Relationships Between Features** 
 
@@ -110,7 +110,7 @@ For all above models, we used the default parameters and did not include hyperpa
 #names(model_comparison)[1] <- " "
 #kable(model_comparison, caption = "Table 1. Comparison of Classification Models") |> 
 #    kableExtra::kable_styling(position = "left", full_width = FALSE)
-knitr::include_graphics("../results/model_comparison_table.png")
+knitr::include_graphics("../results/perm/model_comparison_table_perm.png")
 ```
 
 ## Hyperparameter Optimization
@@ -138,7 +138,7 @@ Our model predicted 53 high risk observations correctly out of a total of 60 tru
 #names(confusion_matrix)[1] <- " "
 #kable(confusion_matrix, caption = "Table 2. Confusion Matrix with Test Data") |> 
 #    kableExtra::kable_styling(position = "left", full_width = FALSE)
-knitr::include_graphics("../results/testdata_confusion_matrix.png")
+knitr::include_graphics("../results/perm/testdata_confusion_matrix_perm.png")
 ```
 
 # Assumptions and Limitations

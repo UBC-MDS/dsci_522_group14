@@ -32,7 +32,7 @@ src/maternal_risk_eda_figures/EDA.png src/maternal_risk_eda_figures/box_plot.png
 
 
 # create graphs and figures from model building and hyperparameter optimization
-results/hyperparam_plot.png results/model_comparison_table.csv : data/processed/train_df.csv data/processed/test_df.csv src/fit_maternal_risk_predict_model.py 
+results/hyperparam_plot.png results/model_comparison_table.csv results/bestmodel.pkl : data/processed/train_df.csv data/processed/test_df.csv src/fit_maternal_risk_predict_model.py 
 	python src/fit_maternal_risk_predict_model.py --train_df_path='data/processed/train_df.csv' --test_df_path='data/processed/test_df.csv' --output_dir_path='results/'
 
 
