@@ -38,7 +38,7 @@ RUN conda install -y python=3.10
 # install other python packages with conda
 #RUN conda install -y docopt=0.6.2
 RUN conda install -y pandas=1.5.1
-RUN conda install -y pandoc=2
+RUN conda install -y pandoc
 RUN conda install -y -c jmcmurray os
 
 # install other python packages with pip 
