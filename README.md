@@ -43,13 +43,13 @@ cd maternal_health_risk_predictor
 Install [docker](https://www.docker.com/get-started/). Then, run the following at the command line/terminal inside of the root directory of this repo: 
 
 ```
-docker run --rm -v /$(pwd):/home/maternal_health_risk_predictor wenlansz/maternal_health_risk_predictor:v1.0 make -C /home/maternal_health_risk_predictor all 
+docker run --rm -v /$(pwd):/home/maternal_health_risk_predictor wenlansz/maternal_health_risk_predictor:latest make -C /home/maternal_health_risk_predictor all 
 ```
 
 To reset the repository to a clean slate with no intermediates or results (so that you can rerun the analysis), run the following at the command line/terminal inside of the root directory of this repo: 
 
 ```
-docker run --rm -v /$(pwd):/home/maternal_health_risk_predictor wenlansz/maternal_health_risk_predictor:v1.0 make -C /home/maternal_health_risk_predictor clean  
+docker run --rm -v /$(pwd):/home/maternal_health_risk_predictor wenlansz/maternal_health_risk_predictor:latest make -C /home/maternal_health_risk_predictor clean  
 ```
 
 
