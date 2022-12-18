@@ -44,6 +44,11 @@ cd maternal_health_risk_predictor
 
 Install [docker](https://www.docker.com/get-started/). Then, run the following at the command line/terminal inside of the root directory of this repo: 
 
+
+```
+docker pull wenlansz/maternal_health_risk_predictor
+```
+
 ```
 docker run --rm -v /$(pwd):/home/maternal_health_risk_predictor wenlansz/maternal_health_risk_predictor:latest make -C /home/maternal_health_risk_predictor all 
 ```
