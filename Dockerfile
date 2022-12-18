@@ -10,22 +10,21 @@ RUN apt update && apt install -y make
 # override/install python 3.10 
 RUN conda install -y python=3.10
 
-# Conda
-RUN conda install -y \
-  pandas=1.5.1 \
-  pandoc=2 \
-  -c jmcmurray os
+# install other python packages with conda
+#RUN conda install -y docopt=0.6.2
+RUN conda install -y pandas=1.5.1
+RUN conda install -y pandoc=2
+RUN conda install -y -c jmcmurray os
 
-# Pip 
-RUN pip install \
-  numpy==1.23.5 \
-  regex==2022.10.31 \
-  altair==4.2.0 \
-  requests==2.22.0 \
-  graphviz==0.20.1 \
-  nbconvert==7.2.5 \
-  scikit-learn==1.2.0 \
-  scipy==1.9.3
+# install other python packages with pip 
+RUN pip install numpy==1.23.5 
+RUN pip install regex==2022.10.31
+RUN pip install altair==4.2.0
+RUN pip install requests==2.22.0
+RUN pip install graphviz==0.20.1
+RUN pip install nbconvert==7.2.5
+RUN pip install scikit-learn==1.2.0
+RUN pip install scipy==1.9.3
 
 # other 
 RUN conda install -y -c conda-forge altair_saver
