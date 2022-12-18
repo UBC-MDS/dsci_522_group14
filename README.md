@@ -38,7 +38,9 @@ cd maternal_health_risk_predictor
 
 4. Use one of the following options to run the rest of the analysis:
 
-#### Option A. Using Docker
+#### Option A. Using Docker 
+
+*Note: dockerfile is currently not able to be run fully - please use "Option B. Without using Docker" 
 
 Install [docker](https://www.docker.com/get-started/). Then, run the following at the command line/terminal inside of the root directory of this repo: 
 
