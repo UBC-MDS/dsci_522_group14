@@ -15,18 +15,19 @@ RUN conda install -y python=3.10
 RUN conda config --append channels conda-forge
 
 # install other python packages with conda
-#RUN conda install -y pandas=1.5.1
+RUN conda install -y pandas=1.5.1
 #RUN conda install -y pandoc=2
 RUN conda install -y -c jmcmurray os
 
 ###
 RUN conda install -y ipykernel=6.17.1
-RUN conda install -y scikit-learn>=1.1.3
-RUN conda install -y altair=4.2.0
-RUN conda install -y altair_saver=0.1.0
-RUN conda install -y pandas=1.4.4
+#RUN conda install -y scikit-learn>=1.1.3
+#RUN conda install -y altair=4.2.0
+#RUN conda install -y altair_saver=0.1.0
+#RUN conda install -y pandas=1.4.4
 RUN conda install -y pandoc>=1.12.3
 
+RUN conda install -y -c conda-forge altair_saver
 
 ###
 RUN apt-get update && apt-get install -y pip
@@ -38,11 +39,11 @@ RUN pip install shutup==0.2.0
 # install other python packages with pip 
 RUN pip install numpy==1.23.5 
 RUN pip install regex==2022.10.31
-#RUN pip install altair==4.2.0
+RUN pip install altair==4.2.0
 RUN pip install requests==2.22.0
 RUN pip install graphviz==0.20.1
 RUN pip install nbconvert==7.2.5
-#RUN pip install scikit-learn==1.2.0
+RUN pip install scikit-learn==1.2.0
 RUN pip install scipy==1.9.3
 
 RUN pip install docopt-ng==0.8.*
